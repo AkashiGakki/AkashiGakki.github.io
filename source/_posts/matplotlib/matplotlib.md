@@ -36,7 +36,7 @@ pyplot.show()
 
 ![pyplot](http://images.akashi.org.cn/FisBWQcbLkZSqA9JNhsjP9gd932i)
 
-- 修改标签文字和线条粗细
+###### 修改标签文字和线条粗细
 
 ```python
 from matplotlib import pyplot
@@ -58,7 +58,7 @@ pyplot.show()
 
 ![pyplot-2](http://images.akashi.org.cn/FsZWlxb-OrPD3ypakWDyno_W3Sef)
 
-- 校正图形
+###### 校正图形
 
 我们发现向 `plot()` 提供一系列数字时，它假设第一个数据点对应的 `x` 轴的值为 `0`，但是我们的第一个值为 `1`，我们需要同时提供输入值和输出值。
 
@@ -83,7 +83,7 @@ pyplot.show()
 
 ![pyplot-3](http://images.akashi.org.cn/FtGOe9qkN4jknnpLnPIEUf-9Ym20)
 
-- 使用 `scatter()` 绘制散点图并设置其样式
+###### 使用 `scatter()` 绘制散点图并设置其样式
 
 ```python
 from matplotlib import pyplot
@@ -102,7 +102,7 @@ pyplot.tick_params(axis='both', which='major', labelsize=13)
 pyplot.show()
 ```
 
-- 绘制一系列点
+###### 绘制一系列点
 
 ```python
 from matplotlib import pyplot
@@ -125,7 +125,7 @@ pyplot.show()
 
 ![scatter](http://images.akashi.org.cn/Fjuyzu9QkCJlzF5CWeU6jMzSJPuU)
 
-- 自动计算数据
+###### 自动计算数据
 
 ```python
 from matplotlib import pyplot
@@ -151,13 +151,13 @@ pyplot.show()
 
 ![自动计算](http://images.akashi.org.cn/FgMkMeqMp_DHf56fKHVfasdQc7Ry)
 
-- 删除数据点轮廓
+###### 删除数据点轮廓
 
 ```python
 pyplot.scatter(x_values, y_values, edgecolors='none', s=7)
 ```
 
-- 自定义颜色
+###### 自定义颜色
 
 向 `scatter()` 传递参数 `c` 设置颜色的名称。
 
@@ -171,7 +171,7 @@ pyplot.scatter(x_values, y_values, c='red', edgecolors='none', s=7)
 pyplot.scatter(x_values, y_values, c=(0.8, 0.2, 0.2, 0.4), edgecolors='none', s=7)
 ```
 
-- 使用颜色映射
+###### 使用颜色映射
 
 示例通过 `y` 的值设置颜色：
 
@@ -199,7 +199,7 @@ pyplot.show()
 
 ![color](http://images.akashi.org.cn/FnRQMzlsYi43OsFqr5fzvk8uNtMu)
 
-- 自动保存图表
+###### 自动保存图表
 
 要让程序自动将图表保存到文件中，可以将 `pyplot.show()` 替换为 `pyplot.savefig()`
 
@@ -211,7 +211,7 @@ pyplot.savefig('squares_plot.png', bbox_inches='tight')
 
 随机漫步每次行走都完全是随机的，没有明确的方向，结果是由一系列随机决策决定的。
 
-- 创建 `RandomWalk()` 类
+###### 创建 `RandomWalk()` 类
 
 为模拟随机漫步，我们将创建一个 `RandomWalk` 类，它随机的选择前进方向。这个类需要三个属性，其中一个是存储随机漫步次数的变量，另外两个是列表，分别存储随机漫步经过的每个点的 `x` 和 `y` 坐标。
 
@@ -227,7 +227,7 @@ class RandomWalk():
         self.y_values = [0]
 ```
 
-- 选择方向
+###### 选择方向
 
 ```python
 from random import choice
@@ -279,7 +279,7 @@ pyplot.show()
 
 ![rw_visual](http://images.akashi.org.cn/Fi_KhhRBi6-z_d0tdsZOoolmis9O)
 
-- 模拟多次
+###### 模拟多次
 
 ```python
 from matplotlib import pyplot
@@ -297,7 +297,7 @@ while True:
         break
 ```
 
-- 给点着色
+###### 给点着色
 
 ```python
 # from matplotlib import pyplot
@@ -321,7 +321,7 @@ while True:
 
 ![着色](http://images.akashi.org.cn/FiEOQFzpY-tZz8H3_J5QJ7w5SyNj)
 
-- 重新绘制起点和终点
+###### 重新绘制起点和终点
 
 ```python
 plt.scatter(0, 0, c='green', edgecolors='none', s=30)
@@ -330,7 +330,7 @@ plt.scatter(rw.x_values[-1], rw.y_values[-1], c='red', edgecolors='none', s=30)
 
 ![起点、终点](http://images.akashi.org.cn/Fgor0V_avlfCElQuXdk-1VIcC2GZ)
 
-- 隐藏坐标轴
+###### 隐藏坐标轴
 
 ```python
 plt.axes().get_xaxis().set_visible(False)
@@ -339,7 +339,7 @@ plt.axes().get_yaxis().set_visible(False)
 
 ![隐藏](http://images.akashi.org.cn/Fuv4aCn_Qyn34annNLyJx8KHtXST)
 
-- 增加点数
+###### 增加点数
 
 `rw = RandomWalk(50000)`
 
@@ -372,7 +372,7 @@ while True:
 
 ![增加点数](http://images.akashi.org.cn/Fh4ksyIdv4xcBo7tjGkX4G2UGRVg)
 
-- 调整尺寸
+###### 调整尺寸
 
 `plt.figure(figsize=(10, 6))`
 
@@ -406,3 +406,189 @@ while True:
 ```
 
 ![调整尺寸](http://images.akashi.org.cn/FiY1r3KLTEnbPiLjhxs3qhEetPxK)
+
+##### 使用 `Pygal` 模拟掷骰子
+
+`Pygal` 可以生成可缩放的矢量图形文件。
+
+###### 安装
+
+```shell
+pip3 install pygal
+```
+
+###### 画廊
+
+查看 `pygal` 文档 ：`http://pygal.org/`
+
+###### 创建 `Die` 类
+
+```python
+from random import randint
+
+
+class Die():
+    def __init__(self, num_sides=6):
+        self.num_sides = num_sides
+
+    def roll(self):
+        return randint(1, self.num_sides)
+```
+
+###### 掷骰子
+
+掷一个 `6` 面的骰子，将结果打印出来：
+
+```python
+from die import Die
+
+
+die = Die()
+
+results = []
+for roll_num in range(100):
+    result = die.roll()
+    results.append(result)
+
+print(results)
+```
+
+###### 分析结果
+
+计算每个点出现的次数：
+
+```python
+from die import Die
+
+
+die = Die()
+
+results = []
+for roll_num in range(1000):
+    result = die.roll()
+    results.append(result)
+
+# print(results)
+
+frequencies = []
+for value in range(1, die.num_sides+1):
+    frequency = results.count(value)
+    frequencies.append(frequency)
+
+print(frequencies)
+```
+
+###### 绘制直方图
+
+```python
+from die import Die
+import pygal
+
+
+die = Die()
+
+results = []
+for roll_num in range(1000):
+    result = die.roll()
+    results.append(result)
+
+# print(results)
+
+frequencies = []
+for value in range(1, die.num_sides+1):
+    frequency = results.count(value)
+    frequencies.append(frequency)
+
+# print(frequencies)
+
+# 对结果进行可视化
+hist = pygal.Bar()
+
+hist.title = "Results of rolling one D6 1000 times."
+hist.x_labels = ['1', '2', '3', '4', '5', '6']
+hist.x_title = "Result"
+hist.y_title = "Frequencies"
+
+hist.add('D6', frequencies)
+hist.render_to_file('die_visual.svg')
+```
+
+![d6](http://images.akashi.org.cn/FgemYP2Q0zobw9OyDujsnvM1uTBR)
+
+###### 同时掷两个骰子
+
+```python
+from die import Die
+import pygal
+
+
+die_1 = Die()
+die_2 = Die()
+
+results = []
+for roll_num in range(1000):
+    result = die_1.roll() + die_2.roll()
+    results.append(result)
+
+# print(results)
+
+frequencies = []
+max_result = die_1.num_sides + die_2.num_sides
+for value in range(1, max_result+1):
+    frequency = results.count(value)
+    frequencies.append(frequency)
+
+# print(frequencies)
+
+# 对结果进行可视化
+hist = pygal.Bar()
+
+hist.title = "Results of rolling two D6 1000 times."
+hist.x_labels = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12']
+hist.x_title = "Result"
+hist.y_title = "Frequencies"
+
+hist.add('D6 +D6', frequencies)
+hist.render_to_file('die_visual_2d6.svg')
+```
+
+![2d6](http://images.akashi.org.cn/FkoEEj2duI9N8gmT9P8021KvinGx)
+
+##### 同时掷两个不同面数的骰子
+
+```python
+from die import Die
+import pygal
+
+
+die_1 = Die()
+die_2 = Die(10)
+
+results = []
+for roll_num in range(5000):
+    result = die_1.roll() + die_2.roll()
+    results.append(result)
+
+# print(results)
+
+frequencies = []
+max_result = die_1.num_sides + die_2.num_sides
+for value in range(1, max_result+1):
+    frequency = results.count(value)
+    frequencies.append(frequency)
+
+# print(frequencies)
+
+# 对结果进行可视化
+hist = pygal.Bar()
+
+hist.title = "Results of rolling a D6 and D10 5000 times."
+hist.x_labels = ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16']
+hist.x_title = "Result"
+hist.y_title = "Frequencies"
+
+hist.add('D6 +D6', frequencies)
+hist.render_to_file('die_visual_d6_d10.svg')
+```
+
+![d6d10](http://images.akashi.org.cn/FiyLRW9cHj7qu5RkoZMZx0UrLG7B)
