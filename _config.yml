@@ -74,6 +74,7 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: next
+# theme: next-reloaded
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -81,3 +82,11 @@ deploy:
   type: git
   repository: git@github.com:AkashiGakki/AkashiGakki.github.io.git
   branch: master
+
+# 字数和阅读时间统计
+symbols_count_time:
+symbols: true
+time: true
+total_symbols: true
+total_time: true
+
