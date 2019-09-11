@@ -334,9 +334,13 @@ post_meta:
 # Dependencies: https://github.com/theme-next/hexo-symbols-count-time
 symbols_count_time:
   separated_meta: true
+  #文章中的显示是否显示文字（本文字数|阅读时长） 
   item_text_post: true
-  item_text_total: true
+  #网页底部的显示是否显示文字（站点总字数|站点阅读时长） 
+  item_text_total: false
+  # Average Word Length (chars count in word)
   awl: 4
+  # Words Per Minute
   wpm: 275
 
 codeblock:

@@ -85,15 +85,17 @@ deploy:
 
 # 字数和阅读时间统计
 symbols_count_time:
-symbols: true
-time: true
-total_symbols: true
-total_time: true
+ #文章内是否显示
+  symbols: true
+  time: true
+ # 网页底部是否显示
+  total_symbols: false
+  total_time: false
 
 # Post wordcount display settings
 # Dependencies: https://github.com/willin/hexo-wordcount
-post_wordcount:
-  item_text: true
-  wordcount: true
-  min2read: true
+# post_wordcount:
+#   item_text: true
+#   wordcount: true
+#   min2read: true
 
