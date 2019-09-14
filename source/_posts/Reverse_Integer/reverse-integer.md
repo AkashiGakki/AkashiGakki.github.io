@@ -42,6 +42,8 @@ thumbnail: /images/bg-34.jpg
 
 ##### 解题方案
 
+`Python`:
+
 首先判断输入是否为负，如果是负数就递归调用原函数转为整数，最后结果再取负返回。
 
 之后使用字符串切片进行反转，判断是否溢出。
@@ -54,6 +56,8 @@ class Solution:
         res = int(str(x)[::-1])
         return res if res <= (2**31-1) else 0
 ```
+
+`Java`:
 
 使用 `long` 类型，避免反转后出现溢出现象。
 
