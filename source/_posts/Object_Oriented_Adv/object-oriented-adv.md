@@ -22,7 +22,7 @@ thumbnail: /images/bg-35.jpg
 继承是为了增强代码的复用性，扩充类的功能，具体实现为：
 
 ```java
-class 子类 extend 父类 {
+class 子类 extends 父类 {
 
 }
 ```
