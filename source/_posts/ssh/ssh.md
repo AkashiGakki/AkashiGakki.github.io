@@ -45,6 +45,13 @@ sudo passwd xxx
 
 注意：`xxx` 是你的用户名，也可以设置 `root` 用户的密码： `sudo passwd root`
 
+也可以在 `root` 用户权限下新增加一个用户并设置密码
+
+```shell
+adduser akashi
+passwd akashi
+```
+
 ##### 编辑 `ssh` 配置文件
 
 ```shell
@@ -56,6 +63,12 @@ vim /etc/ssh/sshd_config
 ```shell
 PermitRootLogin yes
 PasswordAuthentication yes
+```
+
+重启生效
+
+```shell
+sudo service sshd reload
 ```
 
 ##### 使用 `ssh` 密码登录
@@ -121,6 +134,12 @@ cat [KEY_FILENAME].pub
 接下来就可以通过密钥登录了。
 
 ##### 本地通过私钥登录
+
+赋予私钥文件仅本人可读权限
+
+```shell
+chmod 400 <下载的与云服务器关联的私钥的绝对路径>
+```
 
 ```shell
 ssh -i ~/.ssh/[KEY_FILENAME] [USERNAME]@[IP]
