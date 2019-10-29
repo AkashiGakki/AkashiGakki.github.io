@@ -1,5 +1,9 @@
 ### `Ubuntu` 下 `MySQL` 的安装
 
+> 记录服务器下 `MySQL` 的安装过程。
+
+<!-- more -->
+
 ```shell
 apt install mysql-client-core-5.7
 apt install mysql-client-5.7
