@@ -1,3 +1,16 @@
+---
+title: Ubuntu 下 MySQL 的安装
+date: yyyy-mm-dd
+category: 
+    - Linux
+    - 环境安装
+tags:
+    - Linux
+    - 环境安装
+thumbnail: /images/bg-41.jpg
+
+---
+
 ### `Ubuntu` 下 `MySQL` 的安装
 
 > 记录服务器下 `MySQL` 的安装过程。
