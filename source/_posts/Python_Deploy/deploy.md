@@ -2,7 +2,7 @@
 title: Python 应用 uWSGI + Nginx 部署
 date: yyyy-mm-dd
 category: 
-    - Python, Nginx
+    - Python
 tags:
     - Python
     - Nginx
@@ -10,11 +10,11 @@ thumbnail: /images/bg-42.jpg
 
 ---
 
-#### `Python` 应用 `uWSGI` + `Nginx` 部署
-
 > `uWSGI` + `Nginx` 项目部署。
 
 <!-- more -->
+
+#### `Python` 应用 `uWSGI` + `Nginx` 部署
 
 ##### 新建一个 `Django` 应用部署
 
@@ -220,7 +220,7 @@ server {
 
  - 添加 `log` 配置文件
 
- ```python
+```python
 upstream uwsgi {
     server 122.51.1.19:8000;
 }
@@ -305,7 +305,7 @@ nginx -s reload
 远程拷贝到服务器
 
 ```shell
-scp 2_topic.akashi.org.cn.crt root@122.51.1.19::/etc/nginx/ssl/
+scp 2_topic.akashi.org.cn.crt root@122.51.1.19:/etc/nginx/ssl/
 scp 3_topic.akashi.org.cn.key root@122.51.1.19:/etc/nginx/ssl
 ```
 
@@ -352,8 +352,8 @@ nginx -s reload
 
 ```python
 upstream uwsgi {
-        server 127.0.0.1:8000 weight=3;
-        server 127.0.0.1:8001 weight=1;
+    server 127.0.0.1:8000 weight=3;
+    server 127.0.0.1:8001 weight=1;
 }
 ```
 
