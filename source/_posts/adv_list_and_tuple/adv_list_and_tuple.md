@@ -3,7 +3,7 @@ title: Python 上手指南之列表
 date: yyyy-mm-dd
 category: Python
 tags: Python
-thumbnail: /images/bg-43.jpg
+thumbnail: /images/asuka/asu-1.jpg
 
 ---
 
