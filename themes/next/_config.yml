@@ -642,11 +642,14 @@ changyan:
 # More info available at https://valine.js.org
 valine:
   enable: false # When enable is set to be true, leancloud_visitors is recommended to be closed for the re-initialization problem within different leancloud adk version.
-  appid:  # your leancloud application appid
-  appkey:  # your leancloud application appkey
+  appid: zNhmosawnNOGzgW5JTuXbHAO-gzGzoHsz 
+  # your leancloud application appid
+  appkey: rGtKua726IsXnNCecnhq2jQ4 
+  # your leancloud application appkey
   notify: false # mail notifier, See: https://github.com/xCss/Valine/wiki
   verify: false # Verification code
-  placeholder: Just go go # comment box placeholder
+  placeholder: ヾﾉ≧∀≦)o 来呀！快活呀！~
+  # Just go go # comment box placeholder
   avatar: mm # gravatar style
   guest_info: nick,mail,link # custom comment header
   pageSize: 10 # pagination size
@@ -656,7 +659,7 @@ valine:
 
 # LiveRe comments system
 # You can get your uid from https://livere.com/insight/myCode (General web site)
-livere_uid: MTAyMC80NjU2NC8yMzA3NA==
+# livere_uid: MTAyMC80NjU2NC8yMzA3NA==
 
 # Gitment
 # Introduction: https://github.com/imsun/gitment
