@@ -424,6 +424,12 @@ Vue.component('my-component', {
 父组件也可以直接在子组件的自定义标签上使用 `v-on` 来监听子组件触发的自定义事件。
 
 ```html
+<div id="app">
+    <p>总数：{{ total }}</p>
+    <my-component
+        @increase="handleGetTotal"
+        @reduce="handleGetTotal"></my-component>
+</div>
 <script>
     Vue.component('my-component', {
         template: '\
