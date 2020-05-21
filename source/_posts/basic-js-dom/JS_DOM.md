@@ -1,6 +1,6 @@
 ---
 title: JavaScript DOM
-date: yyyy-mm-dd
+date: 2019-7-20
 category:
     - 前端
     - JavaScript

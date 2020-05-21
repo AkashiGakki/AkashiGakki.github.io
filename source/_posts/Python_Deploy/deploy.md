@@ -1,6 +1,6 @@
 ---
 title: Python 应用 uWSGI + Nginx 部署
-date: yyyy-mm-dd
+date: 2019-10-30
 category: 
     - Python
 tags:

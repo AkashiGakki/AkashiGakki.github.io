@@ -1,6 +1,6 @@
 ---
 title: Redis 使用笔记
-date: yyyy-mm-dd
+date: 2019-8-24
 category:
     - 数据库
     - Redis

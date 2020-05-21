@@ -1,6 +1,6 @@
 ---
 title: Google Cloud 搭建 SSR 服务器
-date: yyyy-mm-dd
+date: 2019-8-28
 category:
     - Linux
     - SSR

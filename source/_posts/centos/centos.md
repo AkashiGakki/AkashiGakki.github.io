@@ -1,6 +1,6 @@
 ---
 title: CentOS 安装 Python3 环境
-date: yyyy-mm-dd
+date: 2019-8-16
 category: 
     - Linux
     - 环境安装

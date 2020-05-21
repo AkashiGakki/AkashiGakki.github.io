@@ -1,6 +1,6 @@
 ---
 title: JavaScript基础
-date: yyyy-mm-dd
+date: 2019-7-16
 category: 
     - 前端
     - JavaScript

@@ -1,6 +1,6 @@
 ---
 title: 正则匹配食用指南
-date: yyyy-mm-dd
+date: 2019-8-2
 category:
     - 杂项
 tags:

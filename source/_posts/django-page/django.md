@@ -1,6 +1,6 @@
 ---
 title: Django 项目搭建及分页功能实现
-date: yyyy-mm-dd
+date: 2019-8-12
 category:
     - Python
     - Django

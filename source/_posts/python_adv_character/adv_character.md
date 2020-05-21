@@ -1,6 +1,6 @@
 ---
 title: Python 上手指南之特性、迭代器和生成器
-date: yyyy-mm-dd
+date: 2019-11-10
 category: Python
 tags: Python
 thumbnail: /images/asuka/asu-7.jpg

@@ -1,6 +1,6 @@
 ---
 title: Vuejs 整理笔记
-date: yyyy-mm-dd
+date: 2019-8-13
 category: 
     - Vue
 tags:

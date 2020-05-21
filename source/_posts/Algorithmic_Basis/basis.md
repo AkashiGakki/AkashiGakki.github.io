@@ -1,6 +1,6 @@
 ---
 title: 典型算法处理实现
-date: yyyy-mm-dd
+date: 2019-9-12
 category: 
     - Algorithm
 tags:

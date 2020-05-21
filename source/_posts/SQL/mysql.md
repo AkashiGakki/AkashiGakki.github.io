@@ -1,6 +1,6 @@
 ---
 title: SQL 基础笔记
-date: yyyy-mm-dd
+date: 2019-8-3
 category:
     - 数据库
 tags:

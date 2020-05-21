@@ -1,6 +1,6 @@
 ---
 title: Homebrew 日常使用
-date: yyyy-mm-dd
+date: 2019-8-7
 category:
     - 杂项
 tags:

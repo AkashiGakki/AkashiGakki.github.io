@@ -1,6 +1,6 @@
 ---
 title: Python 上手指南之列表
-date: yyyy-mm-dd
+date: 2019-11-3
 category: Python
 tags: Python
 thumbnail: /images/asuka/asu-1.jpg

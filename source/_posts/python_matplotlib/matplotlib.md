@@ -1,6 +1,6 @@
 ---
 title: Matplotlib 数据可视化
-date: yyyy-mm-dd
+date: 2019-9-7
 category:
     - Python
     - 工具

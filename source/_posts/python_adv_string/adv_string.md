@@ -1,6 +1,6 @@
 ---
 title: Python 上手指南之字符串
-date: yyyy-mm-dd
+date: 2019-11-4
 category: Python
 tags: Python
 thumbnail: /images/asuka/asu-2.jpg

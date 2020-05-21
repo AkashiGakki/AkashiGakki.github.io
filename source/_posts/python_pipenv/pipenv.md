@@ -1,6 +1,6 @@
 ---
 title: Python 包管理工具 pipenv 构建虚拟环境
-date: yyyy-mm-dd
+date: 2019-9-3
 category:
     - 杂项
 tags:

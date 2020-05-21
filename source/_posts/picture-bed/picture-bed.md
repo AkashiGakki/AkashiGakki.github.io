@@ -1,6 +1,6 @@
 ---
 title: 自建图床方案
-date: yyyy-mm-dd
+date: 2019-8-30
 category:
     - 杂项
 tags:

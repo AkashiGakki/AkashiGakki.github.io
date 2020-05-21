@@ -1,6 +1,6 @@
 ---
 title: Ubuntu 下 MySQL 的安装
-date: yyyy-mm-dd
+date: 2019-10-29
 category: 
     - Linux
     - 环境安装

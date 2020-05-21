@@ -1,6 +1,6 @@
 ---
 title: Highcharts 数据可视化
-date: yyyy-mm-dd
+date: 2019-7-26
 thumbnail: /images/bg-9.jpg
 category: 
     - 前端

@@ -1,6 +1,6 @@
 ---
 title: pymysql 操作关系型数据库
-date: yyyy-mm-dd
+date: 2019-09-25
 category: 
     - Python
     - 工具

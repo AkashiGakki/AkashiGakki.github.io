@@ -1,6 +1,6 @@
 ---
 title: SSH 远程登录 Google Cloud 应用实例
-date: yyyy-mm-dd
+date: 2019-8-29
 category:
     - Linux
     - SSH

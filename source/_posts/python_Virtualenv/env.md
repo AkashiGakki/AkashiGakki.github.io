@@ -1,6 +1,6 @@
 ---
 title: Virtualenv 虚拟环境搭建
-date: yyyy-mm-dd
+date: 2019-8-10
 category:
     - 杂项
 tags:

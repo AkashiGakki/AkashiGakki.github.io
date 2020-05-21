@@ -1,6 +1,6 @@
 ---
 title: Highmaps 地图数据可视化
-date: yyyy-mm-dd
+date: 2019-7-27
 thumbnail: /images/bg-10.jpg
 category: 
     - 前端

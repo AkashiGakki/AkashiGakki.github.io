@@ -1,6 +1,6 @@
 ---
 title: 免费申请 Google Cloud 服务器一年 300 刀攻略
-date: yyyy-mm-dd
+date: 2019-8-29
 category:
     - 杂项
     - 云服务

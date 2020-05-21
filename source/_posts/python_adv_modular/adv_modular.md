@@ -1,6 +1,6 @@
 ---
 title: Python 上手指南之标准库
-date: yyyy-mm-dd
+date: 2019-11-11
 category: Python
 tags: Python
 thumbnail: /images/asuka/asu-8.jpg

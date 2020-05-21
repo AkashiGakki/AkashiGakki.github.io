@@ -1,6 +1,6 @@
 ---
 title: Python 上手指南之条件、循环
-date: yyyy-mm-dd
+date: 2019-11-6
 category: Python
 tags: Python
 thumbnail: /images/asuka/asu-4.jpg

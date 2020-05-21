@@ -1,6 +1,6 @@
 ---
 title: Mac 终端美化方案
-date: yyyy-mm-dd
+date: 2019-8-9
 category:
     - 杂项
 tags:

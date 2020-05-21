@@ -1,6 +1,6 @@
 ---
 title: MongoDB 之可视化工具推荐 —— adminMongo
-date: yyyy-mm-dd
+date: 2019-8-10
 category:
     - 数据库
     - MongoDB 

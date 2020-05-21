@@ -1,6 +1,6 @@
 ---
 title: Python 上手指南之抽象
-date: yyyy-mm-dd
+date: 2019-11-7
 category: Python
 tags: Python
 thumbnail: /images/asuka/asu-5.jpg

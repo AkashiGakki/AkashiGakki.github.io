@@ -1,6 +1,6 @@
 ---
 title: Vue.js 阅读笔记（三）
-date: yyyy-mm-dd
+date: 2019-12-16
 category:
     - Vue
 tags: 

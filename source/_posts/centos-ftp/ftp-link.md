@@ -1,6 +1,6 @@
 ---
 title: 云服务器 ftp 的搭建和使用
-date: yyyy-mm-dd
+date: 2019-8-17
 category:
     - Linux
     - ftp

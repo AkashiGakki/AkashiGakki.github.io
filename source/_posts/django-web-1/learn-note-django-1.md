@@ -1,6 +1,6 @@
 ---
 title: Django Web 身份验证系统搭建（上）
-date: yyyy-mm-dd
+date: 2019-8-14
 category:
     - Python
     - Django

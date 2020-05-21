@@ -1,6 +1,6 @@
 ---
 title: MongoDB 初探
-date: yyyy-mm-dd
+date: 2019-8-7
 category:
     - 数据库
     - MongoDB
