@@ -35,10 +35,14 @@ cache:
 # ---------------------------------------------------------------
 
 favicon:
-  small: /images/favicon-16x16-next.png
-  medium: /images/favicon-32x32-next.png
-  apple_touch_icon: /images/apple-touch-icon-next.png
-  safari_pinned_tab: /images/logo.svg
+  small: /images/aragakki.png
+  medium: /images/aragakki.png
+  apple_touch_icon: /images/aragakki.png
+  safari_pinned_tab: /images/aragakki.png
+  # small: /images/favicon-16x16-next.png
+  # medium: /images/favicon-32x32-next.png
+  # apple_touch_icon: /images/apple-touch-icon-next.png
+  # safari_pinned_tab: /images/logo.svg
   #android_manifest: /images/manifest.json
   #ms_browserconfig: /images/browserconfig.xml
 
@@ -203,13 +207,13 @@ social:
   # 微博: https://weibo.com/2623709391/profile?topnav=1&wvr=6&is_all=1
   # 豆瓣: http://douban.com/people/your-user-name
   # 知乎: http://www.zhihu.com/people/your-user-name
-  Google: https://plus.google.com/yourname || google
-  #Twitter: https://twitter.com/yourname || twitter
+  # Google: https://plus.google.com/yourname || google
+  Twitter: https://twitter.com/akashisai022 || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
   #VK Group: https://vk.com/yourname || vk
   #StackOverflow: https://stackoverflow.com/yourname || stack-overflow
   #YouTube: https://youtube.com/yourname || youtube
-  Instagram: https://instagram.com/yourname || instagram
+  Instagram: https://www.instagram.com/akashi_sai_ || instagram
   #Skype: skype:yourname?call|chat || skype
 
 social_icons:
