@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/aragakki.png?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Cesium 上手不完全指北 将最近学习的 CesiumJS 做一个系统梳理，从项目配置开始，记录常用 API 的使用。">
+<meta name="keywords" content="前端,Cesium">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cesium 上手不完全指北">
+<meta property="og:url" content="http://akashigakki.github.io/2020/08/01/cesium/cesium/index.html">
+<meta property="og:site_name" content="Akashi_Sai">
+<meta property="og:description" content="Cesium 上手不完全指北 将最近学习的 CesiumJS 做一个系统梳理，从项目配置开始，记录常用 API 的使用。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://images.akashi.org.cn/FruwP2PUmpBWS6DUgt7BP3uSwttg">
+<meta property="og:image" content="http://images.akashi.org.cn/FvBmVIrV92DLI6lIOhq4QO1yO49H">
+<meta property="og:image" content="http://images.akashi.org.cn/FtYoEALUkR0l494wyk7ziUA3rOg_">
+<meta property="og:image" content="http://images.akashi.org.cn/Fr6_tW4VZX0PXlcKIoM7AKZ2Rtkx">
+<meta property="og:image" content="http://images.akashi.org.cn/Fh2xA_7j8gnzhM2IDfkYjyspi8q9">
+<meta property="og:image" content="http://images.akashi.org.cn/FrVKxw5lUOiT9qHIlPPnnrTPz4i1">
+<meta property="og:image" content="http://images.akashi.org.cn/Fg65ZbEMNBXNiZoc6Y0RSAmtY1Ak">
+<meta property="og:image" content="http://images.akashi.org.cn/FixGRAYzomr31C6d2LIKgTBxUlNZ">
+<meta property="og:image" content="http://images.akashi.org.cn/FnDvItRi_fYdU_PgTc_tCtM7_bRr">
+<meta property="og:image" content="http://images.akashi.org.cn/Fkm_Ynda6lXaJuI_38HeK4SalX2H">
+<meta property="og:updated_time" content="2020-10-06T11:18:57.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cesium 上手不完全指北">
+<meta name="twitter:description" content="Cesium 上手不完全指北 将最近学习的 CesiumJS 做一个系统梳理，从项目配置开始，记录常用 API 的使用。">
+<meta name="twitter:image" content="http://images.akashi.org.cn/FruwP2PUmpBWS6DUgt7BP3uSwttg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://akashigakki.github.io/2020/08/01/cesium/cesium/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Cesium 上手不完全指北 | Akashi_Sai</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?59d9132e52a8c3e7ac2f40c7b5017bab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Akashi_Sai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/akashigakki" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://akashigakki.github.io/2020/08/01/cesium/cesium/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Akashi Sai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/aragakki.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Akashi_Sai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Cesium 上手不完全指北
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-08-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-08-01T00:00:00+08:00">2020-08-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-10-06 19:18:57" itemprop="dateModified" datetime="2020-10-06T19:18:57+08:00">2020-10-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2020/08/01/cesium/cesium/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/08/01/cesium/cesium/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">55k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">50 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Cesium-上手不完全指北"><a href="#Cesium-上手不完全指北" class="headerlink" title="Cesium 上手不完全指北"></a>Cesium 上手不完全指北</h1><blockquote>
+<p>将最近学习的 <code>CesiumJS</code> 做一个系统梳理，从项目配置开始，记录常用 <code>API</code> 的使用。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="环境搭建与安装"><a href="#环境搭建与安装" class="headerlink" title="环境搭建与安装"></a>环境搭建与安装</h2><p>首先，什么是 <code>Cesium</code>，<code>Cesium</code> 是一款开源的基于 <code>JavaScript</code> 的 <code>3D</code> 地图框架，即地图可视化框架。产品基于 <code>WebGL</code> 技术，我们可以使用 <code>CesiumJS</code> 创建虚拟场景的 <code>3D</code> 地理信息平台。其目标是用于创建以基于 <code>Web</code> 的地图动态数据可视化。在提升平台的性能、准确率、虚拟化能力、易用性方面提供各种支持。</p>
+<p>更多介绍和信息可通过<a href="https://cesium.com/" target="_blank" rel="noopener">官网</a>进行学习。</p>
+<h3 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h3><p><code>Cesium ion</code> 是一个提供瓦片图和 <code>3D</code> 地理空间数据的平台，<code>Cesium ion</code> 支持把数据添加到用户自己的 <code>CesiumJS</code> 应用中。使用二三维贴图和世界地形都需要 <code>ion</code> 的支持，如果没有自己的数据源需要 <code>cesium</code> 提供的数据源就需要申请 <code>ion</code> 的 <code>token</code>，具体可以通过以下链接申请 <a href="https://cesium.com/ion/" target="_blank" rel="noopener">access token</a>。</p>
+<p>在创建 <code>Cesium Viewer</code> 的时候，将 <code>access token</code> 填为自己的 <code>access token</code> 即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cesium.Ion.defaultAccessToken = <span class="string">'&lt;YOUR ACCESS TOKEN HERE&gt;'</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="项目搭建"><a href="#项目搭建" class="headerlink" title="项目搭建"></a>项目搭建</h3><p>进入项目搭建过程，项目选择在 <code>Vue</code> 平台上进行实现，首先创建项目安装 <code>cesium</code> 库：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vue create cesium-vue</span><br><span class="line">cd cesium-vue</span><br><span class="line">npm i cesium@<span class="number">1.61</span> --save</span><br></pre></td></tr></table></figure>
+<p>注意：目前使用 <code>webpack</code> 进行配置引用最新版本(1.71) <code>cesium</code> 暂时不能导入，实测 <a href="mailto:`cesium@1.61" target="_blank" rel="noopener">`cesium@1.61</a><code>版本可以进行</code>import` 导入。</p>
+<h3 id="项目配置"><a href="#项目配置" class="headerlink" title="项目配置"></a>项目配置</h3><p>根目录下新建 <code>vue.config.js</code> 配置文件，对项目进行基本配置：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> CopyWebpackPlugin = <span class="built_in">require</span>(<span class="string">'copy-webpack-plugin'</span>)</span><br><span class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>)</span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> debug = process.env.NODE_ENV !== <span class="string">'production'</span></span><br><span class="line"><span class="keyword">let</span> cesiumSource = <span class="string">'./node_modules/cesium/Source'</span></span><br><span class="line"><span class="keyword">let</span> cesiumWorkers = <span class="string">'../Build/Cesium/Workers'</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    publicPath: <span class="string">''</span>,</span><br><span class="line">    devServer: &#123;</span><br><span class="line">        port: <span class="number">9999</span></span><br><span class="line">    &#125;,</span><br><span class="line">    configureWebpack: &#123;</span><br><span class="line">        output: &#123;</span><br><span class="line">            sourcePrefix: <span class="string">' '</span></span><br><span class="line">        &#125;,</span><br><span class="line">        amd: &#123;</span><br><span class="line">            toUrlUndefined: <span class="literal">true</span></span><br><span class="line">        &#125;,</span><br><span class="line">        resolve: &#123;</span><br><span class="line">            alias: &#123;</span><br><span class="line">                <span class="string">'vue$'</span>: <span class="string">'vue/dist/vue.esm.js'</span>,</span><br><span class="line">                <span class="string">'@'</span>: path.resolve(<span class="string">'src'</span>),</span><br><span class="line">                <span class="string">'cesium'</span>: path.resolve(__dirname, cesiumSource)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        plugins: [</span><br><span class="line">            <span class="keyword">new</span> CopyWebpackPlugin([&#123; <span class="attr">from</span>: path.join(cesiumSource, cesiumWorkers), <span class="attr">to</span>: <span class="string">'Workers'</span>&#125;]),</span><br><span class="line">            <span class="keyword">new</span> CopyWebpackPlugin([&#123; <span class="attr">from</span>: path.join(cesiumSource, <span class="string">'Assets'</span>), <span class="attr">to</span>: <span class="string">'Assets'</span>&#125;]),</span><br><span class="line">            <span class="keyword">new</span> CopyWebpackPlugin([&#123; <span class="attr">from</span>: path.join(cesiumSource, <span class="string">'Widgets'</span>), <span class="attr">to</span>: <span class="string">'Widgets'</span>&#125;]),</span><br><span class="line">            <span class="keyword">new</span> CopyWebpackPlugin([&#123; <span class="attr">from</span>: path.join(cesiumSource, <span class="string">'ThirdParty/Workers'</span>), <span class="attr">to</span>: <span class="string">'ThirdParty/Workers'</span>&#125;]),</span><br><span class="line">            <span class="keyword">new</span> webpack.DefinePlugin(&#123; <span class="attr">CESIUM_BASE_URL</span>: <span class="built_in">JSON</span>.stringify(<span class="string">'./'</span>) &#125;),</span><br><span class="line">            <span class="keyword">new</span> CopyWebpackPlugin([&#123; <span class="attr">from</span>: path.join(<span class="string">'./static'</span>, <span class="string">'model'</span>), <span class="attr">to</span>: <span class="string">'model3D'</span> &#125;]),</span><br><span class="line">            <span class="keyword">new</span> CopyWebpackPlugin([&#123; <span class="attr">from</span>: path.join(<span class="string">'./static'</span>, <span class="string">'images'</span>), <span class="attr">to</span>: <span class="string">'images'</span> &#125;])</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在根目录下创建 <code>static</code> 文件夹用于后续 <code>model</code> 和 <code>images</code> 的存放。</p>
+<h3 id="组件实现"><a href="#组件实现" class="headerlink" title="组件实现"></a>组件实现</h3><p>在 <code>src/components/</code> 下新建 <code>CesiumViewer.vue</code> 进行组件实现：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"cesiumContainer"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> Cesium <span class="keyword">from</span> <span class="string">'cesium/Cesium'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'cesium/Widgets/widgets.css'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'CesiumViewer'</span>,</span><br><span class="line">    mounted () &#123;</span><br><span class="line">        <span class="comment">// token</span></span><br><span class="line">        Cesium.Ion.defaultAccessToken = <span class="string">'your token'</span>;</span><br><span class="line">        <span class="keyword">let</span> viewer = <span class="keyword">new</span> Cesium.Viewer(<span class="string">'cesiumContainer'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;style&gt;</span></span><br><span class="line"><span class="regexp">#cesiumContainer &#123;</span></span><br><span class="line"><span class="regexp">    display: block;</span></span><br><span class="line"><span class="regexp">    position: absolute;</span></span><br><span class="line"><span class="regexp">    top: 0;</span></span><br><span class="line"><span class="regexp">    left: 0;</span></span><br><span class="line"><span class="regexp">    border: none;</span></span><br><span class="line"><span class="regexp">    width: 100%;</span></span><br><span class="line"><span class="regexp">    height: 100%;</span></span><br><span class="line"><span class="regexp">    margin: 0;</span></span><br><span class="line"><span class="regexp">    padding: 0;</span></span><br><span class="line"><span class="regexp">    overflow: hidden;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp">&lt;/</span>style&gt;</span><br></pre></td></tr></table></figure>
+<p>可以看到地图在调用 <code>Cesium</code> 的 <code>Viewer</code> 时开始构建。<code>Viewer</code> 是 <code>Cesium</code> <code>API</code> 的起点，<code>new Viewer</code> 后便可以看见地球对象。</p>
+<h3 id="组件声明"><a href="#组件声明" class="headerlink" title="组件声明"></a>组件声明</h3><p>在 <code>App.vue</code> 中引用组件：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;CesiumViewer&gt;&lt;<span class="regexp">/CesiumViewer&gt;</span></span><br><span class="line"><span class="regexp">  &lt;/</span>div&gt;</span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">import CesiumViewer from './</span>components/CesiumViewer<span class="string">'</span></span><br><span class="line"><span class="string">export default &#123;</span></span><br><span class="line"><span class="string">  name: '</span>App<span class="string">',</span></span><br><span class="line"><span class="string">  components: &#123;</span></span><br><span class="line"><span class="string">    CesiumViewer</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>运行查看效果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run serve</span><br></pre></td></tr></table></figure>
+<p><img src="http://images.akashi.org.cn/FruwP2PUmpBWS6DUgt7BP3uSwttg" alt="运行效果"></p>
+<p>此时，已经可以看见最开始的地球🌏效果，我们进行一些简单配置和调整：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> Cesium <span class="keyword">from</span> <span class="string">'cesium/Cesium'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'cesium/Widgets/widgets.css'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'CesiumViewer'</span>,</span><br><span class="line">    mounted () &#123;</span><br><span class="line">        <span class="keyword">this</span>.init();</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        init () &#123;</span><br><span class="line">            <span class="keyword">let</span> viewerOption = &#123;</span><br><span class="line">                geocoder: <span class="literal">false</span>,                <span class="comment">// 地理位置搜索控件</span></span><br><span class="line">                homeButton: <span class="literal">false</span>,              <span class="comment">// 首页跳转控件</span></span><br><span class="line">                sceneModePicker: <span class="literal">false</span>,         <span class="comment">// 2D,3D和Columbus View切换控件</span></span><br><span class="line">                baseLayerPicker: <span class="literal">false</span>,         <span class="comment">// 三维地图底图切换控件</span></span><br><span class="line">                navigationHelpButton: <span class="literal">false</span>,    <span class="comment">// 帮助提示控件</span></span><br><span class="line">                animation: <span class="literal">false</span>,               <span class="comment">// 视图动画播放速度控件</span></span><br><span class="line">                timeline: <span class="literal">false</span>,                <span class="comment">// 时间轴控件</span></span><br><span class="line">                fullscreenButton: <span class="literal">false</span>,        <span class="comment">// 全屏控件</span></span><br><span class="line">                infoBox: <span class="literal">false</span>,                 <span class="comment">// 点击显示窗口控件</span></span><br><span class="line">                selectionIndicator: <span class="literal">false</span>,      <span class="comment">// 实体对象选择框控件</span></span><br><span class="line">                scene3DOnly: <span class="literal">true</span>               <span class="comment">// 仅3D渲染，节省GPU内存</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// token</span></span><br><span class="line">            Cesium.Ion.defaultAccessToken = <span class="string">'your token'</span>;</span><br><span class="line">            <span class="keyword">let</span> viewer = <span class="keyword">new</span> Cesium.Viewer(<span class="string">'cesiumContainer'</span>, viewerOption);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 隐藏Logo</span></span><br><span class="line">            viewer.cesiumWidget.creditContainer.style.display = <span class="string">"none"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run serve</span><br></pre></td></tr></table></figure>
+<p>最终效果如下：</p>
+<p><img src="http://images.akashi.org.cn/FvBmVIrV92DLI6lIOhq4QO1yO49H" alt="最终效果"></p>
+<p>至此，最开始的构建运行就已经完成了，下面对具体 <code>API</code> 进行学习。</p>
+<h2 id="Imagery-图层"><a href="#Imagery-图层" class="headerlink" title="Imagery 图层"></a><code>Imagery</code> 图层</h2><p>开始 <code>API</code> 学习之前，为了方便方法实现，使用 <code>ref</code> 在元素上注册一个引用信息，方便通过 <code>ID</code> 直接访问一个子组件实例。</p>
+<p>修改如下，引用信息将会注册在父组件的 <code>$refs</code> 对象上，子组件通过 <code>this.$viewer</code> 进行访问。</p>
+<p>这里引入图层的概念(<code>Imagery</code>)，瓦片图集合根据不同的投影方式映射到虚拟的三维数字地球表面。依赖于相机指向地表的方向和距离，<code>Cesium</code> 会去请求和渲染不同层级的图层详细信息。</p>
+<p>详细代码如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"cesiumContainer"</span> ref=<span class="string">"viewer"</span>&gt;&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;/</span>template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">import</span> Cesium <span class="keyword">from</span> <span class="string">'cesium/Cesium'</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">'cesium/Widgets/widgets.css'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'CesiumViewer'</span>,</span><br><span class="line">    mounted () &#123;</span><br><span class="line">        <span class="comment">// 初始化</span></span><br><span class="line">        <span class="keyword">this</span>.init();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 添加图层</span></span><br><span class="line">        <span class="keyword">this</span>.addLayers();</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        <span class="comment">// 初始化</span></span><br><span class="line">        init () &#123;</span><br><span class="line">            <span class="keyword">let</span> viewerOption = &#123;...&#125;</span><br><span class="line">            <span class="comment">// token</span></span><br><span class="line">            Cesium.Ion.defaultAccessToken = <span class="string">'your token'</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.$viewer = <span class="keyword">new</span> Cesium.Viewer(<span class="keyword">this</span>.$refs.viewer, viewerOption);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.$viewer.cesiumWidget.creditContainer.style.display = <span class="string">"none"</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">// 添加 `Imagery` (图层)</span></span><br><span class="line">        addLayers () &#123;</span><br><span class="line">            <span class="comment">// Remove default base layer</span></span><br><span class="line">            <span class="comment">// this.$viewer.imageryLayers.remove(this.$viewer.imageryLayers.get(0));</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// Add grid imagery</span></span><br><span class="line">            <span class="keyword">this</span>.$viewer.imageryLayers.addImageryProvider(<span class="keyword">new</span> Cesium.GridImageryProvider());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://images.akashi.org.cn/FtYoEALUkR0l494wyk7ziUA3rOg_" alt="图层效果"></p>
+<p>原理上和 <code>PS</code> 的图层一致，多个图层可以添加、移除和排序，渲染并适应到 <code>Cesium</code> 中。</p>
+<h2 id="Terrain-地形"><a href="#Terrain-地形" class="headerlink" title="Terrain 地形"></a><code>Terrain</code> 地形</h2><p><code>Cesium</code> 的地形图层支持渐进式加载和渲染全球高精度地图，并且包括地形地势、水形数据，包括海洋、湖泊、河流、山峰、峡谷等效果。</p>
+<p>为了添加地形数据，我们需要创建一个 <code>CesiumTerrainProvider</code>，通过 <code>createWorldTerrain</code> 函数创建一个由 <code>Cesium ion</code> 提供服务的 <code>Cesium WorldTerrian</code>，同时可提供配置项，请求额外的水和光数据，最终我们通过 <code>camera</code> 下的函数定位到创建的位置进行查看：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">"CesiumViewer"</span>,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加图层</span></span><br><span class="line">    <span class="comment">// this.addLayers();</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加地形</span></span><br><span class="line">    <span class="keyword">this</span>.addTerrain();</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    init() &#123;...&#125;,</span><br><span class="line">    <span class="comment">// 添加图层</span></span><br><span class="line">    addLayers() &#123;...&#125;,</span><br><span class="line">    <span class="comment">// 添加地形</span></span><br><span class="line">    addTerrain() &#123;</span><br><span class="line">      <span class="keyword">this</span>.$viewer.terrainProvider = Cesium.createWorldTerrain(&#123;</span><br><span class="line">        requestWaterMask: <span class="literal">true</span>, <span class="comment">// required for water effects</span></span><br><span class="line">        requestVertexNormals: <span class="literal">true</span>, <span class="comment">// required for terrain lighting</span></span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// Enable depth testing so things behind the terrain disappear.</span></span><br><span class="line">      <span class="keyword">this</span>.$viewer.scene.globe.depthTestAgainstTerrain = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">this</span>.$viewer.scene.camera.flyTo(&#123;</span><br><span class="line">        destination: Cesium.Cartesian3.fromRadians(</span><br><span class="line">          <span class="number">-2.6399828792482234</span>,</span><br><span class="line">          <span class="number">1.0993550795541742</span>,</span><br><span class="line">          <span class="number">5795</span></span><br><span class="line">        ),</span><br><span class="line">        orientation: &#123;</span><br><span class="line">          heading: <span class="number">3.8455</span>,</span><br><span class="line">          pitch: <span class="number">-0.4535</span>,</span><br><span class="line">          roll: <span class="number">0.0</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://images.akashi.org.cn/Fr6_tW4VZX0PXlcKIoM7AKZ2Rtkx" alt="地形效果"></p>
+<h2 id="Viewer-控件"><a href="#Viewer-控件" class="headerlink" title="Viewer 控件"></a><code>Viewer</code> 控件</h2><p>回到最开始的调整配置上，我们在 <code>viewerOption</code> 中对 <code>Viewer</code> 声明的一系列基本小控件做了移除和优化操作，具体 <code>API</code> 官方给出了如下描述：</p>
+<p><img src="http://images.akashi.org.cn/Fh2xA_7j8gnzhM2IDfkYjyspi8q9" alt="viewer"></p>
+<ol>
+<li>Geocoder : A location search tool that flies the camera to queried location. Uses Bing Maps data by default.</li>
+<li>HomeButton : Flies the viewer back to a default view.</li>
+<li>SceneModePicker : Switches between 3D, 2D and Columbus View (CV) modes.</li>
+<li>BaseLayerPicker : Chooses the imagery and terrain to display on the globe.</li>
+<li>NavigationHelpButton : Displays the default camera controls.</li>
+<li>Animation : Controls the play speed for view animation.</li>
+<li>CreditsDisplay : Displays data attributions. Almost always required!</li>
+<li>Timeline : Indicates current time and allows users to jump to a specific time using the scrubber.</li>
+<li>FullscreenButton : Makes the Viewer fullscreen.</li>
+</ol>
+<p>我们可以根据自身需求选择是否启用。</p>
+<p><a href="https://cesium.com/docs/tutorials/cesium-workshop/" target="_blank" rel="noopener">官方描述地址</a></p>
+<p>同时我们还可以对视窗进行配置，到达自己期望的效果，如开启根据动态时间激活太阳位置的光照，对真实地球进行模拟：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">"CesiumViewer"</span>,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加图层</span></span><br><span class="line">    <span class="comment">// this.addLayers();</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 添加地形</span></span><br><span class="line">    <span class="comment">// this.addTerrain();</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 配置视窗</span></span><br><span class="line">    <span class="keyword">this</span>.configScene();</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    init() &#123;...&#125;,</span><br><span class="line">    <span class="comment">// 配置视窗</span></span><br><span class="line">    configScene() &#123;</span><br><span class="line">      <span class="comment">// Enable lighting based on sun/moon positions(激活基于太阳位置的光照)</span></span><br><span class="line">      <span class="keyword">this</span>.$viewer.scene.globe.enableLighting = <span class="literal">true</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://images.akashi.org.cn/FrVKxw5lUOiT9qHIlPPnnrTPz4i1" alt="光照效果"></p>
+<p>更近一步，可以利用上一小节使用的 <code>camera</code> 实现主视窗的定位：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置视窗</span></span><br><span class="line">configScene() &#123;</span><br><span class="line">    <span class="comment">// Enable lighting based on sun/moon positions(激活基于太阳位置的光照)</span></span><br><span class="line">    <span class="keyword">this</span>.$viewer.scene.globe.enableLighting = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Create an initial camera view</span></span><br><span class="line">    <span class="keyword">let</span> initialPosition = <span class="keyword">new</span> Cesium.Cartesian3.fromDegrees(</span><br><span class="line">        <span class="number">-73.998114468289017509</span>,</span><br><span class="line">        <span class="number">40.674512895646692812</span>,</span><br><span class="line">        <span class="number">2631.082799425431</span></span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">let</span> initialOrientation = <span class="keyword">new</span> Cesium.HeadingPitchRoll.fromDegrees(</span><br><span class="line">        <span class="number">7.1077496389876024807</span>,</span><br><span class="line">        <span class="number">-31.987223091598949054</span>,</span><br><span class="line">        <span class="number">0.025883251314954971306</span></span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">let</span> homeCameraView = &#123;</span><br><span class="line">        destination: initialPosition,</span><br><span class="line">        orientation: &#123;</span><br><span class="line">            heading: initialOrientation.heading,</span><br><span class="line">            pitch: initialOrientation.pitch,</span><br><span class="line">            roll: initialOrientation.roll,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">// Set the initial view</span></span><br><span class="line">    <span class="keyword">this</span>.$viewer.scene.camera.setView(homeCameraView);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p><img src="http://images.akashi.org.cn/Fg65ZbEMNBXNiZoc6Y0RSAmtY1Ak" alt="主视窗效果"></p>
+<p>这里需要介绍的是 <code>Scene</code> 的概念，<code>Scence</code> 虚拟场景是所有<code>3D</code> 图形对象和状态的容器，通常不是由开发者直接创建，而是在 <code>Viewer</code> 或者 <code>CesiumWidget</code> 内部隐式创建的。</p>
+<p>通过 <code>Scene</code> 场景，我们可以控制 <code>Globe</code> 地球(包括地形和图层)、<code>Camera</code> 相机、<code>Primitives</code> (默认矢量数据层)和 <code>PostProcessStage</code> (后期处理效果)等。</p>
+<p>除了以上配置，现在我们需要了解的有以下 <code>Cesium</code> 基本类型的 <code>API</code>:</p>
+<ol>
+<li><p><a href="https://cesium.com/docs/cesiumjs-ref-doc/Cartesian3.html?classFilter=Cartesian3" target="_blank" rel="noopener">Cartesian3</a> : 一个三维笛卡尔坐标——当它被用作相对于地球中心的位置时，使用地球固定框架（<code>ECEF</code>）。</p>
+</li>
+<li><p><a href="https://cesium.com/docs/cesiumjs-ref-doc/Cartographic.html?classFilter=Cartographic" target="_blank" rel="noopener">Cartographic</a> : 由经度、纬度（弧度）和 <code>WGS84</code> 椭球面高度确定的位置。</p>
+</li>
+<li><p><a href="https://cesium.com/docs/cesiumjs-ref-doc/HeadingPitchRoll.html?classFilter=HeadingPitchRoll" target="_blank" rel="noopener">HeadingPitchRoll</a> : 在东北向上的框架中关于局部轴的旋转（弧度）。航向是围绕负 <code>Z</code> 轴的旋转。俯仰是围绕负 <code>Y</code> 轴的旋转。滚动是关于正 <code>X</code> 轴的旋转。</p>
+</li>
+<li><p><a href="https://cesium.com/docs/cesiumjs-ref-doc/Quaternion.html?classFilter=Quaternion" target="_blank" rel="noopener">Quaternion</a> :以 <code>4D</code> 坐标表示的 <code>3D</code> 旋转。</p>
+</li>
+</ol>
+<h2 id="Camera-相机"><a href="#Camera-相机" class="headerlink" title="Camera 相机"></a><code>Camera</code> 相机</h2><p><code>Camera</code> 是 <code>Cesium</code> 中常用的 <code>API</code>，属于 <code>viewer.scene</code> 中的属性，用来控制当前可见的域。可以控制场景的观察视角，例如旋转、缩放、平移以及飞行定位。</p>
+<p>一些最常用的方法如下：</p>
+<ul>
+<li><p><a href="https://cesium.com/docs/cesiumjs-ref-doc/Camera.html#setView" target="_blank" rel="noopener">Camera.setView(options)</a>: 在特定位置和方向立即设置相机。</p>
+</li>
+<li><p><a href="https://cesium.com/docs/cesiumjs-ref-doc/Camera.html#zoomIn" target="_blank" rel="noopener">Camera.zoomIn(amount)</a>: 沿着视角矢量移动摄像机。</p>
+</li>
+<li><p><a href="https://cesium.com/docs/cesiumjs-ref-doc/Camera.html#zoomOut" target="_blank" rel="noopener">Camera.zoomOut(amount)</a>: 沿视角矢量向后移动摄像机。</p>
+</li>
+<li><p><a href="https://cesium.com/docs/cesiumjs-ref-doc/Camera.html#flyTo" target="_blank" rel="noopener">Camera.flyTo(options)</a>: 创建从当前相机位置到新位置的动画相机飞行。</p>
+</li>
+<li><p><a href="https://cesium.com/docs/cesiumjs-ref-doc/Camera.html#lookAt" target="_blank" rel="noopener">Camera.lookAt(target, offset)</a>: 定位并定位摄像机以给定偏移量瞄准目标点。</p>
+</li>
+<li><p><a href="https://cesium.com/docs/cesiumjs-ref-doc/Camera.html#move" target="_blank" rel="noopener">Camera.move(direction, amount)</a>: 朝任何方向移动摄像机。</p>
+</li>
+<li><p><a href="https://cesium.com/docs/cesiumjs-ref-doc/Camera.html#rotate" target="_blank" rel="noopener">Camera.rotate(axis, angle)</a>: 绕任意轴旋转相机。</p>
+</li>
+</ul>
+<p>例子参考上一小节的视窗定位。</p>
+<h2 id="Clock-时钟"><a href="#Clock-时钟" class="headerlink" title="Clock 时钟"></a><code>Clock</code> 时钟</h2><p>使用 <code>viewer</code> 的 <code>Clock</code> 和 <code>Timline</code> 可以控制 <code>scene</code> 的时间进度。</p>
+<p>下面通过修改 <code>init</code> 函数实现一个日夜交替效果：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">"CesiumViewer"</span>,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    init() &#123;</span><br><span class="line">      <span class="keyword">let</span> clock = <span class="keyword">new</span> Cesium.Clock(&#123;</span><br><span class="line">        startTime: Cesium.JulianDate.now(),</span><br><span class="line">        currentTime: Cesium.JulianDate.now(),</span><br><span class="line">        stopTime: Cesium.JulianDate.addDays(Cesium.JulianDate.now(), <span class="number">1</span>, <span class="keyword">new</span> Cesium.JulianDate()),</span><br><span class="line">        clockRange: Cesium.ClockRange.LOOP_STOP,</span><br><span class="line">        clockStep: Cesium.ClockStep.SYSTEM_CLOCK_MULTIPLIER,</span><br><span class="line">        multiplier: <span class="number">9000</span>,</span><br><span class="line">        shouldAnimate: <span class="literal">true</span></span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">let</span> viewerOption = &#123;</span><br><span class="line">        geocoder: <span class="literal">false</span>,</span><br><span class="line">        homeButton: <span class="literal">false</span>,</span><br><span class="line">        sceneModePicker: <span class="literal">false</span>,</span><br><span class="line">        baseLayerPicker: <span class="literal">false</span>,</span><br><span class="line">        navigationHelpButton: <span class="literal">false</span>,</span><br><span class="line">        animation: <span class="literal">false</span>,</span><br><span class="line">        timeline: <span class="literal">false</span>,</span><br><span class="line">        fullscreenButton: <span class="literal">false</span>,</span><br><span class="line">        infoBox: <span class="literal">false</span>,</span><br><span class="line">        selectionIndicator: <span class="literal">false</span>,</span><br><span class="line">        scene3DOnly: <span class="literal">true</span>,</span><br><span class="line">        shadows: <span class="literal">true</span>,</span><br><span class="line">        shouldAnimate: <span class="literal">true</span>,</span><br><span class="line">        clockViewModel: <span class="keyword">new</span> Cesium.ClockViewModel(clock)</span><br><span class="line">      &#125;;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// your token</span></span><br><span class="line">      Cesium.Ion.defaultAccessToken = <span class="string">"token"</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">this</span>.$viewer = <span class="keyword">new</span> Cesium.Viewer(<span class="keyword">this</span>.$refs.viewer, viewerOption);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 隐藏Logo</span></span><br><span class="line">      <span class="keyword">this</span>.$viewer.cesiumWidget.creditContainer.style.display = <span class="string">"none"</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">this</span>.$viewer.scene.globe.enableLighting = <span class="literal">true</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过定义 <code>clock</code>，设置起始时间、速率和循环等配置，使用 <code>clockViewModel</code> 在实例中添加时钟视图模型，然后启用光照，实现效果。</p>
+<p>注：此效果为演示，<code>init</code> 函数后续恢复为开始的创建实例状态，方便之后的例子使用。</p>
+<p><img src="http://images.akashi.org.cn/FixGRAYzomr31C6d2LIKgTBxUlNZ" alt="日夜交替效果"></p>
+<h2 id="Entity-实体"><a href="#Entity-实体" class="headerlink" title="Entity 实体"></a><code>Entity</code> 实体</h2><p><code>Cesium</code> 中的所有空间数据都使用 <code>Entity API</code>来表示。<code>Entity API</code> 以一种有效提供灵活的可视化的方式，以便对 <code>Cesium</code> 进行渲染。<code>Cesium Entity</code> 是可以与样式化图形表示配对并定位在空间和时间上的数据对象。</p>
+<p>在 <code>Cesium</code> 中，加载点线面矢量有两种方式：</p>
+<ul>
+<li><p>Entity API 是数据驱动的一组高级对象，具有接口一致，容易使用的特点，但性能略低。</p>
+</li>
+<li><p>Primitive API 是面向三维图形开发，更为底层，具有灵活，性能高的特点，但使用复杂。</p>
+</li>
+</ul>
+<p>其中，<code>Entity API</code> 的使用通过 <code>viewer.entities.add()</code> 方法添加矢量数据：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">"CesiumViewer"</span>,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line">    <span class="comment">// 加载实体</span></span><br><span class="line">    <span class="keyword">this</span>.loadEntities();</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    init() &#123;...&#125;,</span><br><span class="line">    loadEntities() &#123;</span><br><span class="line">        <span class="keyword">let</span> polygon = <span class="keyword">this</span>.$viewer.entities.add(&#123;</span><br><span class="line">        name: <span class="string">"正方形"</span>,</span><br><span class="line">        id: <span class="string">"square"</span>,</span><br><span class="line">        polygon: &#123;</span><br><span class="line">          hierarchy: Cesium.Cartesian3.fromDegreesArray([</span><br><span class="line">            <span class="number">-109.080842</span>,</span><br><span class="line">            <span class="number">45.002073</span>,</span><br><span class="line">            <span class="number">-105.91517</span>,</span><br><span class="line">            <span class="number">45.002073</span>,</span><br><span class="line">            <span class="number">-104.058488</span>,</span><br><span class="line">            <span class="number">44.996596</span>,</span><br><span class="line">            <span class="number">-104.053011</span>,</span><br><span class="line">            <span class="number">43.002989</span>,</span><br><span class="line">            <span class="number">-104.053011</span>,</span><br><span class="line">            <span class="number">41.003906</span>,</span><br><span class="line">            <span class="number">-105.728954</span>,</span><br><span class="line">            <span class="number">40.998429</span>,</span><br><span class="line">            <span class="number">-107.919731</span>,</span><br><span class="line">            <span class="number">41.003906</span>,</span><br><span class="line">            <span class="number">-109.04798</span>,</span><br><span class="line">            <span class="number">40.998429</span>,</span><br><span class="line">            <span class="number">-111.047063</span>,</span><br><span class="line">            <span class="number">40.998429</span>,</span><br><span class="line">            <span class="number">-111.047063</span>,</span><br><span class="line">            <span class="number">42.000709</span>,</span><br><span class="line">            <span class="number">-111.047063</span>,</span><br><span class="line">            <span class="number">44.476286</span>,</span><br><span class="line">            <span class="number">-111.05254</span>,</span><br><span class="line">            <span class="number">45.002073</span>,</span><br><span class="line">          ]),</span><br><span class="line">          height: <span class="number">0</span>,</span><br><span class="line">          material: Cesium.Color.RED.withAlpha(<span class="number">0.5</span>),</span><br><span class="line">          outline: <span class="literal">true</span>,</span><br><span class="line">          outlineColor: Cesium.Color.BLACK,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">this</span>.$viewer.zoomTo(polygon);</span><br><span class="line">      <span class="comment">// polygon.show = false;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><img src="http://images.akashi.org.cn/FnDvItRi_fYdU_PgTc_tCtM7_bRr" alt="正方形"></p>
+<p>除了绘制实体，还可以通过外部加载的方式进行模型导入。</p>
+<p>这里我们在 <code>static</code> 文件夹下放入 <code>J15.glb</code> 文件进行导入：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">"CesiumViewer"</span>,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="keyword">this</span>.init();</span><br><span class="line">    <span class="comment">// 添加模型</span></span><br><span class="line">    <span class="keyword">this</span>.addEntities();</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    init() &#123;...&#125;,</span><br><span class="line">    addEntities() &#123;</span><br><span class="line">        <span class="keyword">let</span> fighter = <span class="keyword">this</span>.$viewer.entities.add(&#123;</span><br><span class="line">        name: <span class="string">"fighter"</span>,</span><br><span class="line">        id: <span class="string">"J15"</span>,</span><br><span class="line">        model: &#123;</span><br><span class="line">          uri: <span class="string">"model3D/J15.glb"</span>,</span><br><span class="line">          minimumPixelSize: <span class="number">100</span>,</span><br><span class="line">          maximumScale: <span class="number">1000</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        position: Cesium.Cartesian3.fromDegrees(<span class="number">-110.345</span>, <span class="number">30</span>, <span class="number">70000</span>),</span><br><span class="line">      &#125;);</span><br><span class="line">      <span class="comment">// this.$viewer.trackedEntity = fighter;</span></span><br><span class="line">      <span class="keyword">this</span>.$viewer.zoomTo(fighter, <span class="keyword">new</span> Cesium.HeadingPitchRange(<span class="number">-1</span>, <span class="number">-0.3</span>, <span class="number">35</span>));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://images.akashi.org.cn/Fkm_Ynda6lXaJuI_38HeK4SalX2H" alt="模型加载"></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/Cesium/" rel="tag"># Cesium</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/05/31/django-deploy/deploy-django/" rel="next" title="Django 项目 Linux 远程部署记录">
+                <i class="fa fa-chevron-left"></i> Django 项目 Linux 远程部署记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/26/vuejs-repeat-1/repeat-vuejs/" rel="prev" title="深入理解 Vue.js（一）">
+                深入理解 Vue.js（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/aragakki.png" alt="Akashi Sai">
+            
+              <p class="site-author-name" itemprop="name">Akashi Sai</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">74</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/akashigakki" title="GitHub &rarr; https://github.com/akashigakki" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:akashi_sai@163.com" title="E-Mail &rarr; mailto:akashi_sai@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/akashisai022" title="Twitter &rarr; https://twitter.com/akashisai022" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/akashi_sai_" title="Instagram &rarr; https://www.instagram.com/akashi_sai_" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Cesium-上手不完全指北"><span class="nav-number">1.</span> <span class="nav-text">Cesium 上手不完全指北</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境搭建与安装"><span class="nav-number">1.1.</span> <span class="nav-text">环境搭建与安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册"><span class="nav-number">1.1.1.</span> <span class="nav-text">注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目搭建"><span class="nav-number">1.1.2.</span> <span class="nav-text">项目搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目配置"><span class="nav-number">1.1.3.</span> <span class="nav-text">项目配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件实现"><span class="nav-number">1.1.4.</span> <span class="nav-text">组件实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件声明"><span class="nav-number">1.1.5.</span> <span class="nav-text">组件声明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Imagery-图层"><span class="nav-number">1.2.</span> <span class="nav-text">Imagery 图层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Terrain-地形"><span class="nav-number">1.3.</span> <span class="nav-text">Terrain 地形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Viewer-控件"><span class="nav-number">1.4.</span> <span class="nav-text">Viewer 控件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Camera-相机"><span class="nav-number">1.5.</span> <span class="nav-text">Camera 相机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clock-时钟"><span class="nav-number">1.6.</span> <span class="nav-text">Clock 时钟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Entity-实体"><span class="nav-number">1.7.</span> <span class="nav-text">Entity 实体</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Akashi Sai</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zNhmosawnNOGzgW5JTuXbHAO-gzGzoHsz',
+    appKey: 'rGtKua726IsXnNCecnhq2jQ4',
+    placeholder: 'ヾﾉ≧∀≦)o 来啊！快活啊！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
