@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/aragakki.png?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Redis 使用笔记 Redis 是一个开源的、高性能的、基于键值对的缓存与存储系统，通过提供多种键值数据类型来适应不同场景下的缓存与存储需求。同时， Redis 的诸多高级功能使其可以胜任消息队列、任务队列等不同的角色。">
+<meta name="keywords" content="数据库,Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 使用笔记">
+<meta property="og:url" content="http://akashigakki.github.io/2019/08/24/redis/redis/index.html">
+<meta property="og:site_name" content="Akashi_Sai">
+<meta property="og:description" content="Redis 使用笔记 Redis 是一个开源的、高性能的、基于键值对的缓存与存储系统，通过提供多种键值数据类型来适应不同场景下的缓存与存储需求。同时， Redis 的诸多高级功能使其可以胜任消息队列、任务队列等不同的角色。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/9c62a0cfly1g69qd2xmlxj21ts0pun0s.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/9c62a0cfly1g69qe12yrlj20vo05wab9.jpg">
+<meta property="og:updated_time" content="2020-10-06T09:57:39.488Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis 使用笔记">
+<meta name="twitter:description" content="Redis 使用笔记 Redis 是一个开源的、高性能的、基于键值对的缓存与存储系统，通过提供多种键值数据类型来适应不同场景下的缓存与存储需求。同时， Redis 的诸多高级功能使其可以胜任消息队列、任务队列等不同的角色。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/9c62a0cfly1g69qd2xmlxj21ts0pun0s.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://akashigakki.github.io/2019/08/24/redis/redis/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Redis 使用笔记 | Akashi_Sai</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?59d9132e52a8c3e7ac2f40c7b5017bab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Akashi_Sai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/akashigakki" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://akashigakki.github.io/2019/08/24/redis/redis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Akashi Sai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/aragakki.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Akashi_Sai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redis 使用笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-24 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-24T00:00:00+08:00">2019-08-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-10-06 17:57:39" itemprop="dateModified" datetime="2020-10-06T17:57:39+08:00">2020-10-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/08/24/redis/redis/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/24/redis/redis/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">35k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">32 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="Redis-使用笔记"><a href="#Redis-使用笔记" class="headerlink" title="Redis 使用笔记"></a><code>Redis</code> 使用笔记</h4><blockquote>
+<p><code>Redis</code> 是一个开源的、高性能的、基于键值对的缓存与存储系统，通过提供多种键值数据类型来适应不同场景下的缓存与存储需求。同时， <code>Redis</code> 的诸多高级功能使其可以胜任消息队列、任务队列等不同的角色。</p>
+</blockquote>
+<a id="more"></a>
+<h5 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h5><h6 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h6><p><code>Redis</code> 是 <code>Remote Dictionary Server</code> （远程字典服务器）的缩写，它以字典结构存储数据，并允许其他应用通过 <code>TCP</code> 协议读写字典中的内容。与大多数脚本语言中的字典一样， <code>Redis</code> 字典中的键值除了可以使字符串，还可以是其他数据类型。它支持的键值数据类型如下：</p>
+<ul>
+<li><p>字符串类型</p>
+</li>
+<li><p>散列表类型</p>
+</li>
+<li><p>列表类型</p>
+</li>
+<li><p>集合类型</p>
+</li>
+<li><p>有序集合类型</p>
+</li>
+</ul>
+<h6 id="内存存储与持久化"><a href="#内存存储与持久化" class="headerlink" title="内存存储与持久化"></a>内存存储与持久化</h6><p><code>Redis</code> 数据库中的所有数据都存储在内存中。由于内存的读写速度远快于硬盘，因此 <code>Redis</code> 在性能上对比其他的基于硬盘存储的数据库有明显的优势，一台普通的笔记本电脑上， <code>Redis</code> 可以在一秒内读写超过 <code>10</code> 万个键值。</p>
+<p>将数据存储在内存中也存在问题，比如程序退出后内存中的数据会丢失。不过 <code>Redis</code> 提供了对持久化的支持，即可以将内存中的数据异步写入到硬盘中，同时不影响继续提供服务。</p>
+<h6 id="缓存、队列系统"><a href="#缓存、队列系统" class="headerlink" title="缓存、队列系统"></a>缓存、队列系统</h6><p>由于 <code>Redis</code> 提供了丰富的功能，越来越多的人将其用作缓存、队列系统。</p>
+<p><code>Redis</code> 可以为每个键设置生存时间（<code>Time To Live TTL</code>），生存时间到期后键会自动被删除。可以限定数据占用的最大内存空间，在数据达到空间限制之后可以按照一定的规则自动淘汰掉不需要的键。用作缓存系统性能非常出色。</p>
+<p>除此之外， <code>Redis</code> 的列表类型键可以用来实现队列，并且支持阻塞式读取，可以很容易的实现一个高性能的优先级队列。同时在更高的层面上，<code>Redis</code> 还支持 “<code>发布/订阅&quot;</code> 的消息模式。</p>
+<h5 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h5><h6 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h6><p>在 <code>OS X</code> 系统中安装：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install redis</span><br></pre></td></tr></table></figure>
+<h6 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/9c62a0cfly1g69qd2xmlxj21ts0pun0s.jpg" alt></p>
+<p>可以重新打开一个终端窗口，查看 <code>redis</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep redis</span><br></pre></td></tr></table></figure>
+<p>或者通过端口号检查 <code>Redis</code> 服务器状态：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -nlt|grep 6379</span><br></pre></td></tr></table></figure>
+<p><code>Redis</code> 服务器默认使用 <code>6379</code> 端口，当然可以通过 <code>--port</code> 自定义端口号。</p>
+<h6 id="启动-Redis-client"><a href="#启动-Redis-client" class="headerlink" title="启动 Redis-client"></a>启动 <code>Redis-client</code></h6><p>启动完服务器以后，重新打开一个窗口：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli</span><br></pre></td></tr></table></figure>
+<p>即可以启动 <code>Redis</code> 客服端。</p>
+<p>查看连接：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli ping</span><br></pre></td></tr></table></figure>
+<p>如果连接正常，会输出 <code>PONG</code></p>
+<p><code>redis-cli</code> 的一些使用：</p>
+<p>自定义地址和端口号</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h 127.0.0.1 -p 6379</span><br></pre></td></tr></table></figure>
+<p>测试连接（不带运行参数 <code>redis-cli</code>）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PING</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo hi</span><br></pre></td></tr></table></figure>
+<h6 id="停止"><a href="#停止" class="headerlink" title="停止"></a>停止</h6><p>终端运行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis shutdown</span><br></pre></td></tr></table></figure>
+<p>考虑到 <code>Redis</code> 有可能正在将内存中的数据同步到硬盘中，强行终止 <code>Redis</code> 进程可能会导致数据丢失。通过 <code>SHUTDOWN</code> 命令， <code>Redis</code> 会先断开所有的客服端连接，然后根据配置执行持久化，最后完成退出。</p>
+<h6 id="Redis-可执行文件说明"><a href="#Redis-可执行文件说明" class="headerlink" title="Redis 可执行文件说明"></a><code>Redis</code> 可执行文件说明</h6><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>redis-server</code></td>
+<td><code>Redis</code> 服务器</td>
+</tr>
+<tr>
+<td><code>redis-cli</code></td>
+<td><code>Redis</code> 命令行客服端</td>
+</tr>
+<tr>
+<td><code>redis-benchmark</code></td>
+<td><code>Redis</code> 性能测试工具</td>
+</tr>
+<tr>
+<td><code>redis-check-aof</code></td>
+<td><code>AOF</code> 文件修复工具</td>
+</tr>
+<tr>
+<td><code>redis-check-dump</code></td>
+<td><code>RDB</code> 文件检查工具</td>
+</tr>
+<tr>
+<td><code>redis-sentinel</code></td>
+<td><code>Sentinel</code> 服务器</td>
+</tr>
+</tbody>
+</table>
+<h5 id="Redis-数据类型"><a href="#Redis-数据类型" class="headerlink" title="Redis 数据类型"></a><code>Redis</code> 数据类型</h5><h6 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h6><p>以下我们在开启 <code>Redis</code> 服务器的情况下，另外再开一个终端启动 <code>redis-cli</code> 客户端进行下面的学习：</p>
+<ul>
+<li>键值存储</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set key value</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set bar 1</span><br></pre></td></tr></table></figure>
+<p>存入了一个键为 <code>bar</code>，值为 <code>1</code> 的键值。</p>
+<ul>
+<li>获取键名列表</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keys pattern</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keys *</span><br></pre></td></tr></table></figure>
+<p>使用上面的命令我们获得了 <code>Redis</code> 中所有的键。</p>
+<blockquote>
+<p>注意：<code>keys</code> 命令需要遍历 <code>Redis</code> 中所有的键， 当键的数量较多时会影响性能，不建议在生产环境中使用。</p>
+</blockquote>
+<ul>
+<li>判断键是否存储</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exists key [key ...]</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exists bar</span><br></pre></td></tr></table></figure>
+<p>如果存在，返回整数类型 <code>1</code>，否则返回 <code>0</code>。</p>
+<ul>
+<li>获取数据类型</li>
+</ul>
+<p><code>type</code> 用来获取键值的数据类型，返回值可能是 <code>string</code> (字符串类型)、<code>hash</code>(散列类型)、<code>list</code>(列表类型)、<code>set</code>(集合类型)、<code>zset</code>(有序集合类型)</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type key</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type bar</span><br></pre></td></tr></table></figure>
+<p>返回的值是 <code>string</code>。</p>
+<ul>
+<li>删除键</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">del key [key ...]</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">del bar</span><br></pre></td></tr></table></figure>
+<p>这样就删除了我们刚刚存入的 <code>{&#39;bar&#39;: &#39;1&#39;}</code></p>
+<h6 id="字符串类型"><a href="#字符串类型" class="headerlink" title="字符串类型"></a>字符串类型</h6><ul>
+<li>赋值与取值</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set key value</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">get key</span><br></pre></td></tr></table></figure>
+<p><code>set</code> 和 <code>get</code> 是 <code>Redis</code> 里面最基础的两个命令，用来设置和获取键值。</p>
+<ul>
+<li>递增</li>
+</ul>
+<p>当存储的字符串是整数形式时，<code>Redis</code> 提供了一个实现当前键值递增的命名 <code>incr</code>，返回递增后的值。</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incr key</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incr num</span><br></pre></td></tr></table></figure>
+<p>当操作的键不存在时默认键值为 <code>0</code>，所以输出结果是递增后的 <code>1</code>。当键值不是整数时会提示错误。</p>
+<ul>
+<li>增加指定的整数</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incrby key increment</span><br></pre></td></tr></table></figure>
+<p><code>incrby</code> 命令和 <code>incr</code> 命令基本一样，只不过前者可以通过参数 <code>increment</code> 指定一次增加的数值，如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incrby num 3</span><br></pre></td></tr></table></figure>
+<p>在上一次（<code>1</code>） 的结果上再增加 <code>3</code>，那么输出应该为 <code>4</code>。</p>
+<ul>
+<li>减少指定的整数</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decr key</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decrby key decrement</span><br></pre></td></tr></table></figure>
+<p>同样的，<code>decr</code> 和 <code>decrby</code> 可以实现让键值递减。</p>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decrby num 2</span><br></pre></td></tr></table></figure>
+<p>继续使用上面的参数例子，在 <code>4</code> 的基础上减去 <code>2</code>，输出结果是 <code>2</code>。</p>
+<ul>
+<li>增加指定浮点数</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incrbyfloat key increment</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">incrbyflodt num 2.7</span><br></pre></td></tr></table></figure>
+<p>输出结果为 <code>4.7</code>。</p>
+<ul>
+<li>向尾部追加值</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">append key value</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set say hello</span><br><span class="line">append say ' asuka!'</span><br><span class="line">get say</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/9c62a0cfly1g69qe12yrlj20vo05wab9.jpg" alt></p>
+<p><code>append</code> 的作用是向键值的末尾追加 <code>value</code>。例子中使用了引号是因为参数包含了空格，也可以输入类似于：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set name akashi</span><br><span class="line">append name sai</span><br><span class="line">get name</span><br></pre></td></tr></table></figure>
+<p>输出为： <code>akashisai</code></p>
+<ul>
+<li>获取字符串长度</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strlen key</span><br></pre></td></tr></table></figure>
+<p><code>strlen</code> 命令返回键值的长度，如果键不存在则返回 <code>0</code>。</p>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strlen say</span><br></pre></td></tr></table></figure>
+<ul>
+<li>同时获取/设置多个键值</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mget key [key ...]</span><br><span class="line">mset key value [key value ...]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>位操作</li>
+</ul>
+<p>一个字节由 <code>8</code> 个二进制位组成， <code>Redis</code> 提供了 <code>4</code> 个命令可以直接对二进制位进行操作。</p>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getbit key offset</span><br><span class="line">setbit key offset value</span><br><span class="line">bitcount key [start] [end]</span><br><span class="line">bitop operation destkey key [key ...]</span><br></pre></td></tr></table></figure>
+<p><code>getbit</code> 命令可以获得一个字符串类型键指定位置的二进制位的值（ <code>0</code> 或 <code>1</code>）。</p>
+<p><code>bitcount</code> 命令可以获得字符串类型键中值是 <code>1</code> 的二进制位个数。</p>
+<h6 id="散列类型"><a href="#散列类型" class="headerlink" title="散列类型"></a>散列类型</h6><blockquote>
+<p>散列表(<code>hash</code>)的键值是一种字典结构，其存储了字段(<code>field</code>)和字段值的映射，但字段值只能是字符串，不支持其他数据类型，也就是说，散列类型不能嵌套其他类型。</p>
+</blockquote>
+<p>注意：其实 <code>Redis</code> 的其他数据类型同样不支持数据类型的嵌套。比如集合类型的每个元素都只能是字符串，不能是另一个集合或者散列表等。</p>
+<p>散列类型适合存储对象。</p>
+<ul>
+<li>赋值与取值</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">hset key field value</span><br><span class="line">hget key field</span><br><span class="line">hmset key field value [field value ...]</span><br><span class="line">hmget key field [field ...]</span><br><span class="line">hgetall key</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hset user name akashi</span><br><span class="line">hget user name</span><br></pre></td></tr></table></figure>
+<p><code>hset</code> 的方便之处在于不区分插入和删除操作，这意味着不用事先判断字段是否存在来决定执行的是插入(<code>insert</code>)还是更新(<code>update</code>)操作。当字段不存在时，执行插入操作，返回 <code>1</code>，当字段存在时，执行更新操作，返回 <code>0</code>；当键本身不存在时，还会自动建立。</p>
+<p>当需要设置/查找多个字段时：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hmset user age 21 email akashi_sai@163.com</span><br><span class="line">hmget user name age email</span><br></pre></td></tr></table></figure>
+<p>如果想获取键中的所有字段和字段的值却不知道键中有哪些字段时，可以使用 <code>hgetall</code> 命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hgetall user</span><br></pre></td></tr></table></figure>
+<ul>
+<li>判断字段是否存在</li>
+</ul>
+<p>语法:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexists key field</span><br></pre></td></tr></table></figure>
+<p><code>hexists</code> 用来判断一个字段是否存在，如果存在返回 <code>1</code>，否则返回 <code>0</code>。</p>
+<ul>
+<li>当字段不存在时赋值</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hsetnx key field value</span><br></pre></td></tr></table></figure>
+<p><code>nx</code> 表示 <code>if not exisits</code></p>
+<p><code>hsetnx</code> 与 <code>hset</code> 类似，区别在于如果字段已经存在，<code>hsetnx</code> 将不再执行任何操作。</p>
+<ul>
+<li>增加数字</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hincrby key field increment</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hincrby user age 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除字段</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdel key field [field ...]</span><br></pre></td></tr></table></figure>
+<p><code>hdel</code> 命令可以删除一个或多个字段，返回值是被删除的字段个数。</p>
+<ul>
+<li>只获取字段名或字段值</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hkeys key</span><br><span class="line">hvals key</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hkeys user</span><br><span class="line">hvals user</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取字段数量</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">klen key</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hlen user</span><br></pre></td></tr></table></figure>
+<h6 id="列表类型"><a href="#列表类型" class="headerlink" title="列表类型"></a>列表类型</h6><blockquote>
+<p>列表类型(<code>list</code>)可以存储一个有序的字符串列表，常用的操作是向两端添加元素，或者获得列表的某一个片段。</p>
+</blockquote>
+<ul>
+<li>向列表两端增加元素</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lpush key value [value ...]</span><br><span class="line">rpush key value [value ...]</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lpush list 1</span><br><span class="line">lpush list 0</span><br></pre></td></tr></table></figure>
+<p>在列表左边增加元素，完成后，列表 <code>list</code> 的元素为 <code>0 1</code>。</p>
+<p>继续从右边增加元素：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpush list 2 3</span><br></pre></td></tr></table></figure>
+<p>现在列表中的元素排列为: <code>0 1 2 3</code>。</p>
+<ul>
+<li>从列表两端弹出元素</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lpop key</span><br><span class="line">rpop key</span><br></pre></td></tr></table></figure>
+<p>以上面声明的 <code>list</code> 为例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lpop list</span><br></pre></td></tr></table></figure>
+<p>我们知道现在最左边的数字是 <code>0</code>，所以输入命令，返回了 <code>0</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpop list</span><br></pre></td></tr></table></figure>
+<p>同样，返回最右边的数字 <code>3</code>。现在我们弹出了列表两端的两个数字，还存在列表中的还有 <code>1 2</code>。</p>
+<ul>
+<li>获取列表中元素的个数</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">llen key</span><br></pre></td></tr></table></figure>
+<p>当键不存在时返回 <code>0</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">llen list</span><br></pre></td></tr></table></figure>
+<p>返回了当前的列表元素个数 <code>2</code>。</p>
+<ul>
+<li>获取列表片段</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lrange key start stop</span><br></pre></td></tr></table></figure>
+<p><code>Redis</code> 的列表索引从 <code>0</code>开始，返回包括两端的元素。为了演示，我们先往列表里添加一些元素：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpush 3 4 5 6 7</span><br><span class="line">lrange list 2 5</span><br></pre></td></tr></table></figure>
+<p>现在列表里的元素分别有 <code>1 2 3 4 5 6 7</code>，返回索引从 <code>2</code> 开始，<code>5</code> 结束的元素，有：<code>3 4 5 6</code>。</p>
+<ul>
+<li>删除列表中指定的值</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lrem key count value</span><br></pre></td></tr></table></figure>
+<p><code>lrem</code> 会删除列表中前 <code>count</code> 个值为 <code>value</code> 的元素，返回值是实际删除的元素个数。根据 <code>count</code> 的值的不同，分为以下几种情况：</p>
+<ol>
+<li><p><code>count &gt; 0</code> 时，<code>lrem</code> 会从列表左边开始删除前 <code>count</code> 个值为 <code>value</code> 的元素。</p>
+</li>
+<li><p><code>count &lt; 0</code> 时，<code>lrem</code> 会从列表右边开始删除前 <code>|count|</code> 个值为 <code>value</code> 的元素。</p>
+</li>
+<li><p><code>count = 0</code> 时，<code>lrem</code> 会删除所有值为 <code>value</code> 的元素。</p>
+</li>
+</ol>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lrem key 0 7</span><br></pre></td></tr></table></figure>
+<p>以上例子删除了所有值为 <code>7</code> 的元素。</p>
+<ul>
+<li>获取/设置指定索引的元素值</li>
+</ul>
+<p>如果要将列表类型当做数组来用，<code>lindex</code> 是必不可少的，<code>lindex</code> 用来返回指定元素的索引，索引从 <code>0</code> 开始。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lindex key index</span><br><span class="line">lset key index value</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lindex list 1</span><br><span class="line">lindex list -1</span><br></pre></td></tr></table></figure>
+<p><code>-1</code> 表示最右边的索引，以此类推，<code>-2</code> 即为列表里面倒数第二个元素。</p>
+<ul>
+<li>只保留列表指定片段</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ltrim key start end</span><br></pre></td></tr></table></figure>
+<p><code>ltrim</code> 可以删除指定索引范围之外的所有元素，其指定列表范围的方法和 <code>lrange</code> 相同。</p>
+<ul>
+<li>向列表中插入元素</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">linsert key before|after pivot value</span><br></pre></td></tr></table></figure>
+<p><code>linsert</code> 先从左到右查找 <code>pivot</code> 元素位置，然后根据参数决定在之前或者之后插入。</p>
+<ul>
+<li>将元素从一个列表转到另一个列表</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpoplpush source destination</span><br></pre></td></tr></table></figure>
+<p>即先执行 <code>rpop</code> 再执行 <code>lpush</code>命令先从 <code>source</code> 列表类型键的右边弹出一个元素，然后将其加入到 <code>destination</code> 列表类型的左边，并返回这个元素的值。</p>
+<p>当把列表类型当做队列使用时，<code>rpoplpush</code> 可以直观的在多个队列中传递数据；</p>
+<p>当 <code>source</code> 和 <code>destination</code> 相同时，会不断执行队尾元素移到队首，借助这个特性可以实现一个网站监控系统。</p>
+<h6 id="集合类型"><a href="#集合类型" class="headerlink" title="集合类型"></a>集合类型</h6><blockquote>
+<p>集合类型的常用操作是向集合中加入或删除元素、判断某个元素是否存在等，由于集合类型在 <code>Redis</code> 内部是使用值为空的散列表实现的，所以这些操作的时间复杂度都是 <code>O(1)</code>。最方便的是多个集合类型之间还可以进行并集、交集和差集运算。</p>
+</blockquote>
+<p>集合与列表类型的比较：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>集合类型</th>
+<th>列表类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存储内容</td>
+<td>字符串</td>
+<td>字符串</td>
+</tr>
+<tr>
+<td>有序性</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>唯一性</td>
+<td>是</td>
+<td>否</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>增加/删除元素</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sadd key member [member ...]</span><br><span class="line">srem key member [member ...]</span><br></pre></td></tr></table></figure>
+<p><code>sadd</code> 用来向集合中增加一个或多个元素，如果键不存在则会自动创建。因为在一个集合中不能有相同的元素，所以如果加入的元素已经存在就会忽略这个元素，返回值是成功加入的元素的数量。</p>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sadd letters a</span><br><span class="line">sadd letters a b c</span><br></pre></td></tr></table></figure>
+<p>第一条成功加入一个元素，返回 <code>1</code>，第二条加入的 <code>a</code> 元素已经存在，忽略，新加入了 <code>2</code> 个元素，返回 <code>2</code>。</p>
+<p>同理的 <code>srem</code> 用来从集合中删除一个或多个元素，并返回删除成功的个数。</p>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srem letters a</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得集合中的所有元素</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smembers key</span><br></pre></td></tr></table></figure>
+<ul>
+<li>判断元素是否在集合中</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sismember key member</span><br></pre></td></tr></table></figure>
+<p>判断一个元素是否存在集合中的时间复杂度为 <code>O(1)</code>， 当存在时返回 <code>1</code>，否则返回 <code>0</code>。</p>
+<ul>
+<li>集合间运算</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sdiff key [key ...]</span><br><span class="line">sinter key [key ...]</span><br><span class="line">sunion key [key ...]</span><br></pre></td></tr></table></figure>
+<p><code>sdiff</code> 表示执行集合的差集运算、<code>sinter</code> 表示执行集合的交集运算、<code>sunion</code> 表示执行集合的并集运算。</p>
+<ul>
+<li>获取集合中元素个数</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scard key</span><br></pre></td></tr></table></figure>
+<ul>
+<li>进行集合运算并将结果存储</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sdiffstore destination key [key ...]</span><br><span class="line">sinterstore destination key [key ...]</span><br><span class="line">sunionstore destination key [key ...]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>随机获取集合中的元素</li>
+</ul>
+<p>语法；</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srandmember key [count]</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">srandmember letters</span><br><span class="line">srandmember letters 2</span><br></pre></td></tr></table></figure>
+<p>可选参数 <code>count</code> 用来随机获取多个元素，</p>
+<p>当 <code>count</code> 为正数时，随机获取集合里 <code>count</code> 个不重复的元素；</p>
+<p>当 <code>count</code> 为负数时，随机获取集合里 <code>|count|</code> 个元素，有可能相同；</p>
+<ul>
+<li>从集合中弹出一个元素</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spop key</span><br></pre></td></tr></table></figure>
+<p><code>eg</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spop letters</span><br></pre></td></tr></table></figure>
+<h6 id="有序集合"><a href="#有序集合" class="headerlink" title="有序集合"></a>有序集合</h6><blockquote>
+<p>有序集合就是在集合类型的基础上将集合中的每个元素都关联到了一个分数，分数可以是相同的。</p>
+</blockquote>
+<p>有序集合与列表有些类似，下面介绍它们的不同之处：</p>
+<ol>
+<li><p>列表类型是通过链表实现的，获取靠近两端的数据速度极快，而当元素增多以后，访问中间数据的速度会较慢，它合适实现如 “新鲜事”,”日志”等很少访问中间元素的应用，或者是时效性比较强的应用。</p>
+</li>
+<li><p>有序集合类型是使用散列表和跳表(<code>skip list</code>)实现的，即使读取中间数据速度也很快(时间复杂度为<code>O(log(n))</code>)</p>
+</li>
+<li><p>列表中不能简单地调整某个元素的位置，但是有序集合可以(通过更改元素关联的分数)</p>
+</li>
+<li><p>有序集合要比列表类型更耗费内存</p>
+</li>
+</ol>
+<ul>
+<li>增加元素</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zadd key score member [score member ...]</span><br></pre></td></tr></table></figure>
+<p><code>zadd</code> 用来向有序集合加入一个元素和该元素的分数，如果该元素已存在则会用新的分数替换原有的分数，返回新加入到集合中的元素个数。</p>
+<ul>
+<li>获得元素分数</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zscore key member</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取排名在某个范围的元素列表</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zrange key start stop [withscores]</span><br><span class="line">zrevrange key start stop [withscores]</span><br></pre></td></tr></table></figure>
+<p><code>zrevrange</code> 和 <code>zrange</code> 的唯一不同在于 <code>zrevrange</code> 是按照元素分数从大到小的顺序给出结果的。</p>
+<ul>
+<li>获得指定分数范围内的元素</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zrangebyscore key min max [withscores] [limit offset count]</span><br></pre></td></tr></table></figure>
+<p>第一个可选参数就和字面的意思一样，是带上分数返回，第二个可选参数表示在获得的元素列表的基础上向后偏移 <code>offset</code> 个元素，并且只获取前 <code>count</code> 个元素。</p>
+<ul>
+<li>增加某个元素的分数</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zincrby key increment member</span><br></pre></td></tr></table></figure>
+<p><code>zincrby</code> 可以增加一个元素的分数，返回值是更改后的分数。</p>
+<ul>
+<li>获取集合中元素的数量</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zcard key</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得指定分数范围内的元素个数</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zcount key min max</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除一个或多个元素</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zrem key member [member ...]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>按照排名范围删除元素</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zremrangebyrank key start stop</span><br></pre></td></tr></table></figure>
+<ul>
+<li>按照分数范围删除元素</li>
+</ul>
+<p>语法:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zremrangebyscore key min max</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得元素排名</li>
+</ul>
+<p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zrank key member</span><br><span class="line">zrevrank key member</span><br></pre></td></tr></table></figure>
+<p><code>zrank</code> 会按照元素从小到大的顺序获得元素排名，相反， <code>zrevrank</code> 会按照从大到小的顺序排名。</p>
+<ul>
+<li>计算有序集合的交集</li>
+</ul>
+<p>语法:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zinterstore destination numkeys key [key ...] [weights weight [weight ...]] [aggregatesum|min|max]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/22/scrapy-vcbstudio/bf-scrapy/" rel="next" title="Scrapy 实战：广度优先策略抓取">
+                <i class="fa fa-chevron-left"></i> Scrapy 实战：广度优先策略抓取
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/28/google_cloud_ssr/ssr/" rel="prev" title="Google Cloud 搭建 SSR 服务器">
+                Google Cloud 搭建 SSR 服务器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/aragakki.png" alt="Akashi Sai">
+            
+              <p class="site-author-name" itemprop="name">Akashi Sai</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/akashigakki" title="GitHub &rarr; https://github.com/akashigakki" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:akashi_sai@163.com" title="E-Mail &rarr; mailto:akashi_sai@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/akashisai022" title="Twitter &rarr; https://twitter.com/akashisai022" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/akashi_sai_" title="Instagram &rarr; https://www.instagram.com/akashi_sai_" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis-使用笔记"><span class="nav-number">1.</span> <span class="nav-text">Redis 使用笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#存储结构"><span class="nav-number">1.1.1.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#内存存储与持久化"><span class="nav-number">1.1.2.</span> <span class="nav-text">内存存储与持久化</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#缓存、队列系统"><span class="nav-number">1.1.3.</span> <span class="nav-text">缓存、队列系统</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#准备"><span class="nav-number">1.2.</span> <span class="nav-text">准备</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#安装"><span class="nav-number">1.2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#启动"><span class="nav-number">1.2.2.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#启动-Redis-client"><span class="nav-number">1.2.3.</span> <span class="nav-text">启动 Redis-client</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#停止"><span class="nav-number">1.2.4.</span> <span class="nav-text">停止</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Redis-可执行文件说明"><span class="nav-number">1.2.5.</span> <span class="nav-text">Redis 可执行文件说明</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redis-数据类型"><span class="nav-number">1.3.</span> <span class="nav-text">Redis 数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#基础命令"><span class="nav-number">1.3.1.</span> <span class="nav-text">基础命令</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#字符串类型"><span class="nav-number">1.3.2.</span> <span class="nav-text">字符串类型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#散列类型"><span class="nav-number">1.3.3.</span> <span class="nav-text">散列类型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#列表类型"><span class="nav-number">1.3.4.</span> <span class="nav-text">列表类型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#集合类型"><span class="nav-number">1.3.5.</span> <span class="nav-text">集合类型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#有序集合"><span class="nav-number">1.3.6.</span> <span class="nav-text">有序集合</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Akashi Sai</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zNhmosawnNOGzgW5JTuXbHAO-gzGzoHsz',
+    appKey: 'rGtKua726IsXnNCecnhq2jQ4',
+    placeholder: 'ヾﾉ≧∀≦)o 来啊！快活啊！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

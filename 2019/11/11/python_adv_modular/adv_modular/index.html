@@ -1,0 +1,2072 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/aragakki.png?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="标准库 标准库：一些常用的模块。">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 上手指南之标准库">
+<meta property="og:url" content="http://akashigakki.github.io/2019/11/11/python_adv_modular/adv_modular/index.html">
+<meta property="og:site_name" content="Akashi_Sai">
+<meta property="og:description" content="标准库 标准库：一些常用的模块。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-10-06T09:57:39.419Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 上手指南之标准库">
+<meta name="twitter:description" content="标准库 标准库：一些常用的模块。">
+
+
+
+
+
+
+  <link rel="canonical" href="http://akashigakki.github.io/2019/11/11/python_adv_modular/adv_modular/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Python 上手指南之标准库 | Akashi_Sai</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?59d9132e52a8c3e7ac2f40c7b5017bab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Akashi_Sai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/akashigakki" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://akashigakki.github.io/2019/11/11/python_adv_modular/adv_modular/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Akashi Sai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/aragakki.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Akashi_Sai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Python 上手指南之标准库
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-11 00:00:00" itemprop="dateCreated datePublished" datetime="2019-11-11T00:00:00+08:00">2019-11-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-10-06 17:57:39" itemprop="dateModified" datetime="2020-10-06T17:57:39+08:00">2020-10-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/11/11/python_adv_modular/adv_modular/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/11/python_adv_modular/adv_modular/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">35k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">32 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="标准库"><a href="#标准库" class="headerlink" title="标准库"></a>标准库</h3><blockquote>
+<p>标准库：一些常用的模块。</p>
+</blockquote>
+<a id="more"></a>
+<h4 id="探索模块"><a href="#探索模块" class="headerlink" title="探索模块"></a>探索模块</h4><ul>
+<li>使用 <code>dir</code></li>
+</ul>
+<p>要查明模块包含哪些东西，可以使用函数 <code>dir</code>，它列出对象的所有属性</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> copy</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>dir(copy)</span><br><span class="line">[<span class="string">'Error'</span>, <span class="string">'__all__'</span>, <span class="string">'__builtins__'</span>, <span class="string">'__cached__'</span>, <span class="string">'__doc__'</span>, <span class="string">'__file__'</span>, <span class="string">'__loader__'</span>, <span class="string">'__name__'</span>, <span class="string">'__package__'</span>, <span class="string">'__spec__'</span>, <span class="string">'_copy_dispatch'</span>, <span class="string">'_copy_immutable'</span>, <span class="string">'_deepcopy_atomic'</span>, <span class="string">'_deepcopy_dict'</span>, <span class="string">'_deepcopy_dispatch'</span>, <span class="string">'_deepcopy_list'</span>, <span class="string">'_deepcopy_method'</span>, <span class="string">'_deepcopy_tuple'</span>, <span class="string">'_keep_alive'</span>, <span class="string">'_reconstruct'</span>, <span class="string">'copy'</span>, <span class="string">'deepcopy'</span>, <span class="string">'dispatch_table'</span>, <span class="string">'error'</span>]</span><br></pre></td></tr></table></figure>
+<p>为方便阅读，可以去掉下划线打头的不提供外部使用的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[n <span class="keyword">for</span> n <span class="keyword">in</span> dir(copy) <span class="keyword">if</span> <span class="keyword">not</span> n.startswith(<span class="string">'_'</span>)]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>变量 <code>__all__</code></li>
+</ul>
+<p>查看模块具体导入可用的内容</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> copy</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>copy.__all__</span><br><span class="line">[<span class="string">'Error'</span>, <span class="string">'copy'</span>, <span class="string">'deepcopy'</span>]</span><br></pre></td></tr></table></figure>
+<p>这样就可以看到模块 <code>copy</code> 可以使用的公有接口</p>
+<ul>
+<li>使用 <code>help</code></li>
+</ul>
+<p>函数 <code>help</code> 提供一些你需要的信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>help(sys)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看文档</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> sys</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(sys.__doc__)</span><br></pre></td></tr></table></figure>
+<h4 id="sys"><a href="#sys" class="headerlink" title="sys"></a><code>sys</code></h4><p>访问和 <code>Python</code> 解释其相关的变量和函数。</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>argv</code></td>
+<td>获取命令行参数，返回值是List，第一个元素是程序本身路径</td>
+</tr>
+<tr>
+<td><code>exit([arg])</code></td>
+<td>退出当前程序，可以通过可选参数指定返回值或错误消息</td>
+</tr>
+<tr>
+<td><code>modules</code></td>
+<td>一个字典，将模块名映射到加载的函数</td>
+</tr>
+<tr>
+<td><code>path</code></td>
+<td>一个列表，返回模块的搜索路径</td>
+</tr>
+<tr>
+<td><code>platform</code></td>
+<td>返回操作系统的名称</td>
+</tr>
+<tr>
+<td><code>stdin</code></td>
+<td>标准输入流</td>
+</tr>
+<tr>
+<td><code>stdout</code></td>
+<td>标准输出流</td>
+</tr>
+<tr>
+<td><code>stderr</code></td>
+<td>标准错误流</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>解释器版本信息</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><code>argv</code></li>
+</ol>
+<p>命令行执行，实现从外部传入参数</p>
+<p><code>python3 test.py arg1 arg2</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">print(sys.argv)</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">'test.py'</span>, <span class="string">'arg1'</span>, <span class="string">'arg2'</span>]</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><code>exit([arg])</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">print(sys.exit(<span class="string">"运行结束."</span>))</span><br></pre></td></tr></table></figure>
+<h4 id="os"><a href="#os" class="headerlink" title="os"></a><code>os</code></h4><p>访问和操作系统相关的变量和函数。</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getcwd</code></td>
+<td>获取当前的工作目录</td>
+</tr>
+<tr>
+<td><code>chdir</code></td>
+<td>修改当前工作目录</td>
+</tr>
+<tr>
+<td><code>listdir</code></td>
+<td>获取指定文件夹中的所有文件和文件夹组成的列表</td>
+</tr>
+<tr>
+<td><code>mkdir</code></td>
+<td>创建一个目录/文件夹</td>
+</tr>
+<tr>
+<td><code>makedirs</code></td>
+<td>递归创建文件夹</td>
+</tr>
+<tr>
+<td><code>rmdir</code></td>
+<td>移除一个目录（必须是空目录）</td>
+</tr>
+<tr>
+<td><code>removedirs</code></td>
+<td>递归删除文件夹</td>
+</tr>
+<tr>
+<td><code>rename</code></td>
+<td>修改文件和文件夹的名称</td>
+</tr>
+<tr>
+<td><code>stat</code></td>
+<td>获取文件的相关信息</td>
+</tr>
+<tr>
+<td><code>system</code></td>
+<td>执行系统命令</td>
+</tr>
+<tr>
+<td><code>getenv</code></td>
+<td>获取系统环境变量</td>
+</tr>
+<tr>
+<td><code>putenv</code></td>
+<td>设置系统环境变量</td>
+</tr>
+<tr>
+<td><code>exit</code></td>
+<td>退出当前执行命令，直接关闭当前操作</td>
+</tr>
+<tr>
+<td><code>unlink</code></td>
+<td>删除文件</td>
+</tr>
+<tr>
+<td><code>open</code></td>
+<td>新建文件</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>path</code> 模块</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>os.path.__all__</span><br><span class="line">[<span class="string">'normcase'</span>, <span class="string">'isabs'</span>, <span class="string">'join'</span>, <span class="string">'splitdrive'</span>, <span class="string">'split'</span>, <span class="string">'splitext'</span>, <span class="string">'basename'</span>, <span class="string">'dirname'</span>, <span class="string">'commonprefix'</span>, <span class="string">'getsize'</span>, <span class="string">'getmtime'</span>, <span class="string">'getatime'</span>, <span class="string">'getctime'</span>, <span class="string">'islink'</span>, <span class="string">'exists'</span>, <span class="string">'lexists'</span>, <span class="string">'isdir'</span>, <span class="string">'isfile'</span>, <span class="string">'ismount'</span>, <span class="string">'expanduser'</span>, <span class="string">'expandvars'</span>, <span class="string">'normpath'</span>, <span class="string">'abspath'</span>, <span class="string">'samefile'</span>, <span class="string">'sameopenfile'</span>, <span class="string">'samestat'</span>, <span class="string">'curdir'</span>, <span class="string">'pardir'</span>, <span class="string">'sep'</span>, <span class="string">'pathsep'</span>, <span class="string">'defpath'</span>, <span class="string">'altsep'</span>, <span class="string">'extsep'</span>, <span class="string">'devnull'</span>, <span class="string">'realpath'</span>, <span class="string">'supports_unicode_filenames'</span>, <span class="string">'relpath'</span>, <span class="string">'commonpath'</span>]</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>abspath()</code></td>
+<td>将一个相对路径转化为绝对路径</td>
+</tr>
+<tr>
+<td><code>basename()</code></td>
+<td>获取路径中的文件夹或者文件名称（只要路径的最后一部分）</td>
+</tr>
+<tr>
+<td><code>dirname()</code></td>
+<td>获取路径中的路径部分(除去最后一部分)</td>
+</tr>
+<tr>
+<td><code>join()</code></td>
+<td>将两个路径合并为一个路径</td>
+</tr>
+<tr>
+<td><code>split()</code></td>
+<td>将一个路径切割成文件夹和文件名部分</td>
+</tr>
+<tr>
+<td><code>splitext()</code></td>
+<td>将一个文件名切成名字和后缀两个部分</td>
+</tr>
+<tr>
+<td><code>getsize()</code></td>
+<td>获取一个文件的大小</td>
+</tr>
+<tr>
+<td><code>isfile()</code></td>
+<td>检测一个路径是否是一个文件</td>
+</tr>
+<tr>
+<td><code>isdir()</code></td>
+<td>检测一个路径是否是一个文件夹</td>
+</tr>
+<tr>
+<td><code>getctime()</code></td>
+<td>获取文件的创建时间</td>
+</tr>
+<tr>
+<td><code>getmtime()</code></td>
+<td>获取文件的修改时间</td>
+</tr>
+<tr>
+<td><code>getatime()</code></td>
+<td>获取文件的访问时间</td>
+</tr>
+<tr>
+<td><code>exists()</code></td>
+<td>检测指定的路径是否存在 </td>
+</tr>
+<tr>
+<td><code>isabs()</code></td>
+<td>检测一个路径是否是绝对路径</td>
+</tr>
+<tr>
+<td><code>islink()</code></td>
+<td>检测一个路径是否是链接</td>
+</tr>
+<tr>
+<td><code>samefile()</code></td>
+<td>检测两个路径是否指向同一个文件</td>
+</tr>
+</tbody>
+</table>
+<p>参考： <a href="https://blog.csdn.net/jamfiy/article/details/88175302" target="_blank" rel="noopener">os path</a></p>
+<h4 id="fileinput"><a href="#fileinput" class="headerlink" title="fileinput"></a><code>fileinput</code></h4><p>迭代多个文件或流的内容行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> fileinput</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fileinput.__all__</span><br><span class="line">[<span class="string">'input'</span>, <span class="string">'close'</span>, <span class="string">'nextfile'</span>, <span class="string">'filename'</span>, <span class="string">'lineno'</span>, <span class="string">'filelineno'</span>, <span class="string">'fileno'</span>, <span class="string">'isfirstline'</span>, <span class="string">'isstdin'</span>, <span class="string">'FileInput'</span>, <span class="string">'hook_compressed'</span>, <span class="string">'hook_encoded'</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="shutil"><a href="#shutil" class="headerlink" title="shutil"></a><code>shutil</code></h4><p>拷贝、移动文件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> shutil</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>shutil.__all__</span><br><span class="line">[<span class="string">'copyfileobj'</span>, <span class="string">'copyfile'</span>, <span class="string">'copymode'</span>, <span class="string">'copystat'</span>, <span class="string">'copy'</span>, <span class="string">'copy2'</span>, <span class="string">'copytree'</span>, <span class="string">'move'</span>, <span class="string">'rmtree'</span>, <span class="string">'Error'</span>, <span class="string">'SpecialFileError'</span>, <span class="string">'ExecError'</span>, <span class="string">'make_archive'</span>, <span class="string">'get_archive_formats'</span>, <span class="string">'register_archive_format'</span>, <span class="string">'unregister_archive_format'</span>, <span class="string">'get_unpack_formats'</span>, <span class="string">'register_unpack_format'</span>, <span class="string">'unregister_unpack_format'</span>, <span class="string">'unpack_archive'</span>, <span class="string">'ignore_patterns'</span>, <span class="string">'chown'</span>, <span class="string">'which'</span>, <span class="string">'get_terminal_size'</span>, <span class="string">'SameFileError'</span>, <span class="string">'disk_usage'</span>]</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>copyfileobj(f1, f2)</code></td>
+<td>将 <code>f1</code> 的数据覆盖 <code>copy</code> 给 <code>f2</code>，需打开文件</td>
+</tr>
+<tr>
+<td><code>copyfile(f1, f2)</code></td>
+<td>不用打开文件，直接用文件名进行覆盖 <code>copy</code></td>
+</tr>
+<tr>
+<td><code>copymode(f1, f2)</code></td>
+<td>拷贝权限，内容组，用户，均不变</td>
+</tr>
+<tr>
+<td><code>copystat(f1, f2)</code></td>
+<td>只拷贝了权限</td>
+</tr>
+<tr>
+<td><code>copy(f1, f2)</code></td>
+<td>拷贝文件和权限都进行 <code>copy</code></td>
+</tr>
+<tr>
+<td><code>copy2(f1, f2)</code></td>
+<td>拷贝了文件和状态信息</td>
+</tr>
+<tr>
+<td><code>rmtree(dir)</code></td>
+<td>可以递归删除目录下的目录及文件</td>
+</tr>
+<tr>
+<td><code>move(dir, f)</code></td>
+<td>递归移动一个文件</td>
+</tr>
+</tbody>
+</table>
+<p>参考： <a href="https://www.cnblogs.com/xiangsikai/p/7787101.html" target="_blank" rel="noopener">shutil</a></p>
+<h4 id="time"><a href="#time" class="headerlink" title="time"></a><code>time</code></h4><p>获取时间、操作时间和日期以及设置它们格式。</p>
+<p>时间的表示方式：</p>
+<ol>
+<li><p>时间戳 <code>timestamp</code> - 新纪元开始后的秒数(1970年1月1日00:00:00开始按秒计算的偏移量)</p>
+</li>
+<li><p>格式化的时间字符串</p>
+</li>
+<li><p>结构化时间元组 - <code>struct_time</code></p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>localtime([secs])</code></td>
+<td>将秒数(时间戳)转换为表示当地时间的结构化时间元组</td>
+</tr>
+<tr>
+<td><code>gmtime()</code></td>
+<td>将时间戳转换为结构化时间</td>
+</tr>
+<tr>
+<td><code>mktime(tuple)</code></td>
+<td>将结构化时间转换为时间戳</td>
+</tr>
+<tr>
+<td><code>sleep(ses)</code></td>
+<td>休眠，什么都不做</td>
+</tr>
+<tr>
+<td><code>asctime([tuple])</code></td>
+<td>将结构化时间转换为字符串</td>
+</tr>
+<tr>
+<td><code>strptime(string[, format])</code></td>
+<td>将字符串转换为结构化时间</td>
+</tr>
+<tr>
+<td><code>time()</code></td>
+<td>当前时间戳(浮点类型)</td>
+</tr>
+<tr>
+<td><code>ctime()</code></td>
+<td>当前时间字符串</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line"></span><br><span class="line">A[struct_time] --&gt;|strftime| B[Format string]</span><br><span class="line"></span><br><span class="line">B[Format string] --&gt;|strptime| A[struct_time]</span><br><span class="line"></span><br><span class="line">A[struct_time] --&gt;|mktime| C[Timestamp]</span><br><span class="line"></span><br><span class="line">C[Timestamp] --&gt;|localtime, gmtime| A[struct_time]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>当前时间戳 - <code>time()</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> time</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.time()</span><br><span class="line"><span class="number">1573438880.298209</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>当前时间字符串 - <code>ctime()</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> time</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.ctime()</span><br><span class="line"><span class="string">'Mon Nov 11 10:21:08 2019'</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>当前结构化时间元组</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> time</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.localtime()</span><br><span class="line">time.struct_time(tm_year=<span class="number">2019</span>, tm_mon=<span class="number">11</span>, tm_mday=<span class="number">11</span>, tm_hour=<span class="number">10</span>, tm_min=<span class="number">23</span>, tm_sec=<span class="number">28</span>, tm_wday=<span class="number">0</span>, tm_yday=<span class="number">315</span>, tm_isdst=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>休眠 </li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> time</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>time.sleep(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="datetime"><a href="#datetime" class="headerlink" title="datetime"></a><code>datetime</code></h4><p><code>tiem</code> 模块的高级封装，接口更加直观。</p>
+<p>首先查看模块下面的类：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[n <span class="keyword">for</span> n <span class="keyword">in</span> dir(datetime) <span class="keyword">if</span> <span class="keyword">not</span> n.startswith(<span class="string">'_'</span>)]</span><br><span class="line">[<span class="string">'MAXYEAR'</span>, <span class="string">'MINYEAR'</span>, <span class="string">'date'</span>, <span class="string">'datetime'</span>, <span class="string">'datetime_CAPI'</span>, <span class="string">'sys'</span>, <span class="string">'time'</span>, <span class="string">'timedelta'</span>, <span class="string">'timezone'</span>, <span class="string">'tzinfo'</span>]</span><br></pre></td></tr></table></figure>
+<p><code>datetime</code> 模块中包含的类：</p>
+<table>
+<thead>
+<tr>
+<th>类名</th>
+<th>功能说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>date</code></td>
+<td>日期对象,常用的属性有 <code>year</code>, <code>month</code>, <code>day</code></td>
+</tr>
+<tr>
+<td><code>time</code></td>
+<td>时间对象</td>
+</tr>
+<tr>
+<td><code>datetime</code></td>
+<td>日期时间对象,常用的属性有 <code>hour</code>, <code>minute</code>, <code>second</code>, <code>microsecond</code></td>
+</tr>
+<tr>
+<td><code>datetime_CAPI</code></td>
+<td>日期时间对象C语言接口</td>
+</tr>
+<tr>
+<td><code>timedelta</code></td>
+<td>时间间隔，即两个时间点之间的长度</td>
+</tr>
+<tr>
+<td><code>tzinfo</code></td>
+<td>时区信息对象</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>datetime</code></li>
+</ul>
+<ol>
+<li>获取当前结构化时间 - <code>today()</code>、<code>now()</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> datetime</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>datetime.datetime.today()</span><br><span class="line">datetime.datetime(<span class="number">2019</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">9</span>, <span class="number">38</span>, <span class="number">648690</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>datetime.datetime.now()</span><br><span class="line">datetime.datetime(<span class="number">2019</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">11</span>, <span class="number">9</span>, <span class="number">43</span>, <span class="number">735714</span>)</span><br></pre></td></tr></table></figure>
+<p>可用函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> datetime</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>[n <span class="keyword">for</span> n <span class="keyword">in</span> dir(datetime.datetime) <span class="keyword">if</span> <span class="keyword">not</span> n.startswith(<span class="string">'_'</span>)]</span><br><span class="line">[<span class="string">'astimezone'</span>, <span class="string">'combine'</span>, <span class="string">'ctime'</span>, <span class="string">'date'</span>, <span class="string">'day'</span>, <span class="string">'dst'</span>, <span class="string">'fold'</span>, <span class="string">'fromisoformat'</span>, <span class="string">'fromordinal'</span>, <span class="string">'fromtimestamp'</span>, <span class="string">'hour'</span>, <span class="string">'isocalendar'</span>, <span class="string">'isoformat'</span>, <span class="string">'isoweekday'</span>, <span class="string">'max'</span>, <span class="string">'microsecond'</span>, <span class="string">'min'</span>, <span class="string">'minute'</span>, <span class="string">'month'</span>, <span class="string">'now'</span>, <span class="string">'replace'</span>, <span class="string">'resolution'</span>, <span class="string">'second'</span>, <span class="string">'strftime'</span>, <span class="string">'strptime'</span>, <span class="string">'time'</span>, <span class="string">'timestamp'</span>, <span class="string">'timetuple'</span>, <span class="string">'timetz'</span>, <span class="string">'today'</span>, <span class="string">'toordinal'</span>, <span class="string">'tzinfo'</span>, <span class="string">'tzname'</span>, <span class="string">'utcfromtimestamp'</span>, <span class="string">'utcnow'</span>, <span class="string">'utcoffset'</span>, <span class="string">'utctimetuple'</span>, <span class="string">'weekday'</span>, <span class="string">'year'</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="random"><a href="#random" class="headerlink" title="random"></a><code>random</code></h4><p>生成随机数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> random</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>random.__all__</span><br><span class="line">[<span class="string">'Random'</span>, <span class="string">'seed'</span>, <span class="string">'random'</span>, <span class="string">'uniform'</span>, <span class="string">'randint'</span>, <span class="string">'choice'</span>, <span class="string">'sample'</span>, <span class="string">'randrange'</span>, <span class="string">'shuffle'</span>, <span class="string">'normalvariate'</span>, <span class="string">'lognormvariate'</span>, <span class="string">'expovariate'</span>, <span class="string">'vonmisesvariate'</span>, <span class="string">'gammavariate'</span>, <span class="string">'triangular'</span>, <span class="string">'gauss'</span>, <span class="string">'betavariate'</span>, <span class="string">'paretovariate'</span>, <span class="string">'weibullvariate'</span>, <span class="string">'getstate'</span>, <span class="string">'setstate'</span>, <span class="string">'getrandbits'</span>, <span class="string">'choices'</span>, <span class="string">'SystemRandom'</span>]</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>random()</code></td>
+<td>返回一个 <code>[0, 1)</code> 的随机实数</td>
+</tr>
+<tr>
+<td><code>uniform(a, b)</code></td>
+<td>返回一个 <code>[a, b]</code> 的随机实数</td>
+</tr>
+<tr>
+<td><code>randrange([start], stop, [step])</code></td>
+<td>从 <code>range(start, stop, step)</code> 中随机选择一个数</td>
+</tr>
+<tr>
+<td><code>choice(seq)</code></td>
+<td>从序列中随机选择一个元素</td>
+</tr>
+<tr>
+<td><code>shuffle(seq[, random])</code></td>
+<td>就地打乱序列 <code>seq</code></td>
+</tr>
+<tr>
+<td><code>sample(seq, n)</code></td>
+<td>从序列 <code>seq</code> 中随机选择 <code>n</code> 个不同的元素值</td>
+</tr>
+</tbody>
+</table>
+<h4 id="json"><a href="#json" class="headerlink" title="json"></a><code>json</code></h4><p>序列化。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> json</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>json.__all__</span><br><span class="line">[<span class="string">'dump'</span>, <span class="string">'dumps'</span>, <span class="string">'load'</span>, <span class="string">'loads'</span>, <span class="string">'JSONDecoder'</span>, <span class="string">'JSONDecodeError'</span>, <span class="string">'JSONEncoder'</span>]</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dump(fileobj)</code></td>
+<td>字典转成 <code>json</code> 字符串，用于文件</td>
+</tr>
+<tr>
+<td><code>dumps(str)</code></td>
+<td>字典转成 <code>json</code> 字符串</td>
+</tr>
+<tr>
+<td><code>load(fileobj)</code></td>
+<td><code>json</code> 字符串转成字典，用于文件</td>
+</tr>
+<tr>
+<td><code>loads(str)</code></td>
+<td><code>json</code> 字符串转成字典</td>
+</tr>
+</tbody>
+</table>
+<h4 id="re"><a href="#re" class="headerlink" title="re"></a><code>re</code></h4><p>正则表达式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> re</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>re.__all__</span><br><span class="line">[<span class="string">'match'</span>, <span class="string">'fullmatch'</span>, <span class="string">'search'</span>, <span class="string">'sub'</span>, <span class="string">'subn'</span>, <span class="string">'split'</span>, <span class="string">'findall'</span>, <span class="string">'finditer'</span>, <span class="string">'compile'</span>, <span class="string">'purge'</span>, <span class="string">'template'</span>, <span class="string">'escape'</span>, <span class="string">'error'</span>, <span class="string">'Pattern'</span>, <span class="string">'Match'</span>, <span class="string">'A'</span>, <span class="string">'I'</span>, <span class="string">'L'</span>, <span class="string">'M'</span>, <span class="string">'S'</span>, <span class="string">'X'</span>, <span class="string">'U'</span>, <span class="string">'ASCII'</span>, <span class="string">'IGNORECASE'</span>, <span class="string">'LOCALE'</span>, <span class="string">'MULTILINE'</span>, <span class="string">'DOTALL'</span>, <span class="string">'VERBOSE'</span>, <span class="string">'UNICODE'</span>]</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>match(pattern, string[, flags])</code></td>
+<td>在字符串开头匹配模式</td>
+</tr>
+<tr>
+<td><code>search(pattern, string[, flags])</code></td>
+<td>在字符串中查找模式</td>
+</tr>
+<tr>
+<td><code>sub(pat, repl, string[, count=0])</code></td>
+<td>将字符串中与模式 <code>pat</code> 匹配的子串都替换为 <code>repl</code></td>
+</tr>
+<tr>
+<td><code>split(pattern, string[, maxsplit=0])</code></td>
+<td>根据模式来分割子串</td>
+</tr>
+<tr>
+<td><code>findall(pattren, string)</code></td>
+<td>返回一个列表，其中包含字符串中所有与模式匹配的子串</td>
+</tr>
+<tr>
+<td><code>compile(pattern[, flags])</code></td>
+<td>根据包含正则表达式的字符串创建模式对象</td>
+</tr>
+</tbody>
+</table>
+<h4 id="logging"><a href="#logging" class="headerlink" title="logging"></a><code>logging</code></h4><p>日志。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> logging</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>logging.__all__</span><br><span class="line">[<span class="string">'BASIC_FORMAT'</span>, <span class="string">'BufferingFormatter'</span>, <span class="string">'CRITICAL'</span>, <span class="string">'DEBUG'</span>, <span class="string">'ERROR'</span>, <span class="string">'FATAL'</span>, <span class="string">'FileHandler'</span>, <span class="string">'Filter'</span>, <span class="string">'Formatter'</span>, <span class="string">'Handler'</span>, <span class="string">'INFO'</span>, <span class="string">'LogRecord'</span>, <span class="string">'Logger'</span>, <span class="string">'LoggerAdapter'</span>, <span class="string">'NOTSET'</span>, <span class="string">'NullHandler'</span>, <span class="string">'StreamHandler'</span>, <span class="string">'WARN'</span>, <span class="string">'WARNING'</span>, <span class="string">'addLevelName'</span>, <span class="string">'basicConfig'</span>, <span class="string">'captureWarnings'</span>, <span class="string">'critical'</span>, <span class="string">'debug'</span>, <span class="string">'disable'</span>, <span class="string">'error'</span>, <span class="string">'exception'</span>, <span class="string">'fatal'</span>, <span class="string">'getLevelName'</span>, <span class="string">'getLogger'</span>, <span class="string">'getLoggerClass'</span>, <span class="string">'info'</span>, <span class="string">'log'</span>, <span class="string">'makeLogRecord'</span>, <span class="string">'setLoggerClass'</span>, <span class="string">'shutdown'</span>, <span class="string">'warn'</span>, <span class="string">'warning'</span>, <span class="string">'getLogRecordFactory'</span>, <span class="string">'setLogRecordFactory'</span>, <span class="string">'lastResort'</span>, <span class="string">'raiseExceptions'</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="collections"><a href="#collections" class="headerlink" title="collections"></a><code>collections</code></h4><p>内建集合模块，提供多个集合类。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> collections</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>collections.__all__</span><br><span class="line">[<span class="string">'deque'</span>, <span class="string">'defaultdict'</span>, <span class="string">'namedtuple'</span>, <span class="string">'UserDict'</span>, <span class="string">'UserList'</span>, <span class="string">'UserString'</span>, <span class="string">'Counter'</span>, <span class="string">'OrderedDict'</span>, <span class="string">'ChainMap'</span>]</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>namedtuple()</code></td>
+<td>创建一个自定义的 <code>tuple</code> 对象</td>
+</tr>
+<tr>
+<td><code>deque()</code></td>
+<td>高效实现插入和删除操作的双向列表，适合用于队列和栈</td>
+</tr>
+<tr>
+<td><code>defaultdict()</code></td>
+<td>字典，当 <code>key</code> 不存在时，返回一个默认值</td>
+</tr>
+<tr>
+<td><code>OrderedDict()</code></td>
+<td>有序字典</td>
+</tr>
+<tr>
+<td><code>Counter()</code></td>
+<td>计数器</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><code>namedtuple</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> namedtuple</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Point = namedtuple(<span class="string">'Point'</span>, [<span class="string">'x'</span>, <span class="string">'y'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p = Point(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.x</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>p.y</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><code>deque</code></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> collections <span class="keyword">import</span> deque</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q = deque([<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.append(<span class="string">'x'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q.appendleft(<span class="string">'y'</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>q</span><br><span class="line">deque([<span class="string">'y'</span>, <span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'x'</span>])</span><br></pre></td></tr></table></figure>
+<p>参考：<a href="https://www.liaoxuefeng.com/wiki/897692888725344/973805065315456" target="_blank" rel="noopener">collections</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/10/python_adv_character/adv_character/" rel="next" title="Python 上手指南之特性、迭代器和生成器">
+                <i class="fa fa-chevron-left"></i> Python 上手指南之特性、迭代器和生成器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/12/algorithm_bubble_sort/bubble/" rel="prev" title="LeetCode-BubbleSort">
+                LeetCode-BubbleSort <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/aragakki.png" alt="Akashi Sai">
+            
+              <p class="site-author-name" itemprop="name">Akashi Sai</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/akashigakki" title="GitHub &rarr; https://github.com/akashigakki" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:akashi_sai@163.com" title="E-Mail &rarr; mailto:akashi_sai@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/akashisai022" title="Twitter &rarr; https://twitter.com/akashisai022" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/akashi_sai_" title="Instagram &rarr; https://www.instagram.com/akashi_sai_" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#标准库"><span class="nav-number">1.</span> <span class="nav-text">标准库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#探索模块"><span class="nav-number">1.1.</span> <span class="nav-text">探索模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sys"><span class="nav-number">1.2.</span> <span class="nav-text">sys</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#os"><span class="nav-number">1.3.</span> <span class="nav-text">os</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#fileinput"><span class="nav-number">1.4.</span> <span class="nav-text">fileinput</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shutil"><span class="nav-number">1.5.</span> <span class="nav-text">shutil</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#time"><span class="nav-number">1.6.</span> <span class="nav-text">time</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#datetime"><span class="nav-number">1.7.</span> <span class="nav-text">datetime</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#random"><span class="nav-number">1.8.</span> <span class="nav-text">random</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#json"><span class="nav-number">1.9.</span> <span class="nav-text">json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#re"><span class="nav-number">1.10.</span> <span class="nav-text">re</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#logging"><span class="nav-number">1.11.</span> <span class="nav-text">logging</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#collections"><span class="nav-number">1.12.</span> <span class="nav-text">collections</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Akashi Sai</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zNhmosawnNOGzgW5JTuXbHAO-gzGzoHsz',
+    appKey: 'rGtKua726IsXnNCecnhq2jQ4',
+    placeholder: 'ヾﾉ≧∀≦)o 来啊！快活啊！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

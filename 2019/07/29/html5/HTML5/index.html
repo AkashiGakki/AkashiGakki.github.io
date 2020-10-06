@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/aragakki.png?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="H5 笔记整理  整理复习 H5 的基础内容。">
+<meta name="keywords" content="前端,H5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="H5 笔记整理">
+<meta property="og:url" content="http://akashigakki.github.io/2019/07/29/html5/HTML5/index.html">
+<meta property="og:site_name" content="Akashi_Sai">
+<meta property="og:description" content="H5 笔记整理  整理复习 H5 的基础内容。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/9c62a0cfly1g5fm0p16gfj215m07oglf.jpg">
+<meta property="og:updated_time" content="2020-10-06T09:57:39.334Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="H5 笔记整理">
+<meta name="twitter:description" content="H5 笔记整理  整理复习 H5 的基础内容。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/9c62a0cfly1g5fm0p16gfj215m07oglf.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://akashigakki.github.io/2019/07/29/html5/HTML5/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>H5 笔记整理 | Akashi_Sai</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?59d9132e52a8c3e7ac2f40c7b5017bab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Akashi_Sai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/akashigakki" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://akashigakki.github.io/2019/07/29/html5/HTML5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Akashi Sai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/aragakki.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Akashi_Sai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">H5 笔记整理
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-29 00:00:00" itemprop="dateCreated datePublished" datetime="2019-07-29T00:00:00+08:00">2019-07-29</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-10-06 17:57:39" itemprop="dateModified" datetime="2020-10-06T17:57:39+08:00">2020-10-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/HTML/" itemprop="url" rel="index"><span itemprop="name">HTML</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/07/29/html5/HTML5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/29/html5/HTML5/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">50k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">46 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="H5-笔记整理"><a href="#H5-笔记整理" class="headerlink" title="H5 笔记整理"></a><code>H5</code> 笔记整理</h4><hr>
+<blockquote>
+<p>整理复习 <code>H5</code> 的基础内容。</p>
+</blockquote>
+<a id="more"></a>
+<h5 id="将-HTML5-元素定义为块元素"><a href="#将-HTML5-元素定义为块元素" class="headerlink" title="将 HTML5 元素定义为块元素"></a>将 <code>HTML5</code> 元素定义为块元素</h5><blockquote>
+<p><code>HTML5</code> 定义了 <code>8</code> 个新的 <code>HTML</code> 语义（<code>semantic</code>） 元素。所有这些元素都是 <code>块级</code> 元素。</p>
+</blockquote>
+<p>通过设置 <code>CSS</code> 的 <code>display</code> 属性值为 <code>block</code>，让旧版本的浏览器正确显示这些元素：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">header</span>, <span class="selector-tag">section</span>, <span class="selector-tag">footer</span>, <span class="selector-tag">aside</span>, <span class="selector-tag">nav</span>, <span class="selector-tag">main</span>, <span class="selector-tag">article</span>, <span class="selector-tag">figure</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: block; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="为-HTML-添加新元素"><a href="#为-HTML-添加新元素" class="headerlink" title="为 HTML 添加新元素"></a>为 <code>HTML</code> 添加新元素</h5><p>通过设置块级元素，还可以自定义 <code>HTML</code> 新元素：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Custom<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.createElement(<span class="string">"ele"</span>);</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        ele &#123;</span><br><span class="line">            display: block;</span><br><span class="line">            background-color: yellow;</span><br><span class="line">            padding: 50px;</span><br><span class="line">            font-family: 'plantc'</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ele</span>&gt;</span>自定义元素<span class="tag">&lt;/<span class="name">ele</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="HTML5-新元素"><a href="#HTML5-新元素" class="headerlink" title="HTML5 新元素"></a><code>HTML5</code> 新元素</h5><ul>
+<li><code>&lt;canvas&gt;</code> 新元素</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;canvas&gt;</code></td>
+<td>标签定义图形，比如图表和其他图像。该标签基于 <code>JavaScript</code> 的绘图 <code>API</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>新多媒体元素</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;audio&gt;</code></td>
+<td>定义音频内容</td>
+</tr>
+<tr>
+<td><code>&lt;video&gt;</code></td>
+<td>定义视频（<code>video</code> 或者 <code>movie</code>）</td>
+</tr>
+<tr>
+<td><code>&lt;source&gt;</code></td>
+<td>定义多媒体资源 <code>&lt;video&gt;</code> 和 <code>&lt;audio&gt;</code></td>
+</tr>
+<tr>
+<td><code>&lt;embed&gt;</code></td>
+<td>定义嵌入的内容，比如插件。</td>
+</tr>
+<tr>
+<td><code>&lt;track&gt;</code></td>
+<td>为诸如 <code>&lt;video&gt;</code> 和 <code>&lt;audio&gt;</code> 元素之类的媒介规定外部文本轨道。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>新表单元素</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>标签</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;datalist&gt;</code></td>
+<td>定义选项列表。请与 <code>input</code> 元素配合使用该元素，来定义 <code>input</code> 可能的值。</td>
+</tr>
+<tr>
+<td><code>&lt;keygen&gt;</code></td>
+<td>规定用于表单的密钥对生成器字段。</td>
+</tr>
+<tr>
+<td><code>&lt;output&gt;</code></td>
+<td>定义不同类型的输出，比如脚本的输出。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>新的语义和结构元素</li>
+</ul>
+<blockquote>
+<p><code>HTML5</code> 提供了新的元素来创建更好的页面结构：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>标签</th>
+<th>元素</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;article&gt;</code></td>
+<td>定义页面独立的内容区域。</td>
+</tr>
+<tr>
+<td><code>&lt;aside&gt;</code></td>
+<td>定义页面的侧边栏内容。</td>
+</tr>
+<tr>
+<td><code>&lt;bdi&gt;</code></td>
+<td>允许您设置一段文本，使其脱离其父元素的文本方向设置。</td>
+</tr>
+<tr>
+<td><code>&lt;command&gt;</code></td>
+<td>定义命令按钮，比如单选按钮、复选框或按钮</td>
+</tr>
+<tr>
+<td><code>&lt;details&gt;</code></td>
+<td>用于描述文档或文档某个部分的细节</td>
+</tr>
+<tr>
+<td><code>&lt;dialog&gt;</code></td>
+<td>定义对话框，比如提示框</td>
+</tr>
+<tr>
+<td><code>&lt;summary&gt;</code></td>
+<td>标签包含 <code>details</code> 元素的标题</td>
+</tr>
+<tr>
+<td><code>&lt;figure&gt;</code></td>
+<td>规定独立的流内容（图像、图表、照片、代码等等）。</td>
+</tr>
+<tr>
+<td><code>&lt;figcaption&gt;</code></td>
+<td>定义 <code>&lt;figure&gt;</code> 元素的标题</td>
+</tr>
+<tr>
+<td><code>&lt;footer&gt;</code></td>
+<td>定义 <code>section</code> 或 <code>document</code> 的页脚。</td>
+</tr>
+<tr>
+<td><code>&lt;header&gt;</code></td>
+<td>定义了文档的头部区域</td>
+</tr>
+<tr>
+<td><code>&lt;mark&gt;</code></td>
+<td>定义带有记号的文本。</td>
+</tr>
+<tr>
+<td><code>&lt;meter&gt;</code></td>
+<td>定义度量衡。仅用于已知最大和最小值的度量。</td>
+</tr>
+<tr>
+<td><code>&lt;nav&gt;</code></td>
+<td>定义导航链接的部分。</td>
+</tr>
+<tr>
+<td><code>&lt;progress&gt;</code></td>
+<td>定义任何类型的任务的进度。</td>
+</tr>
+<tr>
+<td><code>&lt;ruby&gt;</code></td>
+<td>定义 <code>ruby</code> 注释（中文注音或字符）。</td>
+</tr>
+<tr>
+<td><code>&lt;rt&gt;</code></td>
+<td>定义字符（中文注音或字符）的解释或发音。</td>
+</tr>
+<tr>
+<td><code>&lt;rp&gt;</code></td>
+<td>在 <code>ruby</code> 注释中使用，定义不支持 <code>ruby</code> 元素的浏览器所显示的内容。</td>
+</tr>
+<tr>
+<td><code>&lt;section&gt;</code></td>
+<td>定义文档中的节（<code>section</code>、区段）。</td>
+</tr>
+<tr>
+<td><code>&lt;time&gt;</code></td>
+<td>定义日期或时间。</td>
+</tr>
+<tr>
+<td><code>&lt;wbr&gt;</code></td>
+<td>规定在文本中的何处适合添加换行符。</td>
+</tr>
+</tbody>
+</table>
+<p>需要记住经常使用的标签：<code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;section&gt;</code>。</p>
+<h5 id="HTML5-Canvas"><a href="#HTML5-Canvas" class="headerlink" title="HTML5 Canvas"></a><code>HTML5</code> <code>Canvas</code></h5><blockquote>
+<p><code>&lt;canvas&gt;</code> 标签定义图形，是一个图形容器，用于图形的绘制，通过脚本 (通常是<code>JavaScript</code>)来完成。</p>
+</blockquote>
+<h6 id="创建一个画布（Canvas）"><a href="#创建一个画布（Canvas）" class="headerlink" title="创建一个画布（Canvas）"></a>创建一个画布（<code>Canvas</code>）</h6><p>注意: 默认情况下 <code>&lt;canvas&gt;</code> 元素没有边框和内容。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span> <span class="attr">style</span>=<span class="string">"border: 1px solid black"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="使用-JavaScript-来绘制图像"><a href="#使用-JavaScript-来绘制图像" class="headerlink" title="使用 JavaScript 来绘制图像"></a>使用 <code>JavaScript</code> 来绘制图像</h6><p><code>canvas</code> 元素本身是没有绘图能力的。所有的绘制工作必须在 <code>JavaScript</code> 内部完成：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 找到canvas元素</span></span><br><span class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="comment">// 创建context对象</span></span><br><span class="line"><span class="keyword">var</span> ctx = c.getContext(<span class="string">"2d"</span>);</span><br><span class="line"><span class="comment">// 设置颜色和填充方式</span></span><br><span class="line">ctx.fillStyle = <span class="string">"red"</span>;</span><br><span class="line">ctx.fillRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">150</span>);</span><br></pre></td></tr></table></figure>
+<p><code>getContext(&quot;2d&quot;)</code> 对象是内建的 <code>HTML5</code> 对象，拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。</p>
+<p>设置<code>fillStyle</code>属性可以是<code>CSS</code>颜色，渐变，或图案。<code>fillStyle</code> 默认设置是<code>#000000</code>（黑色）。</p>
+<p><code>fillRect(x,y,width,height)</code> 方法定义了矩形当前的填充方式。</p>
+<h6 id="Canvas-坐标"><a href="#Canvas-坐标" class="headerlink" title="Canvas 坐标"></a><code>Canvas</code> 坐标</h6><p><code>canvas</code> 是一个二维网格。</p>
+<p><code>canvas 的左上角坐标为</code>(0,0)`</p>
+<blockquote>
+<p><code>fillRect(0, 0, 150, 150)</code> 意为从<code>(0,0)</code>左上角开始，填充一个<code>150*150</code>的矩形。画布默认为<code>300*150</code>，如果超出了画布大小，最大以画布为界，溢出部分隐藏。</p>
+</blockquote>
+<p><img src="http://ww1.sinaimg.cn/large/9c62a0cfly1g5fm0p16gfj215m07oglf.jpg" alt="canvas"></p>
+<h6 id="Canvas-路径"><a href="#Canvas-路径" class="headerlink" title="Canvas 路径"></a><code>Canvas</code> 路径</h6><p>使用<code>canvas</code>画线：</p>
+<ul>
+<li><p><code>moveTo(x,y)</code> 定义线条开始坐标</p>
+</li>
+<li><p><code>lineTo(x,y)</code> 定义线条结束坐标</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = c.getContext(<span class="string">"2d"</span>);</span><br><span class="line"><span class="comment">// 定义开始坐标(0,0)，结束坐标(200,100)，然后使用stroke() 方法绘制线条</span></span><br><span class="line">ctx.moveTo(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">ctx.lineTo(<span class="number">200</span>, <span class="number">100</span>);</span><br><span class="line">ctx.stroke();</span><br></pre></td></tr></table></figure>
+<p>在<code>canvas</code>中绘制圆形：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arc(x, y, r, start, stop)</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Circle<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">        <span class="selector-id">#circle</span> &#123;</span></span><br><span class="line">            background-color: orange;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"circle"</span> <span class="attr">width</span>=<span class="string">"200px"</span> <span class="attr">height</span>=<span class="string">"200px"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// 创建context对象</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">"circle"</span>).getContext(<span class="string">"2d"</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">// 开始一条路径，或重置当前的路径</span></span></span><br><span class="line">    ctx.beginPath();</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">// 设置线条宽度</span></span></span><br><span class="line"><span class="actionscript">    ctx.lineWidth = <span class="string">"2"</span>;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// 设置线条颜色</span></span></span><br><span class="line"><span class="actionscript">    ctx.strokeStyle = <span class="string">"pink"</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">// 绘制圆 arc(x, y, r, start, stop)</span></span></span><br><span class="line"><span class="javascript">    ctx.arc(<span class="number">100</span>, <span class="number">100</span>, <span class="number">90</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI);</span></span><br><span class="line">    ctx.stroke();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="Canvas-文本"><a href="#Canvas-文本" class="headerlink" title="Canvas 文本"></a><code>Canvas</code> 文本</h6><p>使用 <code>canvas</code> 绘制文本，重要的属性和方法如下：</p>
+<ul>
+<li><p><code>font</code> 定义字体</p>
+</li>
+<li><p><code>fillText(text, x, y)</code> 在 <code>canvas</code> 上绘制实心的文本</p>
+</li>
+<li><p><code>strokeText(text, x, y)</code> 在 <code>canvas</code> 上绘制空心的文本</p>
+</li>
+</ul>
+<p>实心的文本：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = c.getContext(<span class="string">"2d"</span>);</span><br><span class="line">ctx.font = <span class="string">"30px Arial"</span>;</span><br><span class="line">ctx.fillText(<span class="string">"Akashi"</span>, <span class="number">10</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<p>空心的文本：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> c = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">var</span> ctx = c.getContext(<span class="string">"2d"</span>);</span><br><span class="line">ctx.font = <span class="string">"30px Arial"</span>;</span><br><span class="line">ctx.strokeText(<span class="string">"Akashi"</span>, <span class="number">10</span>, <span class="number">50</span>);</span><br></pre></td></tr></table></figure>
+<h6 id="Canvas-渐变"><a href="#Canvas-渐变" class="headerlink" title="Canvas 渐变"></a><code>Canvas</code> 渐变</h6><ul>
+<li><p><code>createLinearGradient(x, y, x1, y1)</code>  创建线条渐变</p>
+</li>
+<li><p><code>createRadialGradient(x, y, r, x1 , y1, r1)</code>  创建一个径向/圆渐变</p>
+</li>
+</ul>
+<blockquote>
+<p>在使用渐变对象时，必须使用两种或两种以上的停止颜色，<code>addColorStop()</code> 方法指定颜色停止，参数使用坐标来描述，可以是 <code>0</code> 至 <code>1</code> 。</p>
+</blockquote>
+<p>线性渐变：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Gradient<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">        <span class="selector-id">#canvas</span> &#123;</span></span><br><span class="line">            border: 1px solid black;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"canvas"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">"canvas"</span>).getContext(<span class="string">"2d"</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">// 创建</span></span></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> grd = ctx.createLinearGradient(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">200</span>);</span></span><br><span class="line"><span class="actionscript">    grd.addColorStop(<span class="number">0</span>, <span class="string">"red"</span>);</span></span><br><span class="line"><span class="actionscript">    grd.addColorStop(<span class="number">1</span>, <span class="string">"white"</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="comment">// 填充</span></span></span><br><span class="line">    ctx.fillStyle = grd;</span><br><span class="line">    ctx.fillRect(0, 0, 300, 150)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>径向\圆渐变：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Gradient<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">        <span class="selector-id">#gradient</span> &#123;</span></span><br><span class="line">            border: 1px solid black;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"gradient"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">"gradient"</span>).getContext(<span class="string">"2d"</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="keyword">var</span> grd = ctx.createRadialGradient(<span class="number">150</span>, <span class="number">75</span>, <span class="number">0</span>, <span class="number">150</span>, <span class="number">75</span>, <span class="number">100</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">    grd.addColorStop(<span class="number">0</span>, <span class="string">"red"</span>);</span></span><br><span class="line"><span class="actionscript">    grd.addColorStop(<span class="number">1</span>, <span class="string">"white"</span>);</span></span><br><span class="line"></span><br><span class="line">    ctx.fillStyle = grd;</span><br><span class="line">    ctx.fillRect(0, 0, 300, 150);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="HTML5-内联-SVG"><a href="#HTML5-内联-SVG" class="headerlink" title="HTML5 内联 SVG"></a><code>HTML5</code> 内联 <code>SVG</code></h5><blockquote>
+<p><code>HTML5</code> 支持内联 <code>SVG</code>。</p>
+</blockquote>
+<h6 id="什么是-SVG？"><a href="#什么是-SVG？" class="headerlink" title="什么是 SVG？"></a>什么是 <code>SVG</code>？</h6><p><code>SVG</code> 指可伸缩矢量图形 (<code>Scalable Vector Graphics</code>)<br><code>SVG</code> 用于定义用于网络的基于矢量的图形<br><code>SVG</code> 使用 <code>XML</code> 格式定义图形<br><code>SVG</code> 图像在放大或改变尺寸的情况下其图形质量不会有损失<br><code>SVG</code> 是万维网联盟的标准</p>
+<h6 id="SVG-优势"><a href="#SVG-优势" class="headerlink" title="SVG 优势"></a><code>SVG</code> 优势</h6><p>与其他图像格式相比（比如 <code>JPEG</code> 和 <code>GIF</code>），使用 <code>SVG</code> 的优势在于：</p>
+<p><code>SVG</code> 图像可通过文本编辑器来创建和修改<br><code>SVG</code> 图像可被搜索、索引、脚本化或压缩<br><code>SVG</code> 是可伸缩的<br><code>SVG</code> 图像可在任何的分辨率下被高质量地打印<br><code>SVG</code> 可在图像质量不下降的情况下被放大</p>
+<h6 id="Canvas-与-SVG-的比较"><a href="#Canvas-与-SVG-的比较" class="headerlink" title="Canvas 与 SVG 的比较"></a><code>Canvas</code> 与 <code>SVG</code> 的比较</h6><table>
+<thead>
+<tr>
+<th><code>Canvas</code></th>
+<th><code>SVG</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>依赖分辨率</td>
+<td>不依赖分辨率</td>
+</tr>
+<tr>
+<td>不支持事件处理器</td>
+<td>支持事件处理器</td>
+</tr>
+<tr>
+<td>弱的文本渲染能力</td>
+<td>最适合带有大型渲染区域的应用程序（比如谷歌地图）</td>
+</tr>
+<tr>
+<td>能够以 .png 或 .jpg 格式保存结果图像</td>
+<td>复杂度高会减慢渲染速度（任何过度使用 DOM 的应用都不快）</td>
+</tr>
+<tr>
+<td>最适合图像密集型的游戏，其中的许多对象会被频繁重绘</td>
+<td>不适合游戏应用</td>
+</tr>
+</tbody>
+</table>
+<h5 id="HTML5-拖放（Drag-和-Drop）"><a href="#HTML5-拖放（Drag-和-Drop）" class="headerlink" title="HTML5 拖放（Drag 和 Drop）"></a><code>HTML5</code> 拖放（<code>Drag</code> 和 <code>Drop</code>）</h5><h6 id="设置元素可拖放"><a href="#设置元素可拖放" class="headerlink" title="设置元素可拖放"></a>设置元素可拖放</h6><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Drag_Drop<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">        img &#123;</span><br><span class="line">            width: 100px;</span><br><span class="line">            height: auto;</span><br><span class="line">            border: 1px solid black;</span><br><span class="line">            margin: 10px;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="css">        <span class="selector-id">#container</span> &#123;</span></span><br><span class="line">            border: 1px solid black;</span><br><span class="line">            width: 120px;</span><br><span class="line">            min-height: 170px;</span><br><span class="line">            margin: 10px;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"container"</span> <span class="attr">ondrop</span>=<span class="string">"drop(event)"</span> <span class="attr">ondragover</span>=<span class="string">"allowDrop(event)"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">"asuka"</span> <span class="attr">src</span>=<span class="string">"./asuka.jpg"</span> <span class="attr">alt</span>=<span class="string">"asuka"</span> <span class="attr">draggable</span>=<span class="string">"true"</span> <span class="attr">ondragstart</span>=<span class="string">"drag(event)"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">allowDrop</span><span class="params">(event)</span> </span>&#123;</span></span><br><span class="line">        event.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">drag</span><span class="params">(event)</span> </span>&#123;</span></span><br><span class="line"><span class="actionscript">        event.dataTransfer.setData(<span class="string">"Text"</span>, event.target.id);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">drop</span><span class="params">(event)</span> </span>&#123;</span></span><br><span class="line">        event.preventDefault();</span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> data = event.dataTransfer.getData(<span class="string">"Text"</span>);</span></span><br><span class="line"><span class="javascript">        event.target.appendChild(<span class="built_in">document</span>.getElementById(data));</span></span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>首先，要设置元素是可以被拖放的，把 <code>draggable</code> 属性设置为 <code>true</code> ：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">draggable</span>=<span class="string">"true"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="定义元素被拖动时事件"><a href="#定义元素被拖动时事件" class="headerlink" title="定义元素被拖动时事件"></a>定义元素被拖动时事件</h6><ul>
+<li><p><code>ondragstart</code></p>
+</li>
+<li><p><code>setData()</code></p>
+</li>
+</ul>
+<p><code>ondragstart</code> 属性调用了一个函数，<code>drag(event)</code>，它规定了被拖动的数据。</p>
+<p><code>dataTransfer.setData()</code> 方法设置被拖数据的数据类型和值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drag</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">    ev.dataTransfer.setData(<span class="string">"Text"</span>, ev.target.id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="设置元素拖放后事件"><a href="#设置元素拖放后事件" class="headerlink" title="设置元素拖放后事件"></a>设置元素拖放后事件</h5><p><code>ondragover</code> 事件规定在何处放置被拖动的数据。</p>
+<p>默认地，无法将数据/元素放置到其他元素中。如果需要设置允许放置，我们必须阻止对元素的默认处理方式。</p>
+<p>这要通过调用 <code>ondragover</code> 事件的 <code>event.preventDefault()</code> 方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ev.preventDefault()</span><br></pre></td></tr></table></figure>
+<h5 id="进行放置"><a href="#进行放置" class="headerlink" title="进行放置"></a>进行放置</h5><p>当放置被拖数据时，会发生 <code>drop</code> 事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drop</span>(<span class="params">ev</span>) </span>&#123;</span><br><span class="line">    ev.preventDefault();</span><br><span class="line">    <span class="keyword">var</span> data = ev.dataTransfer.getData(<span class="string">"Text"</span>);</span><br><span class="line">    ev.target.appendChild(<span class="built_in">document</span>.getElementById(data));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注释：</p>
+<ul>
+<li>调用 <code>preventDefault()</code> 来避免浏览器对数据的默认处理（<code>drop</code> 事件的默认行为是以链接形式打开）</li>
+<li>通过 <code>dataTransfer.getData(&quot;Text&quot;)</code> 方法获得被拖的数据。该方法将返回在 <code>setData()</code> 方法中设置为相同类型的任何数据。</li>
+<li>被拖数据是被拖元素的 <code>id (&quot;asuka&quot;)</code></li>
+<li>把被拖元素追加到放置元素（目标元素）中</li>
+</ul>
+<h5 id="HTML5-Video-视频"><a href="#HTML5-Video-视频" class="headerlink" title="HTML5 Video(视频)"></a><code>HTML5</code> <code>Video</code>(视频)</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Video<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">video</span> <span class="attr">id</span>=<span class="string">"video"</span> <span class="attr">width</span>=<span class="string">"500px"</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"./gakki.mp4"</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"playControl()"</span>&gt;</span>播放/暂停<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> video = <span class="built_in">document</span>.getElementById(<span class="string">"video"</span>);</span></span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">playControl</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line">        if (video.paused) &#123;</span><br><span class="line">            video.play();</span><br><span class="line"><span class="actionscript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">            video.pause();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="可选属性"><a href="#可选属性" class="headerlink" title="可选属性"></a>可选属性</h6><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>autoplay</code></td>
+<td><code>autoplay</code></td>
+<td>如果出现该属性，则视频在就绪后马上播放。</td>
+</tr>
+<tr>
+<td><code>controls</code></td>
+<td><code>controls</code></td>
+<td>如果出现该属性，则向用户显示控件，比如播放按钮。</td>
+</tr>
+<tr>
+<td><code>height</code></td>
+<td><code>pixels</code></td>
+<td>设置视频播放器的高度。</td>
+</tr>
+<tr>
+<td><code>loop</code></td>
+<td><code>loop</code></td>
+<td>如果出现该属性，则当媒介文件完成播放后再次开始播放。</td>
+</tr>
+<tr>
+<td><code>muted</code></td>
+<td><code>muted</code></td>
+<td>如果出现该属性，视频的音频输出为静音。</td>
+</tr>
+<tr>
+<td><code>poster</code></td>
+<td><code>URL</code></td>
+<td>规定视频正在下载时显示的图像，直到用户点击播放按钮。</td>
+</tr>
+<tr>
+<td><code>preload</code></td>
+<td><code>auto</code> <code>metadata</code> <code>none</code></td>
+<td>如果出现该属性，则视频在页面加载时进行加载，并预备播放。如果使用 “<code>autoplay</code>“，则忽略该属性。</td>
+</tr>
+<tr>
+<td><code>src</code></td>
+<td><code>URL</code></td>
+<td>要播放的视频的 <code>URL</code>。</td>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td><code>pixels</code></td>
+<td>设置视频播放器的宽度。</td>
+</tr>
+</tbody>
+</table>
+<h5 id="HTML5-Audio-音频"><a href="#HTML5-Audio-音频" class="headerlink" title="HTML5 Audio (音频)"></a><code>HTML5</code> <code>Audio</code> (音频)</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"zh-CN"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Audio<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">audio</span> <span class="attr">id</span>=<span class="string">"audio"</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"./aimer.mp3"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"playControl()"</span>&gt;</span>播放/暂停<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> audio = <span class="built_in">document</span>.getElementById(<span class="string">"audio"</span>);</span></span><br><span class="line"><span class="actionscript">    <span class="comment">// 设置自动播放</span></span></span><br><span class="line">    audio.play();</span><br><span class="line">    </span><br><span class="line"><span class="actionscript">    <span class="function"><span class="keyword">function</span> <span class="title">playControl</span><span class="params">()</span> </span>&#123;</span></span><br><span class="line">        if (audio.paused) &#123;</span><br><span class="line">            audio.play();</span><br><span class="line"><span class="actionscript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">            audio.pause();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h6 id="可选属性-1"><a href="#可选属性-1" class="headerlink" title="可选属性"></a>可选属性</h6><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>autoplay</code></td>
+<td><code>autoplay</code></td>
+<td>如果出现该属性，则音频在就绪后马上播放。</td>
+</tr>
+<tr>
+<td><code>controls</code></td>
+<td><code>controls</code></td>
+<td>如果出现该属性，则向用户显示音频控件（比如播放/暂停按钮）。</td>
+</tr>
+<tr>
+<td><code>loop</code></td>
+<td><code>loop</code></td>
+<td>如果出现该属性，则每当音频结束时重新开始播放。</td>
+</tr>
+<tr>
+<td><code>muted</code></td>
+<td><code>muted</code></td>
+<td>如果出现该属性，则音频输出为静音。</td>
+</tr>
+<tr>
+<td><code>preload</code></td>
+<td><code>auto</code> <code>metadata</code> <code>none</code></td>
+<td>规定当网页加载时，音频是否默认被加载以及如何被加载。</td>
+</tr>
+<tr>
+<td><code>src</code></td>
+<td><code>URL</code></td>
+<td>规定音频文件的 <code>URL</code>。</td>
+</tr>
+</tbody>
+</table>
+<h5 id="HTML5-语义元素"><a href="#HTML5-语义元素" class="headerlink" title="HTML5 语义元素"></a><code>HTML5</code> 语义元素</h5><blockquote>
+<p>语义元素可以清楚地描述标签的意义，方便开发者的开发和浏览器的识别。</p>
+</blockquote>
+<h6 id="lt-section-gt"><a href="#lt-section-gt" class="headerlink" title="&lt;section&gt;"></a><code>&lt;section&gt;</code></h6><blockquote>
+<p><code>&lt;section&gt;</code> 标签定义文档中的节（<code>section</code>、区段）。比如章节、页眉、页脚或文档中的其他部分。</p>
+</blockquote>
+<h6 id="lt-article-gt"><a href="#lt-article-gt" class="headerlink" title="&lt;article&gt;"></a><code>&lt;article&gt;</code></h6><blockquote>
+<p><code>&lt;article&gt;</code> 标签定义独立的内容。</p>
+</blockquote>
+<h6 id="lt-nav-gt"><a href="#lt-nav-gt" class="headerlink" title="&lt;nav&gt;"></a><code>&lt;nav&gt;</code></h6><blockquote>
+<p><code>&lt;nav&gt;</code> 标签定义导航链接的部分。</p>
+</blockquote>
+<h6 id="lt-aside-gt"><a href="#lt-aside-gt" class="headerlink" title="&lt;aside&gt;"></a><code>&lt;aside&gt;</code></h6><blockquote>
+<p><code>&lt;aside&gt;</code> 标签定义页面主区域内容之外的内容（比如侧边栏）。</p>
+</blockquote>
+<h6 id="lt-header-gt"><a href="#lt-header-gt" class="headerlink" title="&lt;header&gt;"></a><code>&lt;header&gt;</code></h6><blockquote>
+<p><code>&lt;header&gt;</code>元素描述了文档的头部区域，主要用于定义内容的介绍展示区域。</p>
+</blockquote>
+<h6 id="lt-footer-gt"><a href="#lt-footer-gt" class="headerlink" title="&lt;footer&gt;"></a><code>&lt;footer&gt;</code></h6><blockquote>
+<p><code>&lt;footer&gt;</code> 元素描述了文档的底部区域。</p>
+</blockquote>
+<h6 id="lt-figure-gt-和-lt-figcaption-gt"><a href="#lt-figure-gt-和-lt-figcaption-gt" class="headerlink" title="&lt;figure&gt; 和 &lt;figcaption&gt;"></a><code>&lt;figure&gt;</code> 和 <code>&lt;figcaption&gt;</code></h6><blockquote>
+<p><code>&lt;figure&gt;</code> 标签规定独立的流内容（图像、图表、照片、代码等等）。</p>
+</blockquote>
+<p><code>&lt;figure&gt;</code> 元素的内容应该与主内容相关，但如果被删除，则不应对文档流产生影响。</p>
+<blockquote>
+<p><code>&lt;figcaption&gt;</code> 标签定义 <code>&lt;figure&gt;</code> 元素的标题.</p>
+</blockquote>
+<p><code>&lt;figcaption&gt;</code> 元素应该被置于 “<code>figure</code>“ 元素的第一个或最后一个子元素的位置。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/H5/" rel="tag"># H5</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/27/highmap/highmaps/" rel="next" title="Highmaps 地图数据可视化">
+                <i class="fa fa-chevron-left"></i> Highmaps 地图数据可视化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/30/Emmet/emmet/" rel="prev" title="Emmet 使用指南">
+                Emmet 使用指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/aragakki.png" alt="Akashi Sai">
+            
+              <p class="site-author-name" itemprop="name">Akashi Sai</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/akashigakki" title="GitHub &rarr; https://github.com/akashigakki" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:akashi_sai@163.com" title="E-Mail &rarr; mailto:akashi_sai@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/akashisai022" title="Twitter &rarr; https://twitter.com/akashisai022" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/akashi_sai_" title="Instagram &rarr; https://www.instagram.com/akashi_sai_" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#H5-笔记整理"><span class="nav-number">1.</span> <span class="nav-text">H5 笔记整理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#将-HTML5-元素定义为块元素"><span class="nav-number">1.1.</span> <span class="nav-text">将 HTML5 元素定义为块元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为-HTML-添加新元素"><span class="nav-number">1.2.</span> <span class="nav-text">为 HTML 添加新元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTML5-新元素"><span class="nav-number">1.3.</span> <span class="nav-text">HTML5 新元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTML5-Canvas"><span class="nav-number">1.4.</span> <span class="nav-text">HTML5 Canvas</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#创建一个画布（Canvas）"><span class="nav-number">1.4.1.</span> <span class="nav-text">创建一个画布（Canvas）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#使用-JavaScript-来绘制图像"><span class="nav-number">1.4.2.</span> <span class="nav-text">使用 JavaScript 来绘制图像</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Canvas-坐标"><span class="nav-number">1.4.3.</span> <span class="nav-text">Canvas 坐标</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Canvas-路径"><span class="nav-number">1.4.4.</span> <span class="nav-text">Canvas 路径</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Canvas-文本"><span class="nav-number">1.4.5.</span> <span class="nav-text">Canvas 文本</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Canvas-渐变"><span class="nav-number">1.4.6.</span> <span class="nav-text">Canvas 渐变</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTML5-内联-SVG"><span class="nav-number">1.5.</span> <span class="nav-text">HTML5 内联 SVG</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#什么是-SVG？"><span class="nav-number">1.5.1.</span> <span class="nav-text">什么是 SVG？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#SVG-优势"><span class="nav-number">1.5.2.</span> <span class="nav-text">SVG 优势</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Canvas-与-SVG-的比较"><span class="nav-number">1.5.3.</span> <span class="nav-text">Canvas 与 SVG 的比较</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTML5-拖放（Drag-和-Drop）"><span class="nav-number">1.6.</span> <span class="nav-text">HTML5 拖放（Drag 和 Drop）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#设置元素可拖放"><span class="nav-number">1.6.1.</span> <span class="nav-text">设置元素可拖放</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#定义元素被拖动时事件"><span class="nav-number">1.6.2.</span> <span class="nav-text">定义元素被拖动时事件</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设置元素拖放后事件"><span class="nav-number">1.7.</span> <span class="nav-text">设置元素拖放后事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#进行放置"><span class="nav-number">1.8.</span> <span class="nav-text">进行放置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTML5-Video-视频"><span class="nav-number">1.9.</span> <span class="nav-text">HTML5 Video(视频)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#可选属性"><span class="nav-number">1.9.1.</span> <span class="nav-text">可选属性</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTML5-Audio-音频"><span class="nav-number">1.10.</span> <span class="nav-text">HTML5 Audio (音频)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#可选属性-1"><span class="nav-number">1.10.1.</span> <span class="nav-text">可选属性</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HTML5-语义元素"><span class="nav-number">1.11.</span> <span class="nav-text">HTML5 语义元素</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-section-gt"><span class="nav-number">1.11.1.</span> <span class="nav-text">&lt;section&gt;</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-article-gt"><span class="nav-number">1.11.2.</span> <span class="nav-text">&lt;article&gt;</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-nav-gt"><span class="nav-number">1.11.3.</span> <span class="nav-text">&lt;nav&gt;</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-aside-gt"><span class="nav-number">1.11.4.</span> <span class="nav-text">&lt;aside&gt;</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-header-gt"><span class="nav-number">1.11.5.</span> <span class="nav-text">&lt;header&gt;</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-footer-gt"><span class="nav-number">1.11.6.</span> <span class="nav-text">&lt;footer&gt;</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#lt-figure-gt-和-lt-figcaption-gt"><span class="nav-number">1.11.7.</span> <span class="nav-text">&lt;figure&gt; 和 &lt;figcaption&gt;</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Akashi Sai</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zNhmosawnNOGzgW5JTuXbHAO-gzGzoHsz',
+    appKey: 'rGtKua726IsXnNCecnhq2jQ4',
+    placeholder: 'ヾﾉ≧∀≦)o 来啊！快活啊！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

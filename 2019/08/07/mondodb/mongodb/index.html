@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/aragakki.png?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="MongoDB 初探 MongoDB 是由 C++ 语言编写的非关系型数据库，是一个基于分布式文件存储的开源数据库系统，其内容存储形式类似 JSON 对象，它的字段值可以包含其他文档、数组及文档数组，非常灵活。">
+<meta name="keywords" content="数据库,MongoDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MongoDB 初探">
+<meta property="og:url" content="http://akashigakki.github.io/2019/08/07/mondodb/mongodb/index.html">
+<meta property="og:site_name" content="Akashi_Sai">
+<meta property="og:description" content="MongoDB 初探 MongoDB 是由 C++ 语言编写的非关系型数据库，是一个基于分布式文件存储的开源数据库系统，其内容存储形式类似 JSON 对象，它的字段值可以包含其他文档、数组及文档数组，非常灵活。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/9c62a0cfly1g5rb519ad6j20rs02y0sp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/9c62a0cfly1g5rbb2cb5hj20rs03kjre.jpg">
+<meta property="og:updated_time" content="2020-10-06T09:57:39.335Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MongoDB 初探">
+<meta name="twitter:description" content="MongoDB 初探 MongoDB 是由 C++ 语言编写的非关系型数据库，是一个基于分布式文件存储的开源数据库系统，其内容存储形式类似 JSON 对象，它的字段值可以包含其他文档、数组及文档数组，非常灵活。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/9c62a0cfly1g5rb519ad6j20rs02y0sp.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://akashigakki.github.io/2019/08/07/mondodb/mongodb/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>MongoDB 初探 | Akashi_Sai</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?59d9132e52a8c3e7ac2f40c7b5017bab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Akashi_Sai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/akashigakki" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://akashigakki.github.io/2019/08/07/mondodb/mongodb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Akashi Sai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/aragakki.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Akashi_Sai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MongoDB 初探
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-07 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-07T00:00:00+08:00">2019-08-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-10-06 17:57:39" itemprop="dateModified" datetime="2020-10-06T17:57:39+08:00">2020-10-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/MongoDB/" itemprop="url" rel="index"><span itemprop="name">MongoDB</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/08/07/mondodb/mongodb/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/07/mondodb/mongodb/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">36k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">33 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="MongoDB-初探"><a href="#MongoDB-初探" class="headerlink" title="MongoDB 初探"></a><code>MongoDB</code> 初探</h4><blockquote>
+<p><code>MongoDB</code> 是由 <code>C++</code> 语言编写的非关系型数据库，是一个基于分布式文件存储的开源数据库系统，其内容存储形式类似 <code>JSON</code> 对象，它的字段值可以包含其他文档、数组及文档数组，非常灵活。</p>
+</blockquote>
+<a id="more"></a>
+<h5 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h5><h6 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h6><p>这里使用 <code>Mac OS</code> 的包管理工具 <code>Homebrew</code> 进行下载安装，其他系统请自行搜索正确安装姿势。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install mongodb</span><br></pre></td></tr></table></figure>
+<p>然后创建一个新文件夹 <code>/data/db</code>，用于存放 <code>MongoDB</code> 数据。</p>
+<p>注意：默认 <code>MongoDB</code> 数据文件是放到根目录 <code>data/db</code> 文件夹下,如果没有这个文件,需要自行创建。</p>
+<h6 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services start mongodb</span><br></pre></td></tr></table></figure>
+<p>或者：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mongodb</span><br></pre></td></tr></table></figure>
+<h6 id="停止、重启"><a href="#停止、重启" class="headerlink" title="停止、重启"></a>停止、重启</h6><p>停止:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services stop mongodb</span><br></pre></td></tr></table></figure>
+<p>重启:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew serbices restart mongodb</span><br></pre></td></tr></table></figure>
+<h6 id="可视化工具"><a href="#可视化工具" class="headerlink" title="可视化工具"></a>可视化工具</h6><blockquote>
+<p>推荐两个可视化工具。</p>
+</blockquote>
+<ul>
+<li><p><code>RoboMongo/Robo 3T</code></p>
+<ul>
+<li><code>https://robomongo.org/</code></li>
+</ul>
+</li>
+<li><p><code>Studio 3T</code></p>
+<ul>
+<li><code>https://studio3t.com/</code></li>
+</ul>
+</li>
+</ul>
+<h5 id="简介和使用"><a href="#简介和使用" class="headerlink" title="简介和使用"></a>简介和使用</h5><blockquote>
+<p><code>MongoDB</code> 是一个非关系型的数据库，什么叫非关系型？就是把数据直接放进一个大仓库，不标号、不连线、单纯的堆起来。传统数据库由于受到各种关系的累赘，各种数据形式的束缚，特有的约束和关联成为性能瓶颈，难以处理海量数据以及超高并发的业务场景。为了应对海量数据的存储，出现了非关系型数据库，它不支持外键，不支持事务，不支持数据类型约定，就这样松散的数据结构，成就了数据量的扩展。</p>
+</blockquote>
+<h6 id="面向集合的存储"><a href="#面向集合的存储" class="headerlink" title="面向集合的存储"></a>面向集合的存储</h6><p>在 <code>MongoDB</code> 中，一个数据库包含多个集合，类似于 <code>MySQL</code> 中一个数据库包含多个表；一个集合包含多个文档，类似于 <code>MySQL</code> 中一个表包含多条数据。</p>
+<p>可以把集合记为表，文档记为一条记录。</p>
+<p>这样命名是有原因的，因为 <code>MongoDB</code> 没有行列统一的表格式排列，而是采用一个大仓库的形式将所有数据包纳其中。文档也一样，它是一段自由独立的数据，受外部限制少，所以区别于关系型数据库的记录。</p>
+<h6 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h6><ul>
+<li><p>一个 <code>MongoDB</code> 可以创建多个数据库</p>
+</li>
+<li><p>使用 <code>show dbs</code> 可以查询所有数据库的列表</p>
+</li>
+<li><p>执行 <code>db</code> 命令则可以查看当前数据库对象或者集合</p>
+</li>
+<li><p>运行 <code>use</code> 命令可以连接到指定的数据库</p>
+</li>
+</ul>
+<p>注意：数据库名可以是任何字符，但是不能有<code>空格</code>、<code>点号</code>和 <code>$</code> 字符。</p>
+<p>下面实际操作一次，在启动了 <code>MongoDB</code> 服务以后，在终端运行 <code>mongo</code> 可以进入 <code>MongoDB</code> 环境。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongo</span><br></pre></td></tr></table></figure>
+<p>接下来我们<code>查看</code>所有的<code>数据库列表</code>：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show dbs</span><br></pre></td></tr></table></figure>
+<p>使用 <code>use</code> 命令<code>创建</code>数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use test</span><br></pre></td></tr></table></figure>
+<p>查询当前的<code>数据库对象</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db</span><br></pre></td></tr></table></figure>
+<p>再次查看所有数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show dbs</span><br></pre></td></tr></table></figure>
+<p>列出的所有数据库中看不到 <code>test</code> 或者显示 <code>test(empty)</code> ，因为 <code>test</code> 为空，里面没有任何东西，<code>MongoDB</code> 不显示或显示 <code>test(empty)</code>。</p>
+<p><code>销毁</code>数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.dropDatabase()</span><br></pre></td></tr></table></figure>
+<p>这样，刚刚创建的数据库就被销毁了。</p>
+<p>使用 <code>exit</code> 退出 <code>MongoDB</code> 环境</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit</span><br></pre></td></tr></table></figure>
+<h6 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h6><p>集合就是一组文档的组合，就相当于是 <code>关系数据库中的表</code>，在 <code>MongoDB</code> 中可以存储不同的文档结构的文档。</p>
+<p>例如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">"user"</span>: <span class="string">"akashi"</span>&#125; &#123;<span class="attr">"idol"</span>: <span class="string">"nogizaka"</span>, <span class="attr">"member"</span>: <span class="string">"asuka"</span>&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的两个文档就可以存储在同一个集合中，在关系型数据库中是很难实现上述数据结构的，要么需要定义大量的字段，对于一些字段名不确定的属性，关系型数据库会更加力不从心。</p>
+<h6 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h6><p>文档是 <code>MongoDB</code> 的核心，类似于<code>关系型数据库的每一条数据</code>，多个键及其关联的值放在一起就是文档。在 <code>Mongodb</code> 中使用一种类 <code>json</code> 的 <code>bson</code> 存储数据，<code>bson</code> 数据可以理解为在 <code>json</code> 的基础上添加了一些 <code>json</code> 中没有的数据类型。</p>
+<ul>
+<li>文档的逻辑关系</li>
+</ul>
+<p>例如有以下两个文档：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># user文档</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"akashi"</span>,</span><br><span class="line">    <span class="attr">"age"</span>: <span class="number">22</span>,</span><br><span class="line">    <span class="attr">"sex"</span>: <span class="string">"male"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># address文档</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attr">"building"</span>: <span class="string">"22 A, Indiana Apt"</span>,</span><br><span class="line">    <span class="attr">"pincode"</span>: <span class="number">123456</span>,</span><br><span class="line">    <span class="attr">"city"</span>: <span class="string">"chengdu"</span>,</span><br><span class="line">    <span class="attr">"state"</span>: <span class="string">"sichuan"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>嵌入式关系:</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"akashi"</span>,</span><br><span class="line">    <span class="attr">"age"</span>: <span class="number">22</span>,</span><br><span class="line">    <span class="attr">"sex"</span>: <span class="string">"male"</span>,</span><br><span class="line">    <span class="attr">"address"</span>:</span><br><span class="line">    [&#123;</span><br><span class="line">        <span class="attr">"building"</span>: <span class="string">"22 A, Indiana Apt"</span>,</span><br><span class="line">        <span class="attr">"pincode"</span>: <span class="number">123456</span>,</span><br><span class="line">        <span class="attr">"city"</span>: <span class="string">"chengdu"</span>,</span><br><span class="line">        <span class="attr">"state"</span>: <span class="string">"sichuan"</span></span><br><span class="line">    &#125;,&#123;</span><br><span class="line">        <span class="attr">"building"</span>: <span class="string">"170 A, Acropolis Apt"</span>,</span><br><span class="line">        <span class="attr">"pincode"</span>: <span class="number">456789</span>,</span><br><span class="line">        <span class="attr">"city"</span>: <span class="string">"beijing"</span>,</span><br><span class="line">        <span class="attr">"state"</span>: <span class="string">"beijing"</span></span><br><span class="line">   &#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>引用式关系:</li>
+</ol>
+<blockquote>
+<p>将两个文档分开，通过引用文档的_id 字段来建立关系。</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"name"</span>: <span class="string">"akashi"</span>,</span><br><span class="line">    <span class="attr">"age"</span>: <span class="number">22</span>,</span><br><span class="line">    <span class="attr">"sex"</span>: <span class="string">"male"</span>,</span><br><span class="line">    <span class="attr">"address_ids"</span>: [</span><br><span class="line">        ObjectId(<span class="string">"52ffc4a5d85242602e000000"</span>)    #对应address文档的id字段</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在实际应用的时候，<code>嵌入式</code> 关系比较适合 <code>一对一</code> 的关系，<code>引用式</code> 关系比较适合 <code>一对多</code> 或者 <code>多对多</code> 的情况。</p>
+<h6 id="原数据"><a href="#原数据" class="headerlink" title="原数据"></a>原数据</h6><p>数据库的信息存储在集合中，他们统一使用系统的命名空间：<code>DBNAME.system.*</code>。</p>
+<p><code>DBNAME</code> 可用 <code>db</code> 或数据库名替代：</p>
+<ul>
+<li><p><code>DBNAME.system.namespaces</code> ：列出所有名字空间</p>
+</li>
+<li><p><code>DBNAME.system.indexs</code> ：列出所有索引</p>
+</li>
+<li><p><code>DBNAME.system.profile</code> ：列出数据库概要信息</p>
+</li>
+<li><p><code>DBNAME.system.users</code> ：列出访问数据库的用户</p>
+</li>
+<li><p><code>DBNAME.system.sources</code> ：列出服务器信息</p>
+</li>
+</ul>
+<h6 id="集合的创建和删除"><a href="#集合的创建和删除" class="headerlink" title="集合的创建和删除"></a>集合的创建和删除</h6><ul>
+<li>创建集合</li>
+</ul>
+<p>在数据库 <code>test</code> 中创建一个集合 <code>users</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">use test</span><br><span class="line">db.createCollection(&quot;users&quot;)</span><br></pre></td></tr></table></figure>
+<p>查看创建的集合：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show collections</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除集合</li>
+</ul>
+<p>删除刚刚创建的集合 <code>users</code>:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.drop()</span><br></pre></td></tr></table></figure>
+<p>查看是否删除成：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show collections</span><br></pre></td></tr></table></figure>
+<h6 id="向集合中插入数据"><a href="#向集合中插入数据" class="headerlink" title="向集合中插入数据"></a>向集合中插入数据</h6><ul>
+<li>使用 <code>insert()</code></li>
+</ul>
+<p>插入数据时，如果 <code>users</code> 集合没有创建会自动创建。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">db.users.insert([</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"akashi"</span>,</span><br><span class="line">        <span class="attr">"email"</span>: <span class="string">"akashisai@163.com"</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        "name": "asuka",</span><br><span class="line">        "email": "asuka@163.com"</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用 <code>save()</code></li>
+</ul>
+<p>插入数据时，如果 <code>users</code> 集合没有创建会自动创建。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.users.save(&#123;</span><br><span class="line">    "name": "akashi",</span><br><span class="line">    "email": "akashi_sai@163.com"</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>insert</code> 和 <code>save</code> 的区别：<code>insert</code> 是插入，侧重于新增一个记录的含义；<code>save</code> 是保存，可以保存一个新的记录，也可以保存对一个记录的修改。因此，<code>insert</code> 不能插入一条已经存在的记录，如果已经有了一条记录(以主键为准)，<code>insert</code> 操作会报错，而使用 <code>save</code> 指令则会更新原记录。</p>
+<h5 id="阶段小结"><a href="#阶段小结" class="headerlink" title="阶段小结"></a>阶段小结</h5><p>到这里我们大致了解了非关系型数据库和关系型数据库的差异，现在我们来做一个阶段小结。</p>
+<p>关系型数据库的结构一般是 <code>数据库database</code> =&gt; <code>表table</code> =&gt; <code>字段field</code>，就像下面这样：</p>
+<p><img src="http://ww1.sinaimg.cn/large/9c62a0cfly1g5rb519ad6j20rs02y0sp.jpg" alt></p>
+<p>而非关系型数据库的结构一般是 <code>数据库database</code> =&gt; <code>集合collection</code> =&gt; <code>文档document</code>，像下面这样：</p>
+<p><img src="http://ww1.sinaimg.cn/large/9c62a0cfly1g5rbb2cb5hj20rs03kjre.jpg" alt></p>
+<p>在充分理解差异之后，才能很好的将两者区分开来，不至于混淆。</p>
+<h5 id="数据查询"><a href="#数据查询" class="headerlink" title="数据查询"></a>数据查询</h5><h6 id="find"><a href="#find" class="headerlink" title="find()"></a><code>find()</code></h6><p>语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.COLLECTION_NAME.find()</span><br></pre></td></tr></table></figure>
+<p>以之前创建的 <code>users</code> 集合为例：</p>
+<ul>
+<li>查询所有文档</li>
+</ul>
+<p>查询数据，不加任何参数默认返回所有数据记录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>添加查询条件</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find(&#123;&quot;name&quot;: &quot;akashi&quot;&#125;)</span><br></pre></td></tr></table></figure>
+<h6 id="pretty"><a href="#pretty" class="headerlink" title="pretty()"></a><code>pretty()</code></h6><blockquote>
+<p><code>pretty()</code> 可以使查询输出的结果更美观。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.users.find().pretty()</span><br></pre></td></tr></table></figure>
+<p>如果你想让 <code>mongo shell</code> 始终以 <code>pretty</code> 的方式显示返回数据，可以通过下面的指令实现（退出环境，在终端输入）：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo "DBQuery.prototype._prettyShell = true" &gt;&gt; ~/.mongorc.js</span><br></pre></td></tr></table></figure>
+<p>这样就把默认的显示方式设置为 <code>pretty</code> 了。</p>
+<h6 id="AND"><a href="#AND" class="headerlink" title="AND"></a><code>AND</code></h6><blockquote>
+<p><code>MongoDB</code> 不需要类似于其他数据库的 <code>AND</code> 运算符，当 <code>find()</code> 中传入多个键值对时，<code>MongoDB</code> 就会将其作为 <code>AND</code> 查询处理。</p>
+</blockquote>
+<p>用法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.mycol.find(&#123; key1: value1, key2: value2 &#125;)</span><br></pre></td></tr></table></figure>
+<h6 id="OR"><a href="#OR" class="headerlink" title="OR"></a><code>OR</code></h6><blockquote>
+<p><code>MongoDB</code> 中，<code>OR</code> 查询语句以 <code>$or</code> 作为关键词，用法如下：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.users.find(&#123;</span><br><span class="line">    $or: [</span><br><span class="line">        &#123;key1: value1&#125;, &#123;key2:value2&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h6 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h6><p><code>$gt</code> 表示<code>大于</code>、<code>$lt</code> 表示<code>小于</code>、<code>$gte</code> 表示<code>大于等于</code>、<code>$lte</code> 表示<code>小于等于</code>、<code>$ne</code> 表示<code>不等于</code>。</p>
+<p>可以这样记忆：</p>
+<table>
+<thead>
+<tr>
+<th>表达式</th>
+<th>意义</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gt</code>：</td>
+<td>大于</td>
+<td><code>greater than</code></td>
+</tr>
+<tr>
+<td><code>lt</code>：</td>
+<td>小于</td>
+<td><code>less than</code></td>
+</tr>
+<tr>
+<td><code>gte</code>：</td>
+<td>大于或等于</td>
+<td><code>greater than equal</code></td>
+</tr>
+<tr>
+<td><code>lte</code>：</td>
+<td>小于或等于</td>
+<td><code>less than equal</code></td>
+</tr>
+</tbody>
+</table>
+<h5 id="文档基本操作"><a href="#文档基本操作" class="headerlink" title="文档基本操作"></a>文档基本操作</h5><h6 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h6><p>语法：</p>
+<ul>
+<li><code>db.dropDatabase()</code>：删除数据库</li>
+</ul>
+<p>在当前数据库对象下执行语句，即可删除数据库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 使用 db 查询当前数据库对象</span><br><span class="line">db</span><br><span class="line"></span><br><span class="line"># 删除当前数据库</span><br><span class="line">db.dropDatabase</span><br></pre></td></tr></table></figure>
+<h6 id="创建集合"><a href="#创建集合" class="headerlink" title="创建集合"></a>创建集合</h6><p>语法：</p>
+<ul>
+<li><code>createCollection(name,options)</code>：创建集合</li>
+</ul>
+<p>参数描述:</p>
+<ul>
+<li><code>name</code>：创建的集合名称</li>
+<li><code>options</code>：是一个作为初始化的文档(可选)</li>
+</ul>
+<p>之前我们创建过无参数的集合，下面我们尝试创建一个带参数的集合：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.createCollection(&quot;user&quot;, &#123; capped : 1, autoIndexId : 1, size : 6142800, max : 10000 &#125; ) #带参数</span><br></pre></td></tr></table></figure>
+<p>参数描述：</p>
+<ul>
+<li><code>capped</code>：类型为 <code>Boolean</code>，如果为 <code>true</code> 则创建一个固定大小的集合，当其条目达到最大时可以自动覆盖以前的条目。在设置其为 <code>true</code> 时也要指定参数大小；注意：固定集合的数据不能被修改，只能查找 =&gt; 删除 =&gt; 再插入；</li>
+<li><code>autoIndexId</code>：类型为 <code>Boolean</code>，默认为 <code>false</code>，如果设置为 <code>true</code>，则会在 <code>_id</code> 字段上自动创建索引；</li>
+<li><code>size</code>：如果 <code>capped</code> 为 <code>true</code> 则需要指定，指定参数的最大值，单位为 <code>byte</code>；</li>
+<li><code>max</code>：指定最大的文档数。</li>
+</ul>
+<p>在 <code>Mongodb</code> 中也可以不用创建集合，因为在创建文档的时候也会自动的创建集合。</p>
+<h6 id="删除集合"><a href="#删除集合" class="headerlink" title="删除集合"></a>删除集合</h6><p>语法：</p>
+<ul>
+<li><code>db.COLLECTION.drop()</code>：删除集合</li>
+</ul>
+<p>以下我们依然以之前创建的 <code>test</code> 数据库为例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use test    # 选择数据库</span><br><span class="line">show collections    # 查看集合列表</span><br><span class="line">db.users.drop()     # 删除test数据库下的users集合</span><br></pre></td></tr></table></figure>
+<h6 id="插入文档"><a href="#插入文档" class="headerlink" title="插入文档"></a>插入文档</h6><p>语法：</p>
+<ul>
+<li><code>db.COLLECTION_NAME.insert(document)</code>：插入文档</li>
+</ul>
+<p>我们以下面的例子实际演示：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 先定义文档</span><br><span class="line">user = ([</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"user_id"</span>: <span class="number">1</span>,</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"akashi"</span>,</span><br><span class="line">        <span class="attr">"email"</span>: <span class="string">"akashisai@163.com"</span></span><br><span class="line">    &#125;, &#123;</span><br><span class="line">        "user_id": 2,</span><br><span class="line">        "name": "asuka",</span><br><span class="line">        "email": "asuka@163.com"</span><br><span class="line">    &#125;</span><br><span class="line">])</span><br><span class="line"></span><br><span class="line"># 创建集合test的同时，插入文档数据</span><br><span class="line">db.test.insert(user)</span><br></pre></td></tr></table></figure>
+<h6 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h6><p>语法：</p>
+<ul>
+<li><code>db.COLLECTION_NAME.update(SELECTION_CRITERIA,UPDATED_DATA)</code>：更新文档</li>
+</ul>
+<p>我们将 <code>user_id=1</code> 文档中 <code>email</code> 进行更新：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">db.test.update(&#123;</span><br><span class="line">    "user_id": 1</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    $set:&#123;</span><br><span class="line">        "email": "akashi_sai@163.com"</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>查询更新效果：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.test.find()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>括号内第一个参数标识查找的内容的条件，第二个参数标识更新后的数据</li>
+<li>默认的 <code>update</code> 函数只对一个文档更新，如果想作用所有文档，则需要加入 <code>multi:true</code></li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">db.test.update(&#123;</span><br><span class="line">    "user_id": 1,</span><br><span class="line">    "name": "akashi",</span><br><span class="line">    "email": "akashisai.163.com"</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    $set:&#123;</span><br><span class="line">        "email": "akashi_sai@163.com"</span><br><span class="line">    &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">    "multi": true</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h6 id="替换文档"><a href="#替换文档" class="headerlink" title="替换文档"></a>替换文档</h6><p>语法：</p>
+<ul>
+<li><code>db.COLLECTION_NAME.save({_id:ObjectId(),NEW_DATA})</code>：替换已存在的文档</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">db.test.save(&#123;</span><br><span class="line">    "_id" : ObjectId("5d4ba3240d800ad42ba1f8b8"), </span><br><span class="line">    "user_id": 2,</span><br><span class="line">    "name": "sito_asuka", </span><br><span class="line">    "email": "sito_asuka@163.com"</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>前面提到过一下 <code>save</code> 的用法，它在存入数据的过程中，如果数据存在(通过主键<code>_di</code>进行区分)，则会替换原来的数据，如果不存在，则会新建一条数据。</p>
+<p>我们也可以使用它插入一条文档：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.test.save(&#123;</span><br><span class="line">    &quot;user_id&quot;: 3,</span><br><span class="line">    &quot;name&quot;: &quot;gakki&quot;,</span><br><span class="line">    &quot;email&quot;: &quot;gakki@163.com&quot;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h6 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h6><p>语法：</p>
+<ul>
+<li><code>db.COLLECTION_NAME.remove(DELECTION_CRITERIA)</code>：删除文档</li>
+</ul>
+<p>其实 <code>remove</code> 函数的参数跟 <code>update</code> 函数的第一个参数一样，相当于查找条件，注意，不要误删！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.test.remove(&#123;</span><br><span class="line">    &quot;name&quot;: &quot;gakki&quot;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>删除后可以用查找命令确认数据:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.test.find()</span><br></pre></td></tr></table></figure>
+<h5 id="查询、索引与聚合"><a href="#查询、索引与聚合" class="headerlink" title="查询、索引与聚合"></a>查询、索引与聚合</h5><h6 id="查询语句-find"><a href="#查询语句-find" class="headerlink" title="查询语句 find()"></a>查询语句 <code>find()</code></h6><p>语法：</p>
+<ul>
+<li><code>db.COLLECTION_NAME.find(Parameter)</code></li>
+</ul>
+<p>已经使用过好多次了，这里不再介绍。</p>
+<ul>
+<li>条件操作符</li>
+</ul>
+<p><code>$gt</code>：大于<br><code>$lt</code>：小于<br><code>$gte</code>：大于等于<br><code>$lte</code>：小于等于</p>
+<ul>
+<li><code>$type:[key]</code>:</li>
+</ul>
+<p>可选的 <code>key</code> 值如下：</p>
+<p><code>1</code>: 双精度型(<code>Double</code>)<br><code>2</code>: 字符串(<code>String</code>)<br><code>3</code>: 对象(<code>Object</code>)<br><code>4</code>: 数组(<code>Array</code>)<br><code>5</code>: 二进制数据(<code>Binary data</code>)<br><code>7</code>: 对象 <code>ID</code>(<code>Object id</code>)<br><code>8</code>: 布尔类型(<code>Boolean</code>)<br><code>9</code>: 数据(<code>Date</code>)<br><code>10</code>: 空(<code>Null</code>)<br><code>11</code>: 正则表达式(<code>Regular Expression</code>)<br><code>13</code>: <code>JS</code> 代码(<code>Javascript</code>)<br><code>14</code>: 符号(<code>Symbol</code>)<br><code>15</code>: 有作用域的 <code>JS</code> 代码(<code>JavaScript with scope</code>)<br><code>16</code>: <code>32</code> 位整型数(<code>32-bit integer</code>)<br><code>17</code>: 时间戳(<code>Timestamp</code>)<br><code>18</code>: <code>64</code> 位整型数(<code>64-bit integer</code>)<br><code>-1</code>: 最小值(<code>Min key</code>)<br><code>127</code>: 最大值(<code>Max key</code>)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.test.find(&#123;&quot;name&quot;: &#123;$type:2&#125;&#125;)</span><br></pre></td></tr></table></figure>
+<p>上面的命令是用于查找 <code>name</code> 是字符串的文档记录，它等同于下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.test.find(&#123;&quot;name&quot;: &#123;$type:&apos;string&apos;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>limit()</code> 与 <code>skip()</code></li>
+</ul>
+<p>读取指定数量的数据记录 <code>limit()</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.test.find().limit(1)</span><br></pre></td></tr></table></figure>
+<p>读取一条记录，默认是排在最前面的那一条被读取。</p>
+<p>读取时跳过指定数量的数据记录 <code>skip()</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.test.find().limit(1).skip(1)</span><br></pre></td></tr></table></figure>
+<p>当然，还可以添加 <code>find</code> 的查找条件的参数，以便进行更精确的查找。</p>
+<ul>
+<li>排序 <code>sort()</code></li>
+</ul>
+<p>标识升序和降序，其中升序用 <code>1</code> 表示，降序用 <code>-1</code> 表示。</p>
+<p>语法：</p>
+<ul>
+<li><code>db.COLLECTION_NAME.find().sort({KEY:1|-1})</code></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.test.find().sort(&#123;&quot;user_id&quot;:-1&#125;)</span><br></pre></td></tr></table></figure>
+<h6 id="索引-ensureIndex"><a href="#索引-ensureIndex" class="headerlink" title="索引 ensureIndex()"></a>索引 <code>ensureIndex()</code></h6><blockquote>
+<p>索引通常能够极大的提高查询的效率，如果没有索引，<code>MongoDB</code> 在读取数据时必须扫描集合中的每个文件并选取那些符合查询条件的记录。这种扫描全集合的查询效率是非常低的，特别在处理大量的数据时，查询可能要花费几十秒甚至几分钟，这无疑对网站的性能是非常致命的。</p>
+</blockquote>
+<p>索引是特殊的数据结构，索引存储在一个易于遍历读取的数据集合中，索引是对数据库集合中一个文档或多个文档的值进行排序的一种结构。</p>
+<p>语法：</p>
+<ul>
+<li><code>db.COLLECTION_NAME.ensureIndex({KEY:1|-1})</code></li>
+</ul>
+<p>同样 <code>1</code> 代表升序，<code>-1</code> 代表降序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.test.ensureIndex(&#123;&quot;name&quot;: 1&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>ensureIndex()</code> 的可选参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>background</code></td>
+<td><code>Boolean</code></td>
+<td>建立索引要不要阻塞其他数据库操作，默认为 <code>false</code></td>
+</tr>
+<tr>
+<td><code>unique</code></td>
+<td><code>Boolean</code></td>
+<td>建立的索引是否唯一，默认 <code>false</code></td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td><code>string</code></td>
+<td>索引的名称，若未指定，系统自动生成</td>
+</tr>
+<tr>
+<td><code>dropDups</code></td>
+<td><code>Boolean</code></td>
+<td>建立唯一索引时，是否删除重复记录，默认 <code>flase</code></td>
+</tr>
+<tr>
+<td><code>sparse</code></td>
+<td><code>Boolean</code></td>
+<td>对文档不存在的字段数据不启用索引，默认 <code>false</code></td>
+</tr>
+<tr>
+<td><code>expireAfterSeconds</code></td>
+<td><code>integer</code></td>
+<td>设置集合的生存时间，单位为秒</td>
+</tr>
+<tr>
+<td><code>v</code></td>
+<td><code>index version</code></td>
+<td>索引的版本号</td>
+</tr>
+<tr>
+<td><code>weights</code></td>
+<td><code>document</code></td>
+<td>索引权重值，范围为 <code>1</code> 到 <code>99999</code></td>
+</tr>
+<tr>
+<td><code>default-language</code></td>
+<td><code>string</code></td>
+<td>默认为英语</td>
+</tr>
+<tr>
+<td><code>language_override</code></td>
+<td><code>string</code></td>
+<td>默认值为 <code>language</code></td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.test.ensureIndex(&#123;&quot;user_id&quot;:1,&quot;name&quot;:1&#125;,&#123;background:1&#125;)</span><br></pre></td></tr></table></figure>
+<h6 id="聚合-aggregate"><a href="#聚合-aggregate" class="headerlink" title="聚合 aggregate()"></a>聚合 <code>aggregate()</code></h6><p>语法：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">db.COLLECTION_NAME.aggregate(&#123;</span><br><span class="line">    $match:&#123;x:1&#125;,</span><br><span class="line">    &#123;limit:NUM&#125;,</span><br><span class="line">    $group:&#123;_id:$age&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这些参数都可选：</p>
+<ul>
+<li><code>$match</code>：查询，跟 <code>find</code> 一样；</li>
+<li><code>$limit</code>：限制显示结果数量；</li>
+<li><code>$skip</code>：忽略结果数量；</li>
+<li><code>$sort</code>：排序；</li>
+<li><p><code>$group</code>：按照给定表达式组合结果。</p>
+</li>
+<li><p>聚合表达式</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$sum</code></td>
+<td>计算总和</td>
+</tr>
+<tr>
+<td><code>$avg</code></td>
+<td>计算平均值</td>
+</tr>
+<tr>
+<td><code>min</code> 和 <code>min</code> 和 <code>max</code></td>
+<td>计算最小值和最大值</td>
+</tr>
+<tr>
+<td><code>$push</code></td>
+<td>在结果文档中插入值到一个数组</td>
+</tr>
+<tr>
+<td><code>$addToSet</code></td>
+<td>在结果文档中插入值到一个数组，但不创建副本</td>
+</tr>
+<tr>
+<td><code>$first</code></td>
+<td>根据资源文档的排序获取第一个文档数据</td>
+</tr>
+<tr>
+<td><code>$last</code></td>
+<td>根据资源文档的排序获取最后一个文档数据</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>管道</li>
+</ul>
+<blockquote>
+<p><code>MongoDB</code> 的聚合管道将 <code>MongoDB</code> 文档在一个管道处理完毕后将结果传递给下一个管道处理。管道操作是可以重复的。</p>
+</blockquote>
+<p>表达式：处理输入文档并输出。表达式是无状态的，只能用于计算当前聚合管道的文档，不能处理其它的文档。</p>
+<p>聚合框架中常用的几个操作：</p>
+<ul>
+<li><code>$project</code>：修改输入文档的结构。可以用来重命名、增加或删除域，也可以用于创建计算结果以及嵌套文档。</li>
+<li><code>$match</code>：用于过滤数据，只输出符合条件的文档。<code>$match</code> 使用 <code>MongoDB</code> 的标准查询操作。</li>
+<li><code>$limit</code>：用来限制 <code>MongoDB</code> 聚合管道返回的文档数。</li>
+<li><code>$skip</code>：在聚合管道中跳过指定数量的文档，并返回余下的文档。</li>
+<li><code>$unwind</code>：将文档中的某一个数组类型字段拆分成多条，每条包含数组中的一个值。</li>
+<li><code>$group</code>：将集合中的文档分组，可用于统计结果。</li>
+<li><code>$sort</code>：将输入文档排序后输出。</li>
+<li><code>$geoNear</code>：输出接近某一地理位置的有序文档。</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+            <a href="/tags/MongoDB/" rel="tag"># MongoDB</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/03/SQL/mysql/" rel="next" title="SQL 基础笔记">
+                <i class="fa fa-chevron-left"></i> SQL 基础笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/07/brew/homebrew/" rel="prev" title="Homebrew 日常使用">
+                Homebrew 日常使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/aragakki.png" alt="Akashi Sai">
+            
+              <p class="site-author-name" itemprop="name">Akashi Sai</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/akashigakki" title="GitHub &rarr; https://github.com/akashigakki" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:akashi_sai@163.com" title="E-Mail &rarr; mailto:akashi_sai@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/akashisai022" title="Twitter &rarr; https://twitter.com/akashisai022" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/akashi_sai_" title="Instagram &rarr; https://www.instagram.com/akashi_sai_" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#MongoDB-初探"><span class="nav-number">1.</span> <span class="nav-text">MongoDB 初探</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#准备工作"><span class="nav-number">1.1.</span> <span class="nav-text">准备工作</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#安装"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#启动"><span class="nav-number">1.1.2.</span> <span class="nav-text">启动</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#停止、重启"><span class="nav-number">1.1.3.</span> <span class="nav-text">停止、重启</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#可视化工具"><span class="nav-number">1.1.4.</span> <span class="nav-text">可视化工具</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#简介和使用"><span class="nav-number">1.2.</span> <span class="nav-text">简介和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#面向集合的存储"><span class="nav-number">1.2.1.</span> <span class="nav-text">面向集合的存储</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#数据库"><span class="nav-number">1.2.2.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#集合"><span class="nav-number">1.2.3.</span> <span class="nav-text">集合</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#文档"><span class="nav-number">1.2.4.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#原数据"><span class="nav-number">1.2.5.</span> <span class="nav-text">原数据</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#集合的创建和删除"><span class="nav-number">1.2.6.</span> <span class="nav-text">集合的创建和删除</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#向集合中插入数据"><span class="nav-number">1.2.7.</span> <span class="nav-text">向集合中插入数据</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#阶段小结"><span class="nav-number">1.3.</span> <span class="nav-text">阶段小结</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据查询"><span class="nav-number">1.4.</span> <span class="nav-text">数据查询</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#find"><span class="nav-number">1.4.1.</span> <span class="nav-text">find()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#pretty"><span class="nav-number">1.4.2.</span> <span class="nav-text">pretty()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#AND"><span class="nav-number">1.4.3.</span> <span class="nav-text">AND</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#OR"><span class="nav-number">1.4.4.</span> <span class="nav-text">OR</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#更多"><span class="nav-number">1.4.5.</span> <span class="nav-text">更多</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文档基本操作"><span class="nav-number">1.5.</span> <span class="nav-text">文档基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#删除数据库"><span class="nav-number">1.5.1.</span> <span class="nav-text">删除数据库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#创建集合"><span class="nav-number">1.5.2.</span> <span class="nav-text">创建集合</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除集合"><span class="nav-number">1.5.3.</span> <span class="nav-text">删除集合</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#插入文档"><span class="nav-number">1.5.4.</span> <span class="nav-text">插入文档</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#更新文档"><span class="nav-number">1.5.5.</span> <span class="nav-text">更新文档</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#替换文档"><span class="nav-number">1.5.6.</span> <span class="nav-text">替换文档</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除文档"><span class="nav-number">1.5.7.</span> <span class="nav-text">删除文档</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查询、索引与聚合"><span class="nav-number">1.6.</span> <span class="nav-text">查询、索引与聚合</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#查询语句-find"><span class="nav-number">1.6.1.</span> <span class="nav-text">查询语句 find()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#索引-ensureIndex"><span class="nav-number">1.6.2.</span> <span class="nav-text">索引 ensureIndex()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#聚合-aggregate"><span class="nav-number">1.6.3.</span> <span class="nav-text">聚合 aggregate()</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Akashi Sai</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zNhmosawnNOGzgW5JTuXbHAO-gzGzoHsz',
+    appKey: 'rGtKua726IsXnNCecnhq2jQ4',
+    placeholder: 'ヾﾉ≧∀≦)o 来啊！快活啊！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

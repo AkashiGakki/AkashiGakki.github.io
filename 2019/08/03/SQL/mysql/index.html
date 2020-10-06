@@ -1,0 +1,1832 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.0.1">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/aragakki.png?v=7.0.1">
+
+
+  <link rel="mask-icon" href="/images/aragakki.png?v=7.0.1" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.0.1',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="SQL 基础笔记 对 SQL 语句的基础复习">
+<meta name="keywords" content="数据库,MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL 基础笔记">
+<meta property="og:url" content="http://akashigakki.github.io/2019/08/03/SQL/mysql/index.html">
+<meta property="og:site_name" content="Akashi_Sai">
+<meta property="og:description" content="SQL 基础笔记 对 SQL 语句的基础复习">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-10-06T09:57:39.319Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQL 基础笔记">
+<meta name="twitter:description" content="SQL 基础笔记 对 SQL 语句的基础复习">
+
+
+
+
+
+
+  <link rel="canonical" href="http://akashigakki.github.io/2019/08/03/SQL/mysql/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>SQL 基础笔记 | Akashi_Sai</title>
+  
+
+
+
+
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?59d9132e52a8c3e7ac2f40c7b5017bab";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Akashi_Sai</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+  
+  
+
+  
+
+  <a href="https://github.com/akashigakki" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" style="fill: #222; color: #fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://akashigakki.github.io/2019/08/03/SQL/mysql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Akashi Sai">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/aragakki.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Akashi_Sai">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">SQL 基础笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-03 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-03T00:00:00+08:00">2019-08-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-10-06 17:57:39" itemprop="dateModified" datetime="2020-10-06T17:57:39+08:00">2020-10-06</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/08/03/SQL/mysql/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/03/SQL/mysql/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">46k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">42 分钟</span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="SQL-基础笔记"><a href="#SQL-基础笔记" class="headerlink" title="SQL 基础笔记"></a><code>SQL</code> 基础笔记</h4><blockquote>
+<p>对 <code>SQL</code> 语句的基础复习</p>
+</blockquote>
+<a id="more"></a>
+<p>开始学习之前，我们需要正确安装 <code>MySQL</code>， 各系统的安装稍有差异，这里不另行赘述，自行百度正确的安装姿势。以下内容以我的环境为主：</p>
+<ul>
+<li>系统：<code>Mac OS</code></li>
+<li>包管理工具：<code>Homebrew</code></li>
+<li><code>MySQL</code> 版本：<code>8.0.16</code></li>
+</ul>
+<h5 id="连接-MySQL"><a href="#连接-MySQL" class="headerlink" title="连接 MySQL"></a>连接 <code>MySQL</code></h5><h6 id="确认正确安装"><a href="#确认正确安装" class="headerlink" title="确认正确安装"></a>确认正确安装</h6><p>在终端输入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql --version</span><br></pre></td></tr></table></figure>
+<p>若可以正确打印安装的 <code>MySQL</code> 版本，则安装成功</p>
+<h6 id="启动-终止服务"><a href="#启动-终止服务" class="headerlink" title="启动/终止服务"></a>启动/终止服务</h6><p><code>Mac</code> 下使用 <code>Homebrew</code> 包管理工具可以运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services start mysql</span><br></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew services restart mysql</span><br></pre></td></tr></table></figure>
+<p>其他系统可以尝试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net start mysql5</span><br></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net stop mysql5</span><br></pre></td></tr></table></figure>
+<p>或者是</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql start</span><br></pre></td></tr></table></figure>
+<p>和</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql stop</span><br></pre></td></tr></table></figure>
+<p>来进行启动和关闭服务。</p>
+<h6 id="连接到服务器"><a href="#连接到服务器" class="headerlink" title="连接到服务器"></a>连接到服务器</h6><p>确保服务启动状态下终端运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot -p</span><br></pre></td></tr></table></figure>
+<p>以上命令 <code>mysql</code> 代表客户端命令，<code>-u</code> 后边跟连接数据库的用户，这里是 <code>root</code>，<code>-p</code> 表示输入密码，回车后输入密码即可。<code>MySQL</code> 默认用户为 <code>root</code>，密码为空，如果没有修改，直接回车就可以连接到 <code>MySQL</code> 服务器，也可以使用下面的命令实现快速登录：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -uroot</span><br></pre></td></tr></table></figure>
+<h5 id="DDL-语句"><a href="#DDL-语句" class="headerlink" title="DDL 语句"></a><code>DDL</code> 语句</h5><blockquote>
+<p>数据定义语言，简单来说，就是对数据库的内部对象进行创建、删除、修改等操作的语言。</p>
+</blockquote>
+<h6 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h6><p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> dbname;</span><br></pre></td></tr></table></figure>
+<p>现在，我们来创建一个数据库 <code>demo</code>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> demo;</span><br></pre></td></tr></table></figure>
+<p>注意，如果数据库名称已存在，系统将不再允许创建同名的数据库，这时，我们可以删除已存在的数据库或另取一个名称再创建。</p>
+<p>这样，一个数据库就创建成功了。我们可以通过以下命令查看：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">databases</span>;     // 不要忘了分号(;)</span><br></pre></td></tr></table></figure>
+<p>注意，是 <code>databases</code> 不是 <code>database</code>；还有 <code>sql</code> 以分号结束。</p>
+<p>查看数据库之后，可以选择要操作的数据库，使用命令：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">USE</span> dbname;</span><br></pre></td></tr></table></figure>
+<p>这里我们查看刚刚创建的数据库 <code>demo</code>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> demo;</span><br></pre></td></tr></table></figure>
+<p>然后再查看数据库中创建的所有数据表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;</span><br></pre></td></tr></table></figure>
+<p>因为我们创建的是一个空数据库，里面还没有表。</p>
+<h6 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h6><p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">DATABASE</span> dbnaem;</span><br></pre></td></tr></table></figure>
+<p>这里我们删除刚创建的 <code>demo</code> 数据库：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">database</span> demo;</span><br></pre></td></tr></table></figure>
+<h6 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h6><p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tablename(</span><br><span class="line">    <span class="keyword">name</span> <span class="keyword">type</span> <span class="keyword">constraints</span>,</span><br><span class="line">    <span class="keyword">name</span> <span class="keyword">type</span> <span class="keyword">constraints</span>,</span><br><span class="line">    ....</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><code>constraints</code> （约束）可以为空，不写就行。一般的约束条件有：主键约束（<code>primary key</code>），外键约束（<code>foreign key</code>），唯一约束（<code>unique</code>），非空约束（<code>not null</code>）和默认值（<code>default</code>）</p>
+<table>
+<thead>
+<tr>
+<th>约束</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主键约束（<code>primary key</code>）</td>
+<td>主键约束列不允许重复，也不允许出现空值。相当于唯一约束+非空约束，每个表最多只允许一个主键</td>
+</tr>
+<tr>
+<td>外键约束（<code>foreign key</code>）</td>
+<td>外键约束是保证一个或两个表之间的参照完整性，外键是构建于一个表的两个字段或是两个表的两个字段之间的参照关系</td>
+</tr>
+<tr>
+<td>唯一约束（<code>unique</code>）</td>
+<td>指定<code>table</code>的列或列组合不能重复，保证数据的唯一性</td>
+</tr>
+<tr>
+<td>非空约束（<code>not null</code>）</td>
+<td>确保当前列的值不为空值</td>
+</tr>
+<tr>
+<td>默认值（<code>default</code>）</td>
+<td>可以设置一个当前字段的默认值</td>
+</tr>
+</tbody>
+</table>
+<p>现在我们实际创建一个新的表，首先，创建一个数据库:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">database</span> emp;</span><br></pre></td></tr></table></figure>
+<p>然后，使用它：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">use</span> emp;</span><br></pre></td></tr></table></figure>
+<p>接下来，就是创建表：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp(ename <span class="built_in">varchar</span>(<span class="number">10</span>), hiredate <span class="built_in">date</span>, sal <span class="built_in">decimal</span>(<span class="number">10</span>, <span class="number">2</span>), deptno <span class="built_in">int</span>(<span class="number">2</span>));</span><br></pre></td></tr></table></figure>
+<p>这时，我们便创建了一张新表（<code>emp</code>)，我们可以查看表的定义：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DESC tablename;</span><br></pre></td></tr></table></figure>
+<p>即</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc emp;</span><br></pre></td></tr></table></figure>
+<p>如果需要更全面的表信息，可以使用 <code>SQL</code> 语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> <span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tablename \G;</span><br></pre></td></tr></table></figure>
+<p>我们来尝试一下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">create</span> <span class="keyword">table</span> emp \G</span><br></pre></td></tr></table></figure>
+<p>这里的”<code>\G</code>“的含义是使记录能够按照字段竖向排列，以便更好地显示内容，也可以选择不写，不过一旦选择传入，切记是大写的，不然无效。</p>
+<h6 id="删除表"><a href="#删除表" class="headerlink" title="删除表"></a>删除表</h6><p>语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> tablename;</span><br></pre></td></tr></table></figure>
+<p>可自行尝试。</p>
+<h6 id="修改表"><a href="#修改表" class="headerlink" title="修改表"></a>修改表</h6><blockquote>
+<p>对于已经创建好的表，尤其是已经有大量数据的表，如果需要做一些结构上的改变，可以先将表删除（<code>drop</code>），然后再重新定义表，这样做没有问题，但是就必须重新对数据进行加载，因此，大多数情况下，表结构的更改都使用 <code>alter table</code> 语句，以下是一些常用命令。</p>
+</blockquote>
+<ul>
+<li>修改表类型</li>
+</ul>
+<p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tablename <span class="keyword">MODIFY</span> [<span class="keyword">COLUMN</span>] column_definition [<span class="keyword">FIRST</span>|<span class="keyword">AFTER</span> col_name];</span><br></pre></td></tr></table></figure>
+<p>接下来我是实际进行尝试：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">modify</span> ename <span class="built_in">varchar</span>(<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+<p>重新查看表结构，可以发现我们把 <code>ename</code> 字段的类型从 <code>varchar(10)</code> 修改成了 <code>varchar(20)</code>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc emp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>增加表字段</li>
+</ul>
+<p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tablename <span class="keyword">ADD</span> [<span class="keyword">COLUMN</span>] column_definition [<span class="keyword">FIRST</span>|<span class="keyword">AFTER</span> col_name];</span><br></pre></td></tr></table></figure>
+<p>例如，我们增加一个字段 <code>age</code>，类型为 <code>int(3)</code>：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">add</span> age <span class="built_in">int</span>(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<p>可以自己利用<code>desc</code>语句查看一下表结构的变化。</p>
+<ul>
+<li>删除表字段</li>
+</ul>
+<p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tablename <span class="keyword">DROP</span> [<span class="keyword">COLUMN</span>] col_name;</span><br></pre></td></tr></table></figure>
+<p>以下，我们删除 <code>age</code> 字段：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">drop</span> age;</span><br></pre></td></tr></table></figure>
+<p>自行查看表结构的变化。</p>
+<ul>
+<li>更改字段名</li>
+</ul>
+<p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tablename <span class="keyword">CHANGE</span> [<span class="keyword">COLUMN</span>] old_col_name column_definition [<span class="keyword">FIRST</span>|<span class="keyword">AFTER</span> col_name];</span><br></pre></td></tr></table></figure>
+<p>我们先将刚才删除的字段添加回来：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">add</span> age <span class="built_in">int</span>(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<p>然后修改名称为 <code>age_1</code>，同时修改字段类型为 <code>int(4)</code>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">change</span> age age_1 <span class="built_in">int</span>(<span class="number">4</span>);</span><br></pre></td></tr></table></figure>
+<p>查看表结构的变化：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">desc emp;</span><br></pre></td></tr></table></figure>
+<p>注意：<code>change</code> 和 <code>modify</code> 都可以修改表的定义，不同的是 <code>change</code> 后面需要写两次列名，但 <code>change</code> 的优点是可以修改列名称， <code>modify</code> 则不能。</p>
+<ul>
+<li>修改字段排列顺序</li>
+</ul>
+<p>前面介绍的方法都有一个可选项， <code>first|after cloumn_name</code>，这个选项可以修改字段在表中的位置。 <code>add</code> 默认是加在表的最后位置，<code>change</code> 和 <code>modify</code> 默认不会改变字段的位置。</p>
+<p>下面我们将添加 <code>birth</code> 字段在 <code>ename</code> 之后：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">add</span> birth <span class="built_in">date</span> <span class="keyword">after</span> ename;</span><br></pre></td></tr></table></figure>
+<p>自行查看。</p>
+<ul>
+<li>更改表名</li>
+</ul>
+<p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> tablename <span class="keyword">RENAME</span> [<span class="keyword">TO</span>] new_name;</span><br></pre></td></tr></table></figure>
+<p>我们将表名 <code>emp</code> 改为 <code>emp1</code>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp reanme emp1;</span><br></pre></td></tr></table></figure>
+<p>查看变化：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">show</span> <span class="keyword">tables</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="DML-语句"><a href="#DML-语句" class="headerlink" title="DML 语句"></a><code>DML</code> 语句</h5><blockquote>
+<p><code>DML</code> 即数据操作语句，是指对数据库中表记录的操作，主要包括插入(<code>insert</code>)、更新(<code>update</code>)、删除(<code>delete</code>)和查询(<code>select</code>)，是开发人员日常使用最频繁的操作。</p>
+</blockquote>
+<p>开始之前，先将表进行调整，将表名改回 <code>emp</code>，并且删除 <code>age_1</code> 字段：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp1 <span class="keyword">rename</span> emp;</span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> emp <span class="keyword">drop</span> age_1;</span><br></pre></td></tr></table></figure>
+<h6 id="插入记录"><a href="#插入记录" class="headerlink" title="插入记录"></a>插入记录</h6><p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> tablename (field_1, field_2,..., field_n) <span class="keyword">VALUES</span>(value_1, value_2,...,value_n);</span><br></pre></td></tr></table></figure>
+<p>实际尝试：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp (ename, birth, hiredate, sal, deptno) <span class="keyword">values</span>(<span class="string">'akashi'</span>, <span class="string">'1997-09-28'</span>, <span class="string">'2019-08-01'</span>, <span class="string">'5000'</span>, <span class="number">01</span>);</span><br></pre></td></tr></table></figure>
+<p>也可以不指定字段名，但是 <code>value</code> 后面的顺序要和字段的排列顺序一致：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp <span class="keyword">values</span>(<span class="string">'asuka'</span>, <span class="string">'1998-08-10'</span>, <span class="string">'2019-08-01'</span>, <span class="string">'5000'</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>可以通过以下语法进行查看插入情况：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+<h6 id="更新记录"><a href="#更新记录" class="headerlink" title="更新记录"></a>更新记录</h6><p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> tablename <span class="keyword">SET</span> field_1 = value_1, field_2 = value_2,...,field_n = value_n [<span class="keyword">WHERE</span> CONDITION]</span><br></pre></td></tr></table></figure>
+<p>例如:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">update</span> emp <span class="keyword">set</span> sal = <span class="string">'6000'</span> <span class="keyword">where</span> ename = <span class="string">'asuka'</span>;</span><br></pre></td></tr></table></figure>
+<p>查看：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+<h6 id="删除记录"><a href="#删除记录" class="headerlink" title="删除记录"></a>删除记录</h6><p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> tablename [<span class="keyword">WHERE</span> CONDITION]</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> emp <span class="keyword">where</span> ename = <span class="string">'akashi'</span>;</span><br></pre></td></tr></table></figure>
+<p>使用别名的一个参考例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">delete</span> a, b <span class="keyword">from</span> emp a, dept b <span class="keyword">where</span> a.depton = b.depton <span class="keyword">and</span> a.depton = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<h6 id="查询记录"><a href="#查询记录" class="headerlink" title="查询记录"></a>查询记录</h6><p>其实上面有使用过最基础的查询，语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> tablename [<span class="keyword">WHERE</span> CONDITION]</span><br></pre></td></tr></table></figure>
+<p>即：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+<p><code>*</code> 表示全部，等价于：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename, birth, hiredate, sal, deptno <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+<p>注意：考虑到性能和效率问题，在大型的数据库查询中，并不提倡使用 <code>*</code> 来查询，要养成良好的习惯。</p>
+<ul>
+<li>查询不重复的记录</li>
+</ul>
+<blockquote>
+<p>有时候需要将表中的记录去掉重复后显示出来，可以用 <code>distinct</code> 关键字来实现。</p>
+</blockquote>
+<p>一个例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> depno <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>条件查询</li>
+</ul>
+<blockquote>
+<p>在很多情况下，不需要查询全部记录，而只是需要根据限定条件来查询一部分的数据，用 <code>where</code> 来实现。</p>
+</blockquote>
+<p>一个例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename, birth, hiredate, sal, deptno <span class="keyword">from</span> emp <span class="keyword">where</span> deptno = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>排序和限制</li>
+</ul>
+<blockquote>
+<p>当需要取出按照某个字段进行排序后的记录结果集，可以使用关键字 <code>order by</code> 来实现。</p>
+</blockquote>
+<p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> tablename [<span class="keyword">WHERE</span> CONDITION] [ORDEY <span class="keyword">BY</span> field_1 [<span class="keyword">DESC</span>|<span class="keyword">ASC</span>],...,field_2 [<span class="keyword">DESC</span>|<span class="keyword">ASC</span>]]</span><br></pre></td></tr></table></figure>
+<p>其中，<code>desc</code> 和 <code>asc</code> 排序顺序关键字， <code>desc</code> 表示按照字段进行降序排序， <code>asc</code> 表示升序排序，如果不写，默认是升序。</p>
+<p>一个例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename, birth, hiredate, sal, deptno <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> sal;</span><br></pre></td></tr></table></figure>
+<p>稍微再复杂一点：(先按部门升序，再按奖金降序排序)</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename, birth, hiredate, sal, deptno <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> deptno, sal <span class="keyword">desc</span>;</span><br></pre></td></tr></table></figure>
+<p>对于排序后的记录，如果只希望显示部分，可以使用 <code>limit</code> 关键字。</p>
+<p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> ... [<span class="keyword">LIMIT</span> offset_start, <span class="keyword">row_count</span>]</span><br></pre></td></tr></table></figure>
+<p>其中， <code>offset_start</code> 表示记录的起始偏移量， <code>row_count</code> 表示显示的行数。默认起始偏移量为 <code>0</code>，这时，实际显示的就是前 <code>n</code> 条记录。</p>
+<p>具体例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename, birth, hiredate, sal, deptno <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> sal <span class="keyword">limit</span> <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p>这里显示了 <code>3</code> 条记录。</p>
+<p>另一个例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename, birth, hiredate, sal, deptno <span class="keyword">from</span> emp <span class="keyword">order</span> <span class="keyword">by</span> sal <span class="keyword">limit</span> <span class="number">1</span>, <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p>表示排序后从第<code>2</code>条记录开始，显示<code>3</code>条记录。</p>
+<p><code>limit</code> 经常和 <code>order by</code> 一起配合使用，来进行记录的分页显示。</p>
+<ul>
+<li>聚合</li>
+</ul>
+<p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> [field_1, field_2,...,field_n] fun_name</span><br><span class="line"><span class="keyword">FROM</span> tablenaem</span><br><span class="line">[<span class="keyword">WHERE</span> where_contition]</span><br><span class="line">[<span class="keyword">GROUP</span> <span class="keyword">BY</span> field_1, field_2,...field_n</span><br><span class="line">[<span class="keyword">WITH</span> <span class="keyword">ROLLUP</span>]]</span><br><span class="line">[<span class="keyword">HAVING</span> where_contition]</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<ul>
+<li><p><code>fun_naem</code> 表示要做的聚合参数，也就是聚合函数，常用的有 <code>sum</code>-求和, <code>count(*)</code>-记录数, <code>max</code>-最大值, <code>min</code>-最小值。</p>
+</li>
+<li><p><code>group by</code> 关键字表示要进行分类聚合的字段。</p>
+</li>
+<li><p><code>with rollup</code> 是可选字段（在<code>[]</code>里面表示可选参数），表明是否对分类聚合后的结果进行再汇总。</p>
+</li>
+<li><p><code>having</code> 关键字表示对分类后的结果再进行条件的过滤。</p>
+</li>
+</ul>
+<p>注意：<code>having</code> 和 <code>where</code> 的区别在于， <code>having</code> 是对聚合后的结果进行再过滤，而 <code>where</code> 是在聚合前就对记录进行过滤， 如果逻辑允许，我们尽可能的用 <code>where</code> 先过滤记录， 因为这样结果集会减小，提高聚合效率，最后再根据情况看是否用 <code>having</code> 进行再过滤。</p>
+<p>统计人数大于 <code>1</code> 的部门：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> deptno <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> emp <span class="keyword">group</span> <span class="keyword">by</span> deptno <span class="keyword">having</span> <span class="keyword">count</span>(<span class="number">1</span>) &gt; <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+<p>再看一些具体的函数：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">sum</span>(sal), <span class="keyword">max</span>(sal), <span class="keyword">min</span>(sal) <span class="keyword">from</span> emp;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>表连接</li>
+</ul>
+<blockquote>
+<p>当需要同时显示多个表中的字段时，就可以通过表连接来实现。表连接分为外连接和内连接，他们最主要的区别是，内连接仅选出两张表中相互匹配的记录；而外连接会选出其他不匹配的记录。我们最常用的是内连接。</p>
+</blockquote>
+<p>一个例子(内连接)：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename, deptname <span class="keyword">from</span> emp.dept <span class="keyword">where</span> emp.deptno = dept.deptno;</span><br></pre></td></tr></table></figure>
+<p>外连接又分为左连接和右连接：</p>
+<p>左连接： 包含所有的左边表中的记录甚至是右边表中没有和它匹配的记录。</p>
+<p>右连接： 包含所有的右边表中的记录甚至是左边表中没有和它匹配的记录。</p>
+<p>左连接：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename, deptname <span class="keyword">from</span> emp <span class="keyword">left</span> <span class="keyword">join</span> dept <span class="keyword">on</span> emp.deptno = dept.deptno;</span><br></pre></td></tr></table></figure>
+<p>右连接：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> ename, deptname <span class="keyword">from</span> emp <span class="keyword">right</span> <span class="keyword">join</span> emp <span class="keyword">on</span> dept.deptno = emp.deptno;</span><br></pre></td></tr></table></figure>
+<p>两者效果相同，可以相互转化。</p>
+<ul>
+<li>子查询</li>
+</ul>
+<blockquote>
+<p>有些情况下，查询时需要的条件是另外一个 <code>select</code> 语句的结果，这个时候，就需要子查询。用于子查询的关键字主要包括： <code>in</code>, <code>not in</code>, <code>=</code>, <code>!=</code>, <code>exists</code>, <code>not exists</code> 等。</p>
+</blockquote>
+<p>一个例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> deptno <span class="keyword">in</span> (<span class="keyword">select</span> deptno <span class="keyword">from</span> dept);</span><br></pre></td></tr></table></figure>
+<p>如果子查询的记录唯一，还可以用 <code>=</code> 代替 <code>in</code>:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> deptno = (<span class="keyword">select</span> deptno <span class="keyword">from</span> dept);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>记录联合</li>
+</ul>
+<blockquote>
+<p>我们常常需要将两个表的数据按一定的查询条件查询出来以后，将结果合并到一起显示出来，这时候，需要 <code>union</code> 和 <code>union all</code> 关键字来实现。</p>
+</blockquote>
+<p>语法如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t1</span><br><span class="line"><span class="keyword">UNION</span> | <span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> t2</span><br><span class="line">...</span><br><span class="line"><span class="keyword">UNION</span> | <span class="keyword">UNION</span> <span class="keyword">ALL</span></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> tn</span><br></pre></td></tr></table></figure>
+<p><code>union</code> 和 <code>union all</code> 的主要区别是 <code>union all</code> 是直接把结果合并在一起，而 <code>union</code> 是在 <code>union all</code> 的基础上进行了一次 <code>distinct</code>，去除了重复的记录。</p>
+<p>一个例子：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> deptno <span class="keyword">from</span> emp</span><br><span class="line"><span class="keyword">union</span> <span class="keyword">all</span></span><br><span class="line"><span class="keyword">select</span> deptno <span class="keyword">from</span> dept;</span><br></pre></td></tr></table></figure>
+<p>去重：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> deptno <span class="keyword">from</span> emp</span><br><span class="line"><span class="keyword">union</span> </span><br><span class="line"><span class="keyword">select</span> deptno <span class="keyword">from</span> dept;</span><br></pre></td></tr></table></figure>
+<h5 id="DCL-语句"><a href="#DCL-语句" class="headerlink" title="DCL 语句"></a><code>DCL</code> 语句</h5><blockquote>
+<p><code>DCL</code> 即数据控制语句，主要是DBA用来管理系统中的对象权限时使用，一般开发人员很少使用。</p>
+</blockquote>
+<h6 id="创建数据库用户，添加权限"><a href="#创建数据库用户，添加权限" class="headerlink" title="创建数据库用户，添加权限"></a>创建数据库用户，添加权限</h6><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">user</span> <span class="string">'akashi'</span>@<span class="string">'localhost'</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">'123'</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">grant</span> <span class="keyword">select</span>, <span class="keyword">insert</span> <span class="keyword">on</span> emp.* <span class="keyword">to</span> <span class="string">'akashi'</span>@<span class="string">'localhost'</span>;</span><br></pre></td></tr></table></figure>
+<h6 id="收回权限"><a href="#收回权限" class="headerlink" title="收回权限"></a>收回权限</h6><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">revoke</span> <span class="keyword">insert</span> <span class="keyword">on</span> emp.* <span class="keyword">from</span> <span class="string">'akashi'</span>@<span class="string">'localhost'</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="实战"><a href="#实战" class="headerlink" title="实战"></a>实战</h5><p>一些实例：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 1. 查询第三个字母为A的员工记录</span></span><br><span class="line"><span class="keyword">select</span> ename <span class="keyword">from</span> emp <span class="keyword">where</span> ename <span class="keyword">like</span> <span class="string">'__A%'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 2. 输出员工人数大于等于5的部门</span></span><br><span class="line"><span class="keyword">select</span> deptno, <span class="keyword">count</span>(empno) </span><br><span class="line"><span class="keyword">from</span> emp </span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> deptno </span><br><span class="line"><span class="keyword">having</span> <span class="keyword">count</span>(empno) &gt;= <span class="number">5</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 3. 以部门编号为统计单位，统计(聚合函数)</span></span><br><span class="line"><span class="keyword">select</span> deptno, <span class="keyword">count</span>(empno), <span class="keyword">max</span>(sal), <span class="keyword">min</span>(sal), <span class="keyword">avg</span>(sal)</span><br><span class="line"><span class="keyword">from</span> emp</span><br><span class="line"><span class="keyword">group</span> <span class="keyword">by</span> deptno;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 4. 查询没有奖金的员工信息</span></span><br><span class="line"><span class="comment">-- select * from emp where comm = 'NULL'</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp</span><br><span class="line"><span class="keyword">where</span> comm = <span class="number">0</span> <span class="keyword">or</span> comm <span class="keyword">is</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 如果字段为空，字段置零，如果为零，同样置零</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp </span><br><span class="line"><span class="keyword">where</span> <span class="keyword">ifnull</span>(comm, <span class="number">0</span>) = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 5. 不重复的部门编号</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">distinct</span> deptno <span class="keyword">from</span> emp</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 6. 查询工资和奖金的和大于2000的员工信息(注意：奖金为空时，不参与运算)</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp </span><br><span class="line"><span class="keyword">where</span> <span class="keyword">ifnull</span>(sal, <span class="number">0</span>) + <span class="keyword">ifnull</span>(comm, <span class="number">0</span>) &gt; <span class="number">2000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 7. 公式化：分页查询，n为开始的下标，m为显示的个数</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">limit</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- select * from emp limit （当前页码数-1）* 每页显示条数, 每页显示条数(实时分页，不再利用缓存，满足高并发的数据实时变化)</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">limit</span> （<span class="keyword">index</span><span class="number">-1</span>）* pageSize, pageSize;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 8. 添加</span></span><br><span class="line"><span class="comment">-- 语法规则：</span></span><br><span class="line"><span class="comment">-- 主键（自增长）</span></span><br><span class="line"><span class="comment">-- 字段的类型</span></span><br><span class="line"><span class="comment">-- 字段的长度</span></span><br><span class="line"><span class="comment">-- 日期（表单传入（应用程序）、系统传入、数据库获取）</span></span><br><span class="line"><span class="comment">-- 实体间的依赖关系</span></span><br><span class="line"><span class="comment">-- 添加字段顺序</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp(empno, ename, job, hiredate, sal, comm, deptno) </span><br><span class="line"><span class="keyword">values</span>(<span class="number">9999</span>, <span class="string">'AKASHI'</span>, <span class="string">'STUDENT'</span>, <span class="keyword">now</span>(), <span class="number">5000.56</span>, <span class="number">1000</span>, <span class="number">40</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> emp(ename, job, hiredate, sal, comm, deptno) </span><br><span class="line"><span class="keyword">values</span>(<span class="string">'AKASHI'</span>, <span class="string">'STUDENT'</span>, <span class="keyword">now</span>(), <span class="number">5000.56</span>, <span class="number">1000</span>, <span class="number">40</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> emp <span class="keyword">where</span> empno = <span class="number">10000</span>;</span><br><span class="line"><span class="comment">-- 增删改===&gt; 注意事务的提交和回滚</span></span><br><span class="line"><span class="comment">-- 所有的关系型数据库，存在自动提交和手动提交；Oracle需要手动提交，MySQL自动提交，无需commit，rollback；</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 9. 删除</span></span><br><span class="line"><span class="comment">-- 考虑临界值</span></span><br><span class="line"><span class="comment">-- 先检索语句确认是否满足要求，再删除</span></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> emp <span class="keyword">where</span> sal &gt;= <span class="number">800</span> <span class="keyword">and</span> sal &lt;= <span class="number">3000</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> emp <span class="keyword">where</span> sal &gt;= <span class="number">800</span> <span class="keyword">and</span> sal &lt;= <span class="number">3000</span>;</span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> emp <span class="keyword">where</span> sal <span class="keyword">between</span> <span class="number">800</span> <span class="keyword">and</span> <span class="number">3000</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 10. 更新</span></span><br><span class="line"><span class="comment">-- 先检索</span></span><br><span class="line"><span class="comment">-- 考虑非空</span></span><br><span class="line"><span class="keyword">update</span> emp </span><br><span class="line"><span class="keyword">set</span> sal = <span class="keyword">ifnull</span>(sal, <span class="number">0</span>) + <span class="number">1000</span>, comm = <span class="keyword">ifnull</span>(comm, <span class="number">0</span>) + <span class="number">500</span></span><br><span class="line"><span class="keyword">where</span> <span class="keyword">ifnull</span>(comm,<span class="number">0</span>) = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/02/Regular/regex/" rel="next" title="正则匹配食用指南">
+                <i class="fa fa-chevron-left"></i> 正则匹配食用指南
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/07/mondodb/mongodb/" rel="prev" title="MongoDB 初探">
+                MongoDB 初探 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/aragakki.png" alt="Akashi Sai">
+            
+              <p class="site-author-name" itemprop="name">Akashi Sai</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">70</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/akashigakki" title="GitHub &rarr; https://github.com/akashigakki" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:akashi_sai@163.com" title="E-Mail &rarr; mailto:akashi_sai@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://twitter.com/akashisai022" title="Twitter &rarr; https://twitter.com/akashisai022" rel="noopener" target="_blank"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://www.instagram.com/akashi_sai_" title="Instagram &rarr; https://www.instagram.com/akashi_sai_" rel="noopener" target="_blank"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-基础笔记"><span class="nav-number">1.</span> <span class="nav-text">SQL 基础笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#连接-MySQL"><span class="nav-number">1.1.</span> <span class="nav-text">连接 MySQL</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#确认正确安装"><span class="nav-number">1.1.1.</span> <span class="nav-text">确认正确安装</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#启动-终止服务"><span class="nav-number">1.1.2.</span> <span class="nav-text">启动/终止服务</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#连接到服务器"><span class="nav-number">1.1.3.</span> <span class="nav-text">连接到服务器</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DDL-语句"><span class="nav-number">1.2.</span> <span class="nav-text">DDL 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#创建数据库"><span class="nav-number">1.2.1.</span> <span class="nav-text">创建数据库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除数据库"><span class="nav-number">1.2.2.</span> <span class="nav-text">删除数据库</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#创建表"><span class="nav-number">1.2.3.</span> <span class="nav-text">创建表</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除表"><span class="nav-number">1.2.4.</span> <span class="nav-text">删除表</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#修改表"><span class="nav-number">1.2.5.</span> <span class="nav-text">修改表</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DML-语句"><span class="nav-number">1.3.</span> <span class="nav-text">DML 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#插入记录"><span class="nav-number">1.3.1.</span> <span class="nav-text">插入记录</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#更新记录"><span class="nav-number">1.3.2.</span> <span class="nav-text">更新记录</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#删除记录"><span class="nav-number">1.3.3.</span> <span class="nav-text">删除记录</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#查询记录"><span class="nav-number">1.3.4.</span> <span class="nav-text">查询记录</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DCL-语句"><span class="nav-number">1.4.</span> <span class="nav-text">DCL 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#创建数据库用户，添加权限"><span class="nav-number">1.4.1.</span> <span class="nav-text">创建数据库用户，添加权限</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#收回权限"><span class="nav-number">1.4.2.</span> <span class="nav-text">收回权限</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实战"><span class="nav-number">1.5.</span> <span class="nav-text">实战</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-snowflake-o"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Akashi Sai</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("08/10/2018 17:38:00");//在此处修改你的建站时间
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=7.0.1"></script>
+
+  <script src="/js/src/motion.js?v=7.0.1"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=7.0.1"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=7.0.1"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=7.0.1"></script>
+<script src="/js/src/post-details.js?v=7.0.1"></script>
+
+
+
+  
+
+
+  <script src="/js/src/next-boot.js?v=7.0.1"></script>
+
+
+  
+
+  
+
+  
+
+  
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'zNhmosawnNOGzgW5JTuXbHAO-gzGzoHsz',
+    appKey: 'rGtKua726IsXnNCecnhq2jQ4',
+    placeholder: 'ヾﾉ≧∀≦)o 来啊！快活啊！~',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
